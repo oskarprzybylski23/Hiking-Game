@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+canvas {
+    width: 600px;
+    height: 600px;
+    background-color: blue;
+    margin-left: auto;
+    margin-right: auto;
+}
