@@ -1,16 +1,17 @@
-body {
+h1 {
+    color: lightgrey;
+    text-align: center;
+  }
+  #game {
+    box-shadow: 10px 10px 15px black;
+  }
+  body {
     display: flex;
     justify-content: center;
-}
-
-h1 {
-    text-align: center;
-}
-
-canvas {
-    width: 600px;
-    height: 600px;
-    background-color: blue;
-    margin-left: auto;
-    margin-right: auto;
-}
+    height: 100vh;
+    background: linear-gradient(
+      0deg,
+      rgb(33, 80, 30) 0%,
+      rgb(153, 175, 250) 60%
+    );
+  }

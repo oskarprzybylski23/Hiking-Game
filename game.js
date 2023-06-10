@@ -6,7 +6,7 @@ const tileSize = 32;
 
 const tileMap = new TileMap(tileSize);
 
-function gameLoop(){
+function gameLoop() {
   tileMap.draw(canvas, ctx);
 }
 
