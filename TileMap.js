@@ -16,7 +16,8 @@ export default class TileMap {
     //1 - stone path
     //2- water
     //3 - tree 1
-    map = [
+
+    layer1 = [
       [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0],
       [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 1],
@@ -32,17 +33,35 @@ export default class TileMap {
       [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
       
     ];
+
+    layer2 = [
+      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 1],
+      [0, 0, 0, 3, 0, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0],
+      [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0],
+      [0, 0, 0, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0],
+      [0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0],
+      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0],
+      
+    ];
   
     draw(canvas, ctx) {
       this.#setCanvasSize(canvas);
       this.#clearCanvas(canvas, ctx);
-      this.#drawMap(ctx);
+      this.#drawlayer1(ctx);
+      this.#drawlayer2(ctx);
     }
   
-    #drawMap(ctx) {
-      for (let row = 0; row < this.map.length; row++) {
-        for (let column = 0; column < this.map[row].length; column++) {
-          const tile = this.map[row][column];
+    #drawlayer1(ctx) {
+      for (let row = 0; row < this.layer1.length; row++) {
+        for (let column = 0; column < this.layer1[row].length; column++) {
+          const tile = this.layer1[row][column];
           let image = null;
           switch (tile) {
             case 0:
@@ -58,6 +77,40 @@ export default class TileMap {
               image = this.tree01;
               break;
           }
+            
+  
+          if (image != null)
+            ctx.drawImage(
+              image,
+              column * this.tileSize,
+              row * this.tileSize,
+              this.tileSize,
+              this.tileSize
+            );
+        }
+      }
+    }
+  
+    #drawlayer2(ctx) {
+      for (let row = 0; row < this.layer2.length; row++) {
+        for (let column = 0; column < this.layer2[row].length; column++) {
+          const tile = this.layer2[row][column];
+          let image = null;
+          switch (tile) {
+            case 0:
+              image = this.grass;
+              break;
+            case 1:
+              image = this.stonePath;
+              break;
+            case 2:
+              image = this.water;
+              break;
+            case 3:
+              image = this.tree01;
+              break;
+          }
+            
   
           if (image != null)
             ctx.drawImage(
@@ -77,8 +130,8 @@ export default class TileMap {
     }
   
     #setCanvasSize(canvas) {
-      canvas.height = this.map.length * this.tileSize;
-      canvas.width = this.map[0].length * this.tileSize;
+      canvas.height = this.layer1.length * this.tileSize;
+      canvas.width = this.layer1[0].length * this.tileSize;
     }
   }
   
