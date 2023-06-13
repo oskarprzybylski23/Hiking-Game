@@ -5,6 +5,7 @@ export default class TileMap {
       this.water = this.#image("water.png");
       this.stonePath = this.#image("stonePath.png");
       this.tree01 = this.#image("tree01.png");
+      this.char = this.#image("pacman.png");
     }
   
     #image(fileName) {
@@ -12,42 +13,59 @@ export default class TileMap {
       img.src = `images/${fileName}`;
       return img;
     }
+    //0 - null
     //0 - grass
     //1 - stone path
     //2- water
     //3 - tree 1
 
     layer1 = [
-      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0],
-      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 1],
-      [0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0],
-      [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0],
-      [0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+      [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
       
     ];
 
     layer2 = [
-      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0],
-      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 1],
-      [0, 0, 0, 3, 0, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0],
-      [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0],
-      [0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,2,2,2,0,2,2,2,2,2],
+      [0,0,0,0,0,0,2,0,0,0,0,0,0,0,0],
+      [0,0,2,2,2,2,2,0,0,0,0,0,0,0,0],
+      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+    ];
+
+    hero = [
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,4,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,4,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,5,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       
     ];
   
@@ -56,6 +74,7 @@ export default class TileMap {
       this.#clearCanvas(canvas, ctx);
       this.#drawlayer1(ctx);
       this.#drawlayer2(ctx);
+      this.#drawcolission(ctx);
     }
   
     #drawlayer1(ctx) {
@@ -65,15 +84,18 @@ export default class TileMap {
           let image = null;
           switch (tile) {
             case 0:
-              image = this.grass;
+              image = null;
               break;
             case 1:
-              image = this.stonePath;
+              image = this.grass;
               break;
             case 2:
-              image = this.water;
+              image = this.stonePath;
               break;
             case 3:
+              image = this.water;
+              break;
+            case 4:
               image = this.tree01;
               break;
           }
@@ -98,16 +120,58 @@ export default class TileMap {
           let image = null;
           switch (tile) {
             case 0:
-              image = this.grass;
+              image = null;
               break;
             case 1:
-              image = this.stonePath;
+              image = this.grass;
               break;
             case 2:
-              image = this.water;
+              image = this.stonePath;
               break;
             case 3:
+              image = this.water;
+              break;
+            case 4:
               image = this.tree01;
+              break;
+          }
+            
+  
+          if (image != null)
+            ctx.drawImage(
+              image,
+              column * this.tileSize,
+              row * this.tileSize,
+              this.tileSize,
+              this.tileSize
+            );
+        }
+      }
+    }
+
+    #drawcolission(ctx) {
+      for (let row = 0; row < this.hero.length; row++) {
+        for (let column = 0; column < this.hero[row].length; column++) {
+          const tile = this.hero[row][column];
+          let image = null;
+          switch (tile) {
+            case 0:
+              image = null;
+              break;
+            case 1:
+              image = this.grass;
+              break;
+            case 2:
+              image = this.stonePath;
+              break;
+            case 3:
+              image = this.water;
+              break;
+            case 4:
+              image = this.tree01;
+              break;
+            case 5:
+              image = this.char;
               break;
           }
             
