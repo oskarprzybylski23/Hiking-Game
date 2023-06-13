@@ -1,3 +1,5 @@
+import Hero from "./hero.js";
+
 export default class TileMap {
     constructor(tileSize) {
       this.tileSize = tileSize;
@@ -13,6 +15,9 @@ export default class TileMap {
       img.src = `images/${fileName}`;
       return img;
     }
+
+    // CREATE MAP LAYERS
+
     //0 - null
     //0 - grass
     //1 - stone path
@@ -37,46 +42,51 @@ export default class TileMap {
     ];
 
     layer2 = [
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,2,2,2,0,2,2,2,2,2],
-      [0,0,0,0,0,0,2,0,0,0,0,0,0,0,0],
-      [0,0,2,2,2,2,2,0,0,0,0,0,0,0,0],
-      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,2 ,2 ,2 ,0 ,2 ,2 ,2 ,2 ,2 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,2 ,2 ,2 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
     ];
 
-    hero = [
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,4,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,4,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,5,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    heroLayer = [
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,4 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,4 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,5 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ]
       
     ];
-  
+
+    
+    // SET UP CANVAS AND DRAW OBJECTS
+
     draw(canvas, ctx) {
       this.#setCanvasSize(canvas);
       this.#clearCanvas(canvas, ctx);
-      this.#drawlayer1(ctx);
-      this.#drawlayer2(ctx);
+      // this.#drawlayer1(ctx);
+      // this.#drawlayer2(ctx);
       this.#drawcolission(ctx);
     }
   
+    // FUNCTIONS TO DRAW LAYERS
+
     #drawlayer1(ctx) {
       for (let row = 0; row < this.layer1.length; row++) {
         for (let column = 0; column < this.layer1[row].length; column++) {
@@ -109,6 +119,7 @@ export default class TileMap {
               this.tileSize,
               this.tileSize
             );
+            
         }
       }
     }
@@ -150,9 +161,9 @@ export default class TileMap {
     }
 
     #drawcolission(ctx) {
-      for (let row = 0; row < this.hero.length; row++) {
-        for (let column = 0; column < this.hero[row].length; column++) {
-          const tile = this.hero[row][column];
+      for (let row = 0; row < this.heroLayer.length; row++) {
+        for (let column = 0; column < this.heroLayer[row].length; column++) {
+          let tile = this.heroLayer[row][column];
           let image = null;
           switch (tile) {
             case 0:
@@ -187,12 +198,27 @@ export default class TileMap {
         }
       }
     }
+
+    getHero(velocity){
+      for(let row=0; row < this.heroLayer.length; row++) {
+        for(let column =0; column < this.heroLayer[row].length; column++) {
+          let tile = this.heroLayer[row][column];
+          if (tile === 5) {
+            this.heroLayer[row][column] = 0;
+            return new Hero(column * this.tileSize, row* this.tileSize, this.tileSize, velocity, this);
+          }
+        }
+      }
+    }
+
+    // SET UP CANVAS DEAFULT LOOK
   
     #clearCanvas(canvas, ctx) {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
   
+    
     #setCanvasSize(canvas) {
       canvas.height = this.layer1.length * this.tileSize;
       canvas.width = this.layer1[0].length * this.tileSize;
