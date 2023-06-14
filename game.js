@@ -10,7 +10,7 @@ const hero = tileMap.getHero(velocity);
 
 function gameLoop() {
   tileMap.draw(canvas, ctx);
-  hero.draw(canvas, ctx)
+  hero.draw(ctx)
   }
 
 setInterval(gameLoop, 1000 / 60);

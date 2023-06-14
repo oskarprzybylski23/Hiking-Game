@@ -7,7 +7,7 @@ export default class TileMap {
       this.water = this.#image("water.png");
       this.stonePath = this.#image("stonePath.png");
       this.tree01 = this.#image("tree01.png");
-      this.char = this.#image("pacman.png");
+      // this.char = this.#image("pacman.png");
     }
   
     #image(fileName) {
@@ -19,10 +19,12 @@ export default class TileMap {
     // CREATE MAP LAYERS
 
     //0 - null
-    //0 - grass
-    //1 - stone path
-    //2- water
-    //3 - tree 1
+    //1 - grass
+    //2 - stone path
+    //3- water
+    //4 - tree 1
+    //5 - Hero
+
 
     layer1 = [
       [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -34,7 +36,7 @@ export default class TileMap {
       [1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1,1 , 1, 1, 1, 3, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1],
@@ -66,12 +68,11 @@ export default class TileMap {
       [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
       [0 ,4 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
       [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
-      [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+      [0 ,0 ,0 ,0 ,0 ,4 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
       [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
       [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
       [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
       [0 ,0 ,5 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ]
-      
     ];
 
     
@@ -80,8 +81,8 @@ export default class TileMap {
     draw(canvas, ctx) {
       this.#setCanvasSize(canvas);
       this.#clearCanvas(canvas, ctx);
-      // this.#drawlayer1(ctx);
-      // this.#drawlayer2(ctx);
+      this.#drawlayer1(ctx);
+      this.#drawlayer2(ctx);
       this.#drawcolission(ctx);
     }
   
@@ -181,9 +182,9 @@ export default class TileMap {
             case 4:
               image = this.tree01;
               break;
-            case 5:
-              image = this.char;
-              break;
+            // case 5:
+            //   image = this.char;
+            //   break;
           }
             
   
