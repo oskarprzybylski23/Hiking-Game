@@ -7,7 +7,6 @@ export default class TileMap {
       this.water = this.#image("water.png");
       this.stonePath = this.#image("stonePath.png");
       this.tree01 = this.#image("tree01.png");
-      // this.char = this.#image("pacman.png");
     }
   
     #image(fileName) {
@@ -23,7 +22,7 @@ export default class TileMap {
     //2 - stone path
     //3- water
     //4 - tree 1
-    //5 - Hero
+    //5 - Hero starting position (heroLayer only)
 
 
     layer1 = [

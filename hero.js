@@ -19,4 +19,12 @@ export default class Hero {
         this.HeroImageIndex = 0;
     };
 
+    moveUp() {
+        this.y -= this.tileSize*this.velocity/this.tileSize;
+    }
+
+    moveDown() {
+        this.y += -(this.tileSize*this.velocity/this.tileSize);
+    }
+
     }
