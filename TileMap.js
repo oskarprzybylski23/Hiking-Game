@@ -181,9 +181,6 @@ export default class TileMap {
             case 4:
               image = this.tree01;
               break;
-            // case 5:
-            //   image = this.char;
-            //   break;
           }
             
   
@@ -206,6 +203,7 @@ export default class TileMap {
           if (tile === 5) {
             this.heroLayer[row][column] = 0;
             return new Hero(column * this.tileSize, row* this.tileSize, this.tileSize, velocity, this);
+
           }
         }
       }

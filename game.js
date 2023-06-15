@@ -1,6 +1,6 @@
 import TileMap from "./TileMap.js";
 const tileSize = 32;
-const velocity = 1;
+const velocity = 2;
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -29,6 +29,8 @@ function handleKeyUp(event) {
 
 function gameLoop() {
 
+  console.log(hero.x, hero.y);
+
   if (keyState["ArrowUp"]) {
     // Perform action when ArrowUp key is pressed
     console.log("move_up");
@@ -39,6 +41,18 @@ function gameLoop() {
     // Perform action when ArrowDown key is pressed
     console.log("move_down");
     hero.moveDown();
+  }
+
+  if (keyState["ArrowRight"]) {
+    // Perform action when ArrowDown key is pressed
+    console.log("move_right");
+    hero.moveRight();
+  }
+
+  if (keyState["ArrowLeft"]) {
+    // Perform action when ArrowDown key is pressed
+    console.log("move_left");
+    hero.moveLeft();
   }
 
   tileMap.draw(canvas, ctx);
