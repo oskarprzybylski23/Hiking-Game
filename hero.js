@@ -39,11 +39,17 @@ export default class Hero {
     }
 
     moveRight() {
+        this.checkIfSolid()
+        if (this.isSolidRight == false){
         this.x += (this.tileSize*this.velocity)/this.tileSize;
+        }
     }
 
     moveLeft() {
+        this.checkIfSolid()
+        if (this.isSolidLeft == false){
         this.x -= (this.tileSize*this.velocity)/this.tileSize;
+        }
     }
 
 
@@ -56,19 +62,47 @@ export default class Hero {
 
         let tileAbove = this.y;
         let tileBelow = this.y;
-        let tileRight = 0;
-        let tileLeft = 0;
+        let tileRight = this.x;
+        let tileLeft = this.x;
 
-        if (tileAbove < 0)
-            {
+        const mapHeight = this.tileMap.layer1.length * this.tileSize;
+        const mapWidth = this.tileMap.layer1[1].length * this.tileSize;
+
+        if (tileAbove < 0 ){
             this.isSolidAbove = true;
             }
         
-        if (tileBelow > this.tileMap.layer1.length * this.tileSize-this.tileSize)
-        {
-        this.isSolidBelow = true;
-        }
-        console.log(this.isSolid, this.tileMap.layer1.length * this.tileSize-this.tileSize)
+        if (tileBelow > mapHeight-this.tileSize){
+            this.isSolidBelow = true;
+            }
+
+        if (tileRight > mapWidth-this.tileSize){
+            this.isSolidRight = true;
+            }
+
+        if (tileLeft < 0){
+            this.isSolidLeft = true;
+            }
+        
+
+        
+    
+        console.log(
+            "above:"+this.isSolidAbove,
+            "below:" + this.isSolidBelow,
+            "right:" + this.isSolidRight,
+            "left:" + this.isSolidLeft,
+            "map-height:" + (this.tileMap.layer1.length * this.tileSize-this.tileSize),
+            "map-width:" + (this.tileMap.layer1[1].length * this.tileSize-this.tileSize)
+            )
+            console.log(
+                "above:"+this.isSolidAbove,
+                "below:" + this.isSolidBelow,
+                "right:" + this.isSolidRight,
+                "left:" + this.isSolidLeft,
+                "map-height:" + (this.tileMap.layer1.length * this.tileSize-this.tileSize),
+                "map-width:" + (this.tileMap.layer1[1].length * this.tileSize-this.tileSize)
+                )
         };
     
 
