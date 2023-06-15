@@ -52,9 +52,14 @@ export default class Hero {
         }
     }
 
+    // COLISSION
+    
+      
 
 
     checkIfSolid() {
+        let collisionCoordinates = this.findCollision();
+        
         this.isSolidAbove = false;
         this.isSolidBelow = false;
         this.isSolidRight = false;
@@ -64,7 +69,6 @@ export default class Hero {
         let tileBelow = this.y;
         let tileRight = this.x;
         let tileLeft = this.x;
-
         const mapHeight = this.tileMap.layer1.length * this.tileSize;
         const mapWidth = this.tileMap.layer1[1].length * this.tileSize;
 
@@ -80,13 +84,10 @@ export default class Hero {
             this.isSolidRight = true;
             }
 
-        if (tileLeft < 0){
+        if (tileLeft < 0 || collisionCoordinates.some(coord => coord.x === tileLeft && coord.y === this.y)){
             this.isSolidLeft = true;
             }
         
-
-        
-    
         console.log(
             "above:"+this.isSolidAbove,
             "below:" + this.isSolidBelow,
@@ -95,15 +96,26 @@ export default class Hero {
             "map-height:" + (this.tileMap.layer1.length * this.tileSize-this.tileSize),
             "map-width:" + (this.tileMap.layer1[1].length * this.tileSize-this.tileSize)
             )
-            console.log(
-                "above:"+this.isSolidAbove,
-                "below:" + this.isSolidBelow,
-                "right:" + this.isSolidRight,
-                "left:" + this.isSolidLeft,
-                "map-height:" + (this.tileMap.layer1.length * this.tileSize-this.tileSize),
-                "map-width:" + (this.tileMap.layer1[1].length * this.tileSize-this.tileSize)
-                )
+            console.log("colission object coordinates:"+ JSON.stringify(this.findCollision()));
+            console.log("is colission:" + collisionCoordinates.some(coord => coord.x === tileLeft && coord.y === this.y))
         };
+
+        findCollision(){
+            const collisionCoordinates = [];
+    
+            for (let row = 0; row < this.tileMap.heroLayer.length; row++) {
+              for (let column = 0; column < this.tileMap.heroLayer[row].length; column++) {
+                const tile = this.tileMap.heroLayer[row][column];
+                if (tile === 4) {
+                  collisionCoordinates.push({ x: column*this.tileSize, y: row*this.tileSize });
+                  
+                }
+              }
+            }
+            return collisionCoordinates;
+            
+            
+          };
     
 
     }

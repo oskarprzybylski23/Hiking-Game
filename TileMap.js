@@ -209,6 +209,9 @@ export default class TileMap {
       }
     }
 
+
+
+
     // SET UP CANVAS DEAFULT LOOK
   
     #clearCanvas(canvas, ctx) {
