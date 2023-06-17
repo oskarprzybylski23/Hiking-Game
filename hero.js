@@ -120,10 +120,9 @@ export default class Hero {
             console.log("row: " + Math.ceil(this.y/this.tileSize) + " column: " + Math.floor(this.x/this.tileSize))
             console.log("x:" + this.x, "y:" + this.y);
             console.log(rowBelow+1);
-            // console.log(this.tileMap.heroLayer[Math.floor(this.y/this.tileSize)][columnRight])
         };
 
-        findCollision(){
+    findCollision(){
             const collisionCoordinates = [];
     
             for (let row = 0; row < this.tileMap.heroLayer.length; row++) {
@@ -135,9 +134,12 @@ export default class Hero {
               }
             }
             return collisionCoordinates;
-            
-            
           };
     
+    winCondition() {
+        if (this.tileMap.heroLayer[Math.ceil(this.y/this.tileSize)][Math.floor(this.x/this.tileSize)] === 6){
+            console.log("WIN!!!");
+        }
+    }
 
     }

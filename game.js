@@ -29,7 +29,7 @@ function handleKeyUp(event) {
 
 function gameLoop() {
 
-  console.log("x:" + hero.x, "y:" + hero.y);
+  
 
   if (keyState["ArrowUp"]) {
     // Perform action when ArrowUp key is pressed
@@ -56,7 +56,8 @@ function gameLoop() {
   }
 
   tileMap.draw(canvas, ctx);
-  hero.draw(ctx)
+  hero.draw(ctx);
+  hero.winCondition();
   }
 
 setInterval(gameLoop, 1000 / 60);
