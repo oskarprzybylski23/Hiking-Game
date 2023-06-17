@@ -101,7 +101,7 @@ export default class Hero {
         if (columnLeft < 0) {
             this.isSolidLeft = true;
         } else {
-        if (this.tileMap.heroLayer[Math.floor(this.x/this.tileSize)][columnLeft] === 4 ){
+        if (this.tileMap.heroLayer[Math.ceil(this.y/this.tileSize)][columnLeft] === 4 || this.tileMap.heroLayer[Math.floor(this.y/this.tileSize)][columnLeft] === 4){
             this.isSolidLeft = true;
             }
         }
