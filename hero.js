@@ -53,51 +53,74 @@ export default class Hero {
     }
 
     // COLISSION
-    
-      
-
 
     checkIfSolid() {
-        let collisionCoordinates = this.findCollision();
+        // let collisionCoordinates = this.findCollision();
         
         this.isSolidAbove = false;
         this.isSolidBelow = false;
         this.isSolidRight = false;
         this.isSolidLeft = false;
 
-        let tileAbove = this.y;
-        let tileBelow = this.y;
-        let tileRight = this.x;
-        let tileLeft = this.x;
-        const mapHeight = this.tileMap.layer1.length * this.tileSize;
-        const mapWidth = this.tileMap.layer1[1].length * this.tileSize;
+        let rowAbove = Math.ceil(this.y/this.tileSize)-1;
+        let rowBelow = Math.floor(this.y/this.tileSize)+1;
+        let columnRight = Math.ceil(this.x/this.tileSize)+1;
+        let columnLeft = Math.floor(this.x/this.tileSize);
 
-        if (tileAbove < 0 ){
+
+        const mapHeight = this.tileMap.layer1.length;
+        const mapWidth = this.tileMap.layer1[1].length;
+
+        if (rowAbove < 0) {
             this.isSolidAbove = true;
+            } 
+            else {
+            if (this.tileMap.heroLayer[rowAbove][Math.ceil(this.x/this.tileSize)] === 4 || this.tileMap.heroLayer[rowAbove][Math.floor(this.x/this.tileSize)] === 4) {
+            this.isSolidAbove = true;
+              }
             }
+            
         
-        if (tileBelow > mapHeight-this.tileSize){
+        if (rowBelow > mapHeight - 1) {
             this.isSolidBelow = true;
+            } else {
+            if (this.tileMap.heroLayer[rowBelow][Math.ceil(this.x/this.tileSize)] === 4 || this.tileMap.heroLayer[rowBelow][Math.floor(this.x/this.tileSize)] === 4) {
+            this.isSolidBelow = true;
+              }
             }
 
-        if (tileRight > mapWidth-this.tileSize){
+        if (columnRight > mapWidth) {
+            this.isSolidRight = true;
+        } else {
+        
+        if (this.tileMap.heroLayer[Math.ceil(this.y/this.tileSize)][columnRight-1] === 4 || this.tileMap.heroLayer[Math.floor(this.y/this.tileSize)][columnRight-1] === 4 ){
             this.isSolidRight = true;
             }
+        }
 
-        if (tileLeft < 0 || collisionCoordinates.some(coord => coord.x === tileLeft && coord.y === this.y)){
+        if (columnLeft < 0) {
+            this.isSolidLeft = true;
+        } else {
+        if (this.tileMap.heroLayer[Math.floor(this.x/this.tileSize)][columnLeft] === 4 ){
             this.isSolidLeft = true;
             }
-        
+        }
+       
+        // LOG FOR DEBUGGING
+            
         console.log(
             "above:"+this.isSolidAbove,
             "below:" + this.isSolidBelow,
             "right:" + this.isSolidRight,
             "left:" + this.isSolidLeft,
-            "map-height:" + (this.tileMap.layer1.length * this.tileSize-this.tileSize),
-            "map-width:" + (this.tileMap.layer1[1].length * this.tileSize-this.tileSize)
+            "map-height:" + (this.mapHeight),
+            "map-width:" + (this.mapWidth)
             )
             console.log("colission object coordinates:"+ JSON.stringify(this.findCollision()));
-            console.log("is colission:" + collisionCoordinates.some(coord => coord.x === tileLeft && coord.y === this.y))
+            console.log("row: " + Math.ceil(this.y/this.tileSize) + " column: " + Math.floor(this.x/this.tileSize))
+            console.log("x:" + this.x, "y:" + this.y);
+            console.log(rowBelow+1);
+            // console.log(this.tileMap.heroLayer[Math.floor(this.y/this.tileSize)][columnRight])
         };
 
         findCollision(){
@@ -107,8 +130,7 @@ export default class Hero {
               for (let column = 0; column < this.tileMap.heroLayer[row].length; column++) {
                 const tile = this.tileMap.heroLayer[row][column];
                 if (tile === 4) {
-                  collisionCoordinates.push({ x: column*this.tileSize, y: row*this.tileSize });
-                  
+                  collisionCoordinates.push({ x: column, y: row });
                 }
               }
             }
