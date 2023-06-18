@@ -13,7 +13,14 @@ export default class Hero {
 // HERO CREATION
 
     draw(ctx){
-        ctx.drawImage(this.HeroImages[this.HeroImageIndex], this.x, this.y, this.tileSize, this.tileSize);
+        let visibleHeight = this.tileSize;
+        let offsetY = 0;
+        let sx = 0;
+        let sy = 0;
+        let swidth = this.tileSize;
+        let sheight = this.tileSize;
+        //drawImage(img, sx, sy, swidth, sheight, x, y, width, height)
+        ctx.drawImage(this.HeroImages[this.HeroImageIndex], sx, sy, swidth, sheight,this.x, this.y- offsetY, this.tileSize, visibleHeight);
     }
 
     #loadHeroImage() {
@@ -153,6 +160,8 @@ export default class Hero {
             // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)+1][Math.floor(this.x/this.tileSize)]);
             
             if (this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3){
+                this.visibleHeight = 16;
+
                 if(this.tileMap.layer1[Math.ceil(this.y/this.tileSize)+1][Math.ceil(this.x/this.tileSize)] === 3){
                 this.y += (this.tileSize*this.velocity*0.2)/this.tileSize;
                 }
@@ -161,13 +170,13 @@ export default class Hero {
                     this.x += (this.tileSize*this.velocity*0.2)/this.tileSize;
                 }
 
-                // if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
-                //     this.x -= (this.tileSize*this.velocity*0.2)/this.tileSize;
-                // }
+                if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
+                    this.x -= (this.tileSize*this.velocity*0.2)/this.tileSize;
+                }
 
-                // if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
-                //     this.x -= (this.tileSize*this.velocity*0.2)/this.tileSize;
-                // }
+                if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)+1] === 3 && this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
+                    this.x += (this.tileSize*this.velocity*0.2)/this.tileSize;
+                }
             }   
 
         //SURFACES

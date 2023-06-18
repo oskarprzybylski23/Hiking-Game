@@ -23,7 +23,7 @@ export default class TileMap {
     //3- water
     //4 - tree 1
     //5 - Hero starting position (heroLayer only)
-    //6 - Hero finish position (heroLayer only)
+    //6 - Hero starting position (heroLayer only)
 
 
     layer1 = [
@@ -75,6 +75,22 @@ export default class TileMap {
       [0 ,0 ,5 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ]
     ];
 
+    coverLayer = [
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ],
+      [7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ,7 ]
+    ];
+
     
     // SET UP CANVAS AND DRAW OBJECTS
 
@@ -84,6 +100,7 @@ export default class TileMap {
       this.#drawlayer1(ctx);
       this.#drawlayer2(ctx);
       this.#drawcolission(ctx);
+      this.#drawcover(ctx);
     }
   
     // FUNCTIONS TO DRAW LAYERS
@@ -120,6 +137,8 @@ export default class TileMap {
               this.tileSize,
               this.tileSize
             );
+
+          
             
         }
       }
@@ -183,6 +202,8 @@ export default class TileMap {
               image = this.tree01;
               break;
           }
+
+        
             
   
           if (image != null)
@@ -193,6 +214,35 @@ export default class TileMap {
               this.tileSize,
               this.tileSize
             );
+        }
+      }
+    }
+
+    #drawcover(ctx) {
+      const whiteTileColor = "#FFFFFF";
+    
+      for (let row = 0; row < this.coverLayer.length; row++) {
+        for (let column = 0; column < this.coverLayer[row].length; column++) {
+          let tile = this.coverLayer[row][column];
+          let color = null;
+        
+
+          // console.log("tileMAP log"+ this.x/this.tileSize)
+          switch (tile) {
+            case 7:
+              color = whiteTileColor;
+              break;
+          }
+    
+          if (color === whiteTileColor) {
+            ctx.fillStyle = color;
+            ctx.fillRect(
+              column * this.tileSize,
+              row * this.tileSize,
+              this.tileSize,
+              this.tileSize
+            );
+          }
         }
       }
     }
