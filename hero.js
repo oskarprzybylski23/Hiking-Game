@@ -191,7 +191,30 @@ export default class Hero {
 
           this.velocity = updatedVelocity;
 
-        console.log(this.tileMap.layer2[Math.floor(this.y / this.tileSize)][Math.floor(this.x / this.tileSize)])
-        // console.log()
+        console.log(this.tileMap.layer2[Math.ceil(this.y / this.tileSize)][Math.ceil(this.x / this.tileSize)])
         }
+
+        //UNCOVERING TILES
+
+        uncoverTile() {
+            let rowCurrent = Math.floor(this.y/this.tileSize);
+            let columnCurrent = Math.floor(this.x/this.tileSize);
+
+            for (let row = 0; row < this.tileMap.coverLayer.length; row++) {
+                for (let column = 0; column < this.tileMap.coverLayer[row].length; column++) {
+                    this.tileMap.coverLayer[rowCurrent][columnCurrent] =
+                    this.tileMap.coverLayer[rowCurrent+1][columnCurrent+1] =
+                    this.tileMap.coverLayer[rowCurrent-1][columnCurrent-1] =
+                    this.tileMap.coverLayer[rowCurrent+1][columnCurrent] =
+                    this.tileMap.coverLayer[rowCurrent][columnCurrent+1] =
+                    this.tileMap.coverLayer[rowCurrent-1][columnCurrent] =
+                    this.tileMap.coverLayer[rowCurrent][columnCurrent-1] =
+                    this.tileMap.coverLayer[rowCurrent-1][columnCurrent+1] =
+                    this.tileMap.coverLayer[rowCurrent+1][columnCurrent-1] = 0
+                        
+                }
+        }
+
     }
+
+}

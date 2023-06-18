@@ -59,6 +59,8 @@ function gameLoop() {
   hero.draw(ctx);
   hero.winCondition();
   hero.surfaceBehaviour();
+  hero.uncoverTile();
+
   }
 
 setInterval(gameLoop, 1000 / 60);

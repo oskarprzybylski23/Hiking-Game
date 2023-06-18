@@ -225,9 +225,7 @@ export default class TileMap {
         for (let column = 0; column < this.coverLayer[row].length; column++) {
           let tile = this.coverLayer[row][column];
           let color = null;
-        
-
-          // console.log("tileMAP log"+ this.x/this.tileSize)
+      
           switch (tile) {
             case 7:
               color = whiteTileColor;
@@ -253,6 +251,7 @@ export default class TileMap {
           let tile = this.heroLayer[row][column];
           if (tile === 5) {
             this.heroLayer[row][column] = 0;
+            this.coverLayer[row][column] = 0;
             return new Hero(column * this.tileSize, row* this.tileSize, this.tileSize, velocity, this);
 
           }
