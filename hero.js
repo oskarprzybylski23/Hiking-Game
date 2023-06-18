@@ -6,7 +6,9 @@ export default class Hero {
         this.velocity = velocity;
         this.tileMap = tileMap;
         this.#loadHeroImage();
+        this.deafultVelocity = this.velocity;
     }
+
 
 // HERO CREATION
 
@@ -22,7 +24,6 @@ export default class Hero {
     };
 
 // MOVEMENT
-
 
     moveUp() {
         this.checkIfSolid()
@@ -62,10 +63,10 @@ export default class Hero {
         this.isSolidRight = false;
         this.isSolidLeft = false;
 
-        let rowAbove = Math.ceil(this.y/this.tileSize)-1;
-        let rowBelow = Math.floor(this.y/this.tileSize)+1;
-        let columnRight = Math.ceil(this.x/this.tileSize)+1;
-        let columnLeft = Math.floor(this.x/this.tileSize);
+        const rowAbove = Math.ceil(this.y/this.tileSize)-1;
+        const rowBelow = Math.floor(this.y/this.tileSize)+1;
+        const columnRight = Math.ceil(this.x/this.tileSize)+1;
+        const columnLeft = Math.floor(this.x/this.tileSize);
 
 
         const mapHeight = this.tileMap.layer1.length;
@@ -136,10 +137,52 @@ export default class Hero {
             return collisionCoordinates;
           };
     
+    // WIN CONDITION
+
     winCondition() {
-        if (this.tileMap.heroLayer[Math.ceil(this.y/this.tileSize)][Math.floor(this.x/this.tileSize)] === 6){
+        if (this.tileMap.heroLayer[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 6){
             console.log("WIN!!!");
         }
     }
 
+    // SURFACE BEHAVIOUR
+
+        surfaceBehaviour() {
+            //WATER
+            // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3);
+            // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)+1][Math.floor(this.x/this.tileSize)]);
+            
+            if (this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3){
+                if(this.tileMap.layer1[Math.ceil(this.y/this.tileSize)+1][Math.ceil(this.x/this.tileSize)] === 3){
+                this.y += (this.tileSize*this.velocity*0.2)/this.tileSize;
+                }
+
+                if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)+1] === 3){
+                    this.x += (this.tileSize*this.velocity*0.2)/this.tileSize;
+                }
+
+                // if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
+                //     this.x -= (this.tileSize*this.velocity*0.2)/this.tileSize;
+                // }
+
+                // if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
+                //     this.x -= (this.tileSize*this.velocity*0.2)/this.tileSize;
+                // }
+            }   
+
+        //SURFACES
+        
+        let updatedVelocity;
+
+        if (this.tileMap.layer2[Math.floor(this.y / this.tileSize)][Math.floor(this.x / this.tileSize)] === 2 || this.tileMap.layer2[Math.ceil(this.y / this.tileSize)][Math.ceil(this.x / this.tileSize)] === 2) {
+            updatedVelocity = this.deafultVelocity;
+          }   else {
+            updatedVelocity = this.deafultVelocity*0.5;
+          }
+
+          this.velocity = updatedVelocity;
+
+        console.log(this.tileMap.layer2[Math.floor(this.y / this.tileSize)][Math.floor(this.x / this.tileSize)])
+        // console.log()
+        }
     }

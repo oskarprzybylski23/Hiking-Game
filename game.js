@@ -1,6 +1,6 @@
 import TileMap from "./TileMap.js";
 const tileSize = 32;
-const velocity = 3;
+let velocity = 3;
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -58,6 +58,7 @@ function gameLoop() {
   tileMap.draw(canvas, ctx);
   hero.draw(ctx);
   hero.winCondition();
+  hero.surfaceBehaviour();
   }
 
 setInterval(gameLoop, 1000 / 60);
