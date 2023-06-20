@@ -19,6 +19,28 @@ export default class Hero {
         let sy = 0;
         let swidth = this.tileSize;
         let sheight = this.tileSize;
+
+        if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 3) {
+            sheight = this.tileSize/2;
+            visibleHeight = this.tileSize/2;
+          }
+
+        //DRAW RECTANGLE FOR DEBUGGING
+         // Get the tile coordinates
+        const tileX = Math.round(this.x / this.tileSize);
+        const tileY = Math.round(this.y / this.tileSize);
+
+        // Calculate the position and size of the rectangle
+        const rectX = tileX * this.tileSize;
+        const rectY = tileY * this.tileSize;
+        const rectWidth = this.tileSize;
+        const rectHeight = this.tileSize;
+
+        // Draw the rectangle
+        ctx.strokeStyle = 'red'; // Set the stroke color
+        ctx.lineWidth = 2; // Set the stroke width
+        ctx.strokeRect(rectX, rectY, rectWidth, rectHeight);
+
         //drawImage(img, sx, sy, swidth, sheight, x, y, width, height)
         ctx.drawImage(this.HeroImages[this.HeroImageIndex], sx, sy, swidth, sheight,this.x, this.y- offsetY, this.tileSize, visibleHeight);
     }
@@ -63,7 +85,6 @@ export default class Hero {
     // COLISSION
 
     checkIfSolid() {
-        // let collisionCoordinates = this.findCollision();
         
         this.isSolidAbove = false;
         this.isSolidBelow = false;
@@ -147,7 +168,7 @@ export default class Hero {
     // WIN CONDITION
 
     winCondition() {
-        if (this.tileMap.heroLayer[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 6){
+        if (this.tileMap.heroLayer[Math.round(this.y/this.tileSize)][Math.round(this.x/this.tileSize)] === 6){
             console.log("WIN!!!");
         }
     }
@@ -158,23 +179,25 @@ export default class Hero {
             //WATER
             // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3);
             // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)+1][Math.floor(this.x/this.tileSize)]);
-            
-            if (this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3){
-                this.visibleHeight = 16;
+            this.inWater = false;
 
-                if(this.tileMap.layer1[Math.ceil(this.y/this.tileSize)+1][Math.ceil(this.x/this.tileSize)] === 3){
-                this.y += (this.tileSize*this.velocity*0.2)/this.tileSize;
+            if (this.tileMap.layer1[Math.round(this.y/this.tileSize)][Math.round(this.x/this.tileSize)] === 3){
+                
+                this.inWater = true;
+                
+                if(this.tileMap.layer1[Math.round(this.y/this.tileSize)+1][Math.round(this.x/this.tileSize)] === 3){
+                this.y += ((this.tileSize*this.velocity*0.2)/this.tileSize);
                 }
 
-                if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)+1] === 3){
+                if(this.tileMap.layer1[Math.round(this.y/this.tileSize)][Math.round(this.x/this.tileSize)+1] === 3){
                     this.x += (this.tileSize*this.velocity*0.2)/this.tileSize;
                 }
 
-                if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
+                if(this.tileMap.layer1[Math.round(this.y/this.tileSize)][Math.round(this.x/this.tileSize)-1] === 3){
                     this.x -= (this.tileSize*this.velocity*0.2)/this.tileSize;
                 }
 
-                if(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)+1] === 3 && this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)-1] === 3){
+                if(this.tileMap.layer1[Math.round(this.y/this.tileSize)][Math.round(this.x/this.tileSize)+1] === 3 && this.tileMap.layer1[Math.round(this.y/this.tileSize)][Math.round(this.x/this.tileSize)-1] === 3){
                     this.x += (this.tileSize*this.velocity*0.2)/this.tileSize;
                 }
             }   
@@ -183,7 +206,7 @@ export default class Hero {
         
         let updatedVelocity;
 
-        if (this.tileMap.layer2[Math.floor(this.y / this.tileSize)][Math.floor(this.x / this.tileSize)] === 2 || this.tileMap.layer2[Math.ceil(this.y / this.tileSize)][Math.ceil(this.x / this.tileSize)] === 2) {
+        if (this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 2) {
             updatedVelocity = this.deafultVelocity;
           }   else {
             updatedVelocity = this.deafultVelocity*0.5;
@@ -191,14 +214,14 @@ export default class Hero {
 
           this.velocity = updatedVelocity;
 
-        console.log(this.tileMap.layer2[Math.ceil(this.y / this.tileSize)][Math.ceil(this.x / this.tileSize)])
         }
+
 
         //UNCOVERING TILES
 
         uncoverTile() {
-            let rowCurrent = Math.floor(this.y/this.tileSize);
-            let columnCurrent = Math.floor(this.x/this.tileSize);
+            let rowCurrent = Math.round(this.y/this.tileSize);
+            let columnCurrent = Math.round(this.x/this.tileSize);
 
             for (let row = 0; row < this.tileMap.coverLayer.length; row++) {
                 for (let column = 0; column < this.tileMap.coverLayer[row].length; column++) {

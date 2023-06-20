@@ -100,7 +100,7 @@ export default class TileMap {
       this.#drawlayer1(ctx);
       this.#drawlayer2(ctx);
       this.#drawcolission(ctx);
-      this.#drawcover(ctx);
+      // this.#drawcover(ctx);
     }
   
     // FUNCTIONS TO DRAW LAYERS
@@ -109,7 +109,7 @@ export default class TileMap {
       for (let row = 0; row < this.layer1.length; row++) {
         for (let column = 0; column < this.layer1[row].length; column++) {
           const tile = this.layer1[row][column];
-          let image = null;
+          let image = null; 
           switch (tile) {
             case 0:
               image = null;
@@ -203,9 +203,6 @@ export default class TileMap {
               break;
           }
 
-        
-            
-  
           if (image != null)
             ctx.drawImage(
               image,
