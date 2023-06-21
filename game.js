@@ -25,6 +25,11 @@ function handleKeyUp(event) {
   keyState[event.code] = false;
 }
 
+
+const button = document.querySelector("button");
+button.addEventListener("click", startGameLoop);
+
+
 // GAME LOOP
 
 function gameLoop() {

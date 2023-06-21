@@ -100,7 +100,7 @@ export default class TileMap {
       this.#drawlayer1(ctx);
       this.#drawlayer2(ctx);
       this.#drawcolission(ctx);
-      // this.#drawcover(ctx);
+      this.#drawcover(ctx);
     }
   
     // FUNCTIONS TO DRAW LAYERS
