@@ -19,22 +19,62 @@ let keyState = {}; // Object to store the state of each key
 
 function handleKeyDown(event) {
   keyState[event.code] = true;
+  
+  //Start game action
+  if (keyState["KeyN"]) {
+    startGameLoop();
+  }
+
 }
 
 function handleKeyUp(event) {
   keyState[event.code] = false;
 }
 
+// START GAME ACTION
+let gameRunning = false;
 
-const button = document.querySelector("button");
-button.addEventListener("click", startGameLoop);
+const startButton = document.querySelector("#startButton");
+startButton.addEventListener("click", startGameLoop);
 
+  
+
+//check if game loop is already running
+
+
+function startGameLoop() {
+  if (!gameRunning) {
+    gameRunning = true;
+    startButton.style.visibility = "hidden";
+    gameLoop();
+     // Hide the button
+  }
+}
+
+// OTHER ELEMENTS AND BUTTONS
+
+const helpButton = document.querySelector("#helpButton");
+const help = document.querySelector(".help");
+
+helpButton.addEventListener("click", handleHelp);
+const computedStyle = getComputedStyle(help);
+
+function handleHelp() {
+  if (computedStyle.visibility === "hidden") {
+    helpButton.style.background = "transparent";
+    help.style.visibility = "visible";
+  } else {
+    helpButton.style.background = "white";
+    help.style.visibility = "hidden";
+  }
+}
 
 // GAME LOOP
 
 function gameLoop() {
+  tileMap.drawInitial(canvas, ctx);
 
-  
+  if (gameRunning) {
 
   if (keyState["ArrowUp"]) {
     // Perform action when ArrowUp key is pressed
@@ -67,6 +107,7 @@ function gameLoop() {
   hero.uncoverTile();
 
   }
+}
 
 setInterval(gameLoop, 1000 / 60);
 
