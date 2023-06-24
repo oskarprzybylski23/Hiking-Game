@@ -1,7 +1,7 @@
 h1 {
-    color: lightgrey;
-    text-align: center;
-  }
+  color: lightgrey;
+  text-align: center;
+}
 
 h2 {
   color: white;
@@ -9,64 +9,64 @@ h2 {
   margin-bottom: 30px;
 }
 
-  #game {
-    box-shadow: 0px 10px 15px black;
-    min-height: 500px;
-  }
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(
-      0deg,
+#game {
+  box-shadow: 0px 10px 15px black;
+  min-height: 500px;
+  border-radius: 25px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(0deg,
       rgb(33, 80, 30) 0%,
-      rgb(153, 175, 250) 60%
-    );
-    overflow: hidden;
-  }
+      rgb(153, 175, 250) 60%);
+  overflow: hidden;
+}
 
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 10px;
-    height: fit-content;
-    min-height: fit-content;
-  }
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  height: fit-content;
+  min-height: fit-content;
+}
 
-  .top-menu {
-    display: flex;
-    position: relative;
-    justify-content: space-around;
-    height: 50px;
-    width: 600px;
-  }
+.top-menu {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  height: 50px;
+  width: 600px;
+}
 
-  .button-container {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.button-container {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  .help {
-    visibility: hidden;
-    position: absolute;
-    height: 400px;
-    width: 400px;
-    padding: 20px;
-    background-color: rgb(250, 234, 161);
-    border: solid 5px white;
-    border-radius: 15px;
-    position: absolute;
-    top: 30%;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.help {
+  visibility: hidden;
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  padding: 20px;
+  background-color: rgb(250, 234, 161);
+  border: solid 5px white;
+  border-radius: 15px;
+  position: absolute;
+  top: 30%;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  #helpButton {
-    background-color: white;
-  }
+#helpButton {
+  background-color: white;
+}

@@ -19,7 +19,7 @@ let keyState = {}; // Object to store the state of each key
 
 function handleKeyDown(event) {
   keyState[event.code] = true;
-  
+
   //Start game action
   if (keyState["KeyN"]) {
     startGameLoop();
@@ -37,7 +37,7 @@ let gameRunning = false;
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGameLoop);
 
-  
+
 
 //check if game loop is already running
 
@@ -47,7 +47,7 @@ function startGameLoop() {
     gameRunning = true;
     startButton.style.visibility = "hidden";
     gameLoop();
-     // Hide the button
+    // Hide the button
   }
 }
 
@@ -76,35 +76,35 @@ function gameLoop() {
 
   if (gameRunning) {
 
-  if (keyState["ArrowUp"]) {
-    // Perform action when ArrowUp key is pressed
-    console.log("move_up");
-    hero.moveUp();
-  }
+    if (keyState["ArrowUp"]) {
+      // Perform action when ArrowUp key is pressed
+      console.log("move_up");
+      hero.moveUp();
+    }
 
-  if (keyState["ArrowDown"]) {
-    // Perform action when ArrowDown key is pressed
-    console.log("move_down");
-    hero.moveDown();
-  }
+    if (keyState["ArrowDown"]) {
+      // Perform action when ArrowDown key is pressed
+      console.log("move_down");
+      hero.moveDown();
+    }
 
-  if (keyState["ArrowRight"]) {
-    // Perform action when ArrowDown key is pressed
-    console.log("move_right");
-    hero.moveRight();
-  }
+    if (keyState["ArrowRight"]) {
+      // Perform action when ArrowDown key is pressed
+      console.log("move_right");
+      hero.moveRight();
+    }
 
-  if (keyState["ArrowLeft"]) {
-    // Perform action when ArrowDown key is pressed
-    console.log("move_left");
-    hero.moveLeft();
-  }
+    if (keyState["ArrowLeft"]) {
+      // Perform action when ArrowDown key is pressed
+      console.log("move_left");
+      hero.moveLeft();
+    }
 
-  tileMap.draw(canvas, ctx);
-  hero.draw(ctx);
-  hero.winCondition();
-  hero.surfaceBehaviour();
-  hero.uncoverTile();
+    tileMap.draw(canvas, ctx);
+    hero.draw(ctx);
+    hero.winCondition();
+    hero.surfaceBehaviour();
+    hero.uncoverTile();
 
   }
 }
