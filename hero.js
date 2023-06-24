@@ -55,14 +55,15 @@ export default class Hero {
     // MOVEMENT
 
     moveUp() {
-        this.checkIfSolid()
+        this.checkIfSolid();
+
         if (this.isSolidAbove == false) {
             this.y -= (this.tileSize * this.velocity) / this.tileSize;
         }
     }
 
     moveDown() {
-        this.checkIfSolid()
+        this.checkIfSolid();
         if (this.isSolidBelow == false) {
             this.y += (this.tileSize * this.velocity) / this.tileSize;
         }
@@ -97,8 +98,8 @@ export default class Hero {
         const columnLeft = Math.floor(this.x / this.tileSize);
 
 
-        const mapHeight = this.tileMap.layer1.length;
-        const mapWidth = this.tileMap.layer1[1].length;
+        this.mapHeight = this.tileMap.layer1.length;
+        this.mapWidth = this.tileMap.layer1[1].length;
 
         if (rowAbove < 0) {
             this.isSolidAbove = true;
@@ -110,7 +111,7 @@ export default class Hero {
         }
 
 
-        if (rowBelow > mapHeight - 1) {
+        if (rowBelow > this.mapHeight - 1) {
             this.isSolidBelow = true;
         } else {
             if (this.tileMap.heroLayer[rowBelow][Math.ceil(this.x / this.tileSize)] === 4 || this.tileMap.heroLayer[rowBelow][Math.floor(this.x / this.tileSize)] === 4) {
@@ -118,7 +119,7 @@ export default class Hero {
             }
         }
 
-        if (columnRight > mapWidth) {
+        if (columnRight > this.mapWidth) {
             this.isSolidRight = true;
         } else {
 
@@ -176,32 +177,7 @@ export default class Hero {
     // SURFACE BEHAVIOUR
 
     surfaceBehaviour() {
-        //WATER
-        // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3);
-        // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)+1][Math.floor(this.x/this.tileSize)]);
-        this.inWater = false;
-
-        if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 3) {
-
-            this.inWater = true;
-
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize) + 1][Math.round(this.x / this.tileSize)] === 3) {
-                this.y += ((this.tileSize * this.velocity * 0.2) / this.tileSize);
-            }
-
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3) {
-                this.x += (this.tileSize * this.velocity * 0.2) / this.tileSize;
-            }
-
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) - 1] === 3) {
-                this.x -= (this.tileSize * this.velocity * 0.2) / this.tileSize;
-            }
-
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3 && this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) - 1] === 3) {
-                this.x += (this.tileSize * this.velocity * 0.2) / this.tileSize;
-            }
-        }
-
+        
         //SURFACES
 
         let updatedVelocity;
@@ -212,8 +188,49 @@ export default class Hero {
             updatedVelocity = this.deafultVelocity * 0.5;
         }
 
-        this.velocity = updatedVelocity;
+        
 
+        //WATER
+        // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3);
+        // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)+1][Math.floor(this.x/this.tileSize)]);
+        
+        this.inWater = false;
+
+        if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 3) {
+            console.log("in water: " + Math.round(this.x / this.tileSize))
+            this.inWater = true;
+
+
+            if (this.tileMap.layer1[Math.round(this.y / this.tileSize) + 1][Math.round(this.x / this.tileSize)] === 3) {
+                // this.y += ((this.tileSize * this.velocity * 0.2) / this.tileSize);
+                updatedVelocity = this.deafultVelocity * 0.2;
+                this.moveDown();
+            }
+
+            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3) {
+                // this.x += (this.tileSize * this.velocity * 0.2) / this.tileSize;
+                updatedVelocity = this.deafultVelocity * 0.2;
+                this.moveRight();
+            }
+
+            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) - 1] === 3) {
+                // this.x -= (this.tileSize * this.velocity * 0.2) / this.tileSize;
+                updatedVelocity = this.deafultVelocity * 0.2;
+                this.moveLeft();
+            }
+
+            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3 && this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) - 1] === 3) {
+                // this.x += (this.tileSize * this.velocity * 0.2) / this.tileSize;
+                updatedVelocity = this.deafultVelocity * 0.2;
+                this.moveRight();
+            
+            
+        }
+
+    }
+
+
+    this.velocity = updatedVelocity;
     }
 
 

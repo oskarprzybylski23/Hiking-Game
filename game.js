@@ -104,7 +104,7 @@ function gameLoop() {
     hero.draw(ctx);
     hero.winCondition();
     hero.surfaceBehaviour();
-    hero.uncoverTile();
+    // hero.uncoverTile();
 
   }
 }
