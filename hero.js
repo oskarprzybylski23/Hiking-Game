@@ -19,8 +19,11 @@ export default class Hero {
         let sy = 0;
         let swidth = this.tileSize;
         let sheight = this.tileSize;
+        let rowCurrent = Math.round(this.y / this.tileSize);
+        let columnCurrent = Math.round(this.x / this.tileSize);
 
-        if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 3) {
+
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3) {
             sheight = this.tileSize / 2;
             visibleHeight = this.tileSize / 2;
         }
@@ -94,47 +97,58 @@ export default class Hero {
 
         const rowAbove = Math.ceil(this.y / this.tileSize) - 1;
         const rowBelow = Math.floor(this.y / this.tileSize) + 1;
-        const columnRight = Math.ceil(this.x / this.tileSize) + 1;
+        const columnRight = Math.ceil(this.x / this.tileSize);
         const columnLeft = Math.floor(this.x / this.tileSize);
 
 
         this.mapHeight = this.tileMap.layer1.length;
         this.mapWidth = this.tileMap.layer1[1].length;
 
+        //add current row and column variables for readability
+
         if (rowAbove < 0) {
             this.isSolidAbove = true;
-        }
-        else {
-            if (this.tileMap.heroLayer[rowAbove][Math.ceil(this.x / this.tileSize)] === 4 || this.tileMap.heroLayer[rowAbove][Math.floor(this.x / this.tileSize)] === 4) {
-                this.isSolidAbove = true;
+          } else {
+            if (
+              this.tileMap.heroLayer[rowAbove][Math.floor(this.x / this.tileSize)] === 4 ||
+                this.tileMap.heroLayer[rowAbove][Math.ceil(this.x / this.tileSize)] === 4
+            ) {
+              this.isSolidAbove = true;
             }
-        }
-
-
-        if (rowBelow > this.mapHeight - 1) {
+          }
+        
+          if (rowBelow >= this.mapHeight) {
             this.isSolidBelow = true;
-        } else {
-            if (this.tileMap.heroLayer[rowBelow][Math.ceil(this.x / this.tileSize)] === 4 || this.tileMap.heroLayer[rowBelow][Math.floor(this.x / this.tileSize)] === 4) {
-                this.isSolidBelow = true;
+          } else {
+            if (
+              this.tileMap.heroLayer[rowBelow][Math.floor(this.x / this.tileSize)] === 4 ||
+                this.tileMap.heroLayer[rowBelow][Math.ceil(this.x / this.tileSize)] === 4
+            ) {
+              this.isSolidBelow = true;
             }
-        }
-
-        if (columnRight > this.mapWidth) {
+          }
+        
+          if (columnRight >= this.mapWidth) {
             this.isSolidRight = true;
-        } else {
-
-            if (this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][columnRight - 1] === 4 || this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnRight - 1] === 4) {
-                this.isSolidRight = true;
+          } else {
+            if (!(this.y / this.tileSize) > this.mapHeight &&
+                (this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnRight] === 4 ||
+                  this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][20] === 4)
+            ) {
+              this.isSolidRight = true;
             }
-        }
-
-        if (columnLeft < 0) {
+          }
+        
+          if (columnLeft < 0 || (this.y / this.tileSize) > 12) {
             this.isSolidLeft = true;
-        } else {
-            if (this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][columnLeft] === 4 || this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnLeft] === 4) {
-                this.isSolidLeft = true;
+          } else {
+            if (!(this.y / this.tileSize) > this.mapHeight &&
+              (this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnLeft] === 4 ||
+                this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][columnLeft] === 4)
+            ) {
+              this.isSolidLeft = true;
             }
-        }
+          }
 
         // LOG FOR DEBUGGING
 
@@ -147,10 +161,10 @@ export default class Hero {
             "map-width:" + (this.mapWidth)
         )
         console.log("colission object coordinates:" + JSON.stringify(this.findCollision()));
-        console.log("row: " + Math.ceil(this.y / this.tileSize) + " column: " + Math.floor(this.x / this.tileSize))
+        console.log("row: " + Math.round(this.y / this.tileSize) + " column: " + Math.round(this.x / this.tileSize))
         console.log("x:" + this.x, "y:" + this.y);
-        console.log(rowBelow + 1);
     };
+
 
     findCollision() {
         const collisionCoordinates = [];
@@ -181,30 +195,38 @@ export default class Hero {
         //SURFACES
 
         let updatedVelocity;
+        let rowCurrent = Math.round(this.y / this.tileSize);
+        let columnCurrent = Math.round(this.x / this.tileSize);
 
         if (this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 2) {
             updatedVelocity = this.deafultVelocity;
         } else {
             updatedVelocity = this.deafultVelocity * 0.5;
         }
-
         
 
         //WATER
         // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3);
         // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)+1][Math.floor(this.x/this.tileSize)]);
         
-        this.inWater = false;
+        
 
-        if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 3) {
-            console.log("in water: " + Math.round(this.x / this.tileSize))
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent > 0 && rowCurrent < 12) {
+            
+            
             this.inWater = true;
+            console.log((rowCurrent) < 11);
 
+           
 
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize) + 1][Math.round(this.x / this.tileSize)] === 3) {
-                // this.y += ((this.tileSize * this.velocity * 0.2) / this.tileSize);
-                updatedVelocity = this.deafultVelocity * 0.2;
-                this.moveDown();
+            if (
+                Math.round(this.y / this.tileSize) < this.tileMap.layer1.length &&
+                Math.round(this.x / this.tileSize) + 1 < this.tileMap.layer1[0].length &&
+                this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3
+              ) {
+                this.y += ((this.tileSize * this.velocity * 0.2) / this.tileSize);
+                
+                // this.moveDown();
             }
 
             if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3) {
@@ -223,9 +245,9 @@ export default class Hero {
                 // this.x += (this.tileSize * this.velocity * 0.2) / this.tileSize;
                 updatedVelocity = this.deafultVelocity * 0.2;
                 this.moveRight();
-            
-            
-        }
+            }
+        
+        this.inWater = false;
 
     }
 
