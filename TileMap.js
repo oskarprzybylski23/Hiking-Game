@@ -7,6 +7,8 @@ export default class TileMap {
     this.water = this.#image("water.png");
     this.stonePath = this.#image("stonePath.png");
     this.tree01 = this.#image("tree01.png");
+    this.remainingTime = 30;
+
   }
 
   #image(fileName) {
@@ -222,7 +224,7 @@ export default class TileMap {
     }
   }
 
-  #drawcover(ctx) {
+  drawcover(ctx) {
     const whiteTileColor = "#FFFFFF";
 
     for (let row = 0; row < this.coverLayer.length; row++) {
@@ -262,9 +264,6 @@ export default class TileMap {
       }
     }
   }
-
-
-
 
   // SET UP CANVAS DEAFULT LOOK
 

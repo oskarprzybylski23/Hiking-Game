@@ -2,11 +2,15 @@ import TileMap from "./TileMap.js";
 const tileSize = 32;
 let velocity = 3;
 
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const tileMap = new TileMap(tileSize);
 const hero = tileMap.getHero(velocity);
+
+let remainingTime = tileMap.remainingTime;
+let coverVisible = false;
 
 // KEY INPUT SENSING
 
@@ -37,11 +41,7 @@ let gameRunning = false;
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGameLoop);
 
-
-
 //check if game loop is already running
-
-
 function startGameLoop() {
   if (!gameRunning) {
     gameRunning = true;
@@ -49,6 +49,14 @@ function startGameLoop() {
     gameLoop();
     // Hide the button
   }
+}
+
+//TIMER
+function updateTimer() {
+  if (coverVisible === true){
+  const remainingTimeElement = document.getElementById("remainingTime");
+  remainingTimeElement.textContent = Math.ceil(remainingTime);
+}
 }
 
 // OTHER ELEMENTS AND BUTTONS
@@ -72,9 +80,14 @@ function handleHelp() {
 // GAME LOOP
 
 function gameLoop() {
+  
   tileMap.drawInitial(canvas, ctx);
 
   if (gameRunning) {
+
+
+  
+    //key actions
 
     if (keyState["ArrowUp"]) {
       // Perform action when ArrowUp key is pressed
@@ -100,11 +113,39 @@ function gameLoop() {
       hero.moveLeft();
     }
 
+    //draw map and hero layers
+
     tileMap.draw(canvas, ctx);
     hero.draw(ctx);
     hero.winCondition();
     hero.surfaceBehaviour();
-    // hero.uncoverTile();
+    hero.uncoverTile();
+
+
+
+
+    //timer
+
+    
+    remainingTime -= 1 / 60;
+    updateTimer();
+    
+    if (remainingTime <= 0) {
+      console.log("Time's up!");
+      gameRunning = false;
+      startButton.style.visibility = "visible";
+      remainingTime = tileMap.remainingTime;
+    }
+
+    if (remainingTime <= 25) {
+      coverVisible = true;
+    }
+
+    console.log("cover" + coverVisible)
+
+    if (coverVisible === true) {
+      tileMap.drawcover(ctx);
+    }
 
   }
 }

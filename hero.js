@@ -100,6 +100,9 @@ export default class Hero {
         const columnRight = Math.ceil(this.x / this.tileSize);
         const columnLeft = Math.floor(this.x / this.tileSize);
 
+        const rowCurrent = Math.round(this.y / this.tileSize);
+        const columnCurrent = Math.round(this.x / this.tileSize);
+
 
         this.mapHeight = this.tileMap.layer1.length;
         this.mapWidth = this.tileMap.layer1[1].length;
@@ -110,8 +113,7 @@ export default class Hero {
             this.isSolidAbove = true;
         } else {
             if (
-                this.tileMap.heroLayer[rowAbove][Math.floor(this.x / this.tileSize)] === 4 ||
-                this.tileMap.heroLayer[rowAbove][Math.ceil(this.x / this.tileSize)] === 4
+                this.tileMap.heroLayer[rowAbove][columnCurrent] === 4
             ) {
                 this.isSolidAbove = true;
             }
@@ -121,34 +123,32 @@ export default class Hero {
             this.isSolidBelow = true;
         } else {
             if (
-                this.tileMap.heroLayer[rowBelow][Math.floor(this.x / this.tileSize)] === 4 ||
-                this.tileMap.heroLayer[rowBelow][Math.ceil(this.x / this.tileSize)] === 4
+                this.tileMap.heroLayer[rowBelow][columnCurrent] === 4
             ) {
                 this.isSolidBelow = true;
             }
         }
 
-        if (columnRight >= this.mapWidth) {
+        if (columnRight >= this.mapWidth || (this.y / this.tileSize) > this.mapHeight-1) {
             this.isSolidRight = true;
         } else {
-            if (!(this.y / this.tileSize) > this.mapHeight &&
-                (this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnRight] === 4 ||
-                    this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][20] === 4)
+            if (this.tileMap.heroLayer[rowCurrent] &&
+                (this.tileMap.heroLayer[rowCurrent][columnRight] === 4)
             ) {
                 this.isSolidRight = true;
             }
         }
 
-        if (columnLeft < 0) {
+        if (columnLeft < 0 || (this.y / this.tileSize) > this.mapHeight-1) {
             this.isSolidLeft = true;
-        } else {
-            if (!(this.y / this.tileSize) > this.mapHeight &&
-                (this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnLeft] === 4 ||
-                    this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][columnLeft] === 4)
+          } else {
+            if (
+              this.tileMap.heroLayer[rowCurrent] &&
+              (this.tileMap.heroLayer[rowCurrent][columnLeft] === 4)
             ) {
-                this.isSolidLeft = true;
+              this.isSolidLeft = true;
             }
-        }
+          }
 
         // LOG FOR DEBUGGING
 
@@ -206,11 +206,8 @@ export default class Hero {
 
         //WATER
 
-        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent > 0 && rowCurrent < this.mapHeight - 1) {
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent >= 0 && rowCurrent < this.mapHeight - 1) {
 
-
-            this.inWater = true;
-            console.log((rowCurrent) < 11);
             updatedVelocity = this.deafultVelocity * 0.2;
 
 
@@ -220,7 +217,6 @@ export default class Hero {
                 this.tileMap.layer1[rowCurrent + 1][columnCurrent] === 3
             ) {
                 this.y += ((this.tileSize * this.velocity * 0.5) / this.tileSize);
-                console.log("donwstream");
             }
 
             if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 3) {
@@ -234,14 +230,9 @@ export default class Hero {
             if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 3 && this.tileMap.layer1[rowCurrent][Math.round(this.x / this.tileSize) - 1] === 3) {
                 this.x += (this.tileSize * this.velocity * 0.5) / this.tileSize;
             }
-
-            this.inWater = false;
-
         }
-
         this.velocity = updatedVelocity;
     }
-
 
     //UNCOVERING TILES
 
