@@ -10,7 +10,9 @@ const tileMap = new TileMap(tileSize);
 const hero = tileMap.getHero(velocity);
 
 let remainingTime = tileMap.remainingTime;
+let actualTime = 0;
 let coverVisible = false;
+let pauseGame = true;
 
 // KEY INPUT SENSING
 
@@ -56,6 +58,9 @@ function updateTimer() {
   if (coverVisible === true){
   const remainingTimeElement = document.getElementById("remainingTime");
   remainingTimeElement.textContent = Math.ceil(remainingTime);
+  document.getElementById("timer").style.visibility = "visible"
+  } else {
+  document.getElementById("timer").style.visibility = "hidden";
 }
 }
 
@@ -88,12 +93,14 @@ function gameLoop() {
 
   
     //key actions
-
+    
+    if (pauseGame === false){
     if (keyState["ArrowUp"]) {
       // Perform action when ArrowUp key is pressed
       console.log("move_up");
       hero.moveUp();
     }
+
 
     if (keyState["ArrowDown"]) {
       // Perform action when ArrowDown key is pressed
@@ -112,7 +119,11 @@ function gameLoop() {
       console.log("move_left");
       hero.moveLeft();
     }
+    
+    remainingTime -= 1 / 60;
 
+  }
+  
     //draw map and hero layers
 
     tileMap.draw(canvas, ctx);
@@ -121,13 +132,10 @@ function gameLoop() {
     hero.surfaceBehaviour();
     hero.uncoverTile();
 
-
-
-
     //timer
 
-    
-    remainingTime -= 1 / 60;
+    actualTime += 1 / 60;
+
     updateTimer();
     
     if (remainingTime <= 0) {
@@ -135,10 +143,12 @@ function gameLoop() {
       gameRunning = false;
       startButton.style.visibility = "visible";
       remainingTime = tileMap.remainingTime;
+      actualTime = 0;
     }
 
-    if (remainingTime <= 25) {
+    if (actualTime >= 5) {
       coverVisible = true;
+      pauseGame = false;
     }
 
     console.log("cover" + coverVisible)
@@ -147,6 +157,9 @@ function gameLoop() {
       tileMap.drawcover(ctx);
     }
 
+    console.log("actual time: " + Math.ceil(actualTime));
+    console.log("remaining time: " + Math.ceil(remainingTime));
+    console.log("pause: "+ pauseGame);
   }
 }
 

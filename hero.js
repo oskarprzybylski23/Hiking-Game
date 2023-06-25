@@ -237,24 +237,32 @@ export default class Hero {
     //UNCOVERING TILES
 
     uncoverTile() {
-        let rowCurrent = Math.round(this.y / this.tileSize);
-        let columnCurrent = Math.round(this.x / this.tileSize);
+        const rowCurrent = Math.round(this.y / this.tileSize);
+        const columnCurrent = Math.round(this.x / this.tileSize);
 
-        for (let row = 0; row < this.tileMap.coverLayer.length; row++) {
-            for (let column = 0; column < this.tileMap.coverLayer[row].length; column++) {
-                this.tileMap.coverLayer[rowCurrent][columnCurrent] =
-                    this.tileMap.coverLayer[rowCurrent + 1][columnCurrent + 1] =
-                    this.tileMap.coverLayer[rowCurrent - 1][columnCurrent - 1] =
-                    this.tileMap.coverLayer[rowCurrent + 1][columnCurrent] =
-                    this.tileMap.coverLayer[rowCurrent][columnCurrent + 1] =
-                    this.tileMap.coverLayer[rowCurrent - 1][columnCurrent] =
-                    this.tileMap.coverLayer[rowCurrent][columnCurrent - 1] =
-                    this.tileMap.coverLayer[rowCurrent - 1][columnCurrent + 1] =
-                    this.tileMap.coverLayer[rowCurrent + 1][columnCurrent - 1] = 0
-
+        const tilesToUpdate = [
+            [rowCurrent, columnCurrent],
+            [rowCurrent + 1, columnCurrent + 1],
+            [rowCurrent - 1, columnCurrent - 1],
+            [rowCurrent + 1, columnCurrent],
+            [rowCurrent, columnCurrent + 1],
+            [rowCurrent - 1, columnCurrent],
+            [rowCurrent, columnCurrent - 1],
+            [rowCurrent - 1, columnCurrent + 1],
+            [rowCurrent + 1, columnCurrent - 1]
+          ];
+        
+          for (const [row, column] of tilesToUpdate) {
+            if (
+              row >= 0 &&
+              row < this.tileMap.coverLayer.length &&
+              column >= 0 &&
+              column < this.tileMap.coverLayer[row].length
+            ) {
+              this.tileMap.coverLayer[row][column] = 0;
             }
+          }
         }
 
     }
 
-}

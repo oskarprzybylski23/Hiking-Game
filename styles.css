@@ -70,3 +70,7 @@ main {
 #helpButton {
   background-color: white;
 }
+
+#timer {
+  visibility: hidden;
+}
