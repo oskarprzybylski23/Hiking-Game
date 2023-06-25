@@ -108,47 +108,47 @@ export default class Hero {
 
         if (rowAbove < 0) {
             this.isSolidAbove = true;
-          } else {
+        } else {
             if (
-              this.tileMap.heroLayer[rowAbove][Math.floor(this.x / this.tileSize)] === 4 ||
+                this.tileMap.heroLayer[rowAbove][Math.floor(this.x / this.tileSize)] === 4 ||
                 this.tileMap.heroLayer[rowAbove][Math.ceil(this.x / this.tileSize)] === 4
             ) {
-              this.isSolidAbove = true;
+                this.isSolidAbove = true;
             }
-          }
-        
-          if (rowBelow >= this.mapHeight) {
+        }
+
+        if (rowBelow >= this.mapHeight) {
             this.isSolidBelow = true;
-          } else {
+        } else {
             if (
-              this.tileMap.heroLayer[rowBelow][Math.floor(this.x / this.tileSize)] === 4 ||
+                this.tileMap.heroLayer[rowBelow][Math.floor(this.x / this.tileSize)] === 4 ||
                 this.tileMap.heroLayer[rowBelow][Math.ceil(this.x / this.tileSize)] === 4
             ) {
-              this.isSolidBelow = true;
+                this.isSolidBelow = true;
             }
-          }
-        
-          if (columnRight >= this.mapWidth) {
+        }
+
+        if (columnRight >= this.mapWidth) {
             this.isSolidRight = true;
-          } else {
+        } else {
             if (!(this.y / this.tileSize) > this.mapHeight &&
                 (this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnRight] === 4 ||
-                  this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][20] === 4)
+                    this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][20] === 4)
             ) {
-              this.isSolidRight = true;
+                this.isSolidRight = true;
             }
-          }
-        
-          if (columnLeft < 0 || (this.y / this.tileSize) > 12) {
+        }
+
+        if (columnLeft < 0 || (this.y / this.tileSize) > 12) {
             this.isSolidLeft = true;
-          } else {
+        } else {
             if (!(this.y / this.tileSize) > this.mapHeight &&
-              (this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnLeft] === 4 ||
-                this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][columnLeft] === 4)
+                (this.tileMap.heroLayer[Math.floor(this.y / this.tileSize)][columnLeft] === 4 ||
+                    this.tileMap.heroLayer[Math.ceil(this.y / this.tileSize)][columnLeft] === 4)
             ) {
-              this.isSolidLeft = true;
+                this.isSolidLeft = true;
             }
-          }
+        }
 
         // LOG FOR DEBUGGING
 
@@ -191,7 +191,7 @@ export default class Hero {
     // SURFACE BEHAVIOUR
 
     surfaceBehaviour() {
-        
+
         //SURFACES
 
         let updatedVelocity;
@@ -203,56 +203,43 @@ export default class Hero {
         } else {
             updatedVelocity = this.deafultVelocity * 0.5;
         }
-        
 
         //WATER
-        // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)][Math.ceil(this.x/this.tileSize)] === 3);
-        // console.log(this.tileMap.layer1[Math.floor(this.y/this.tileSize)+1][Math.floor(this.x/this.tileSize)]);
-        
-        
 
-        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent > 0 && rowCurrent < 12) {
-            
-            
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent > 0 && rowCurrent < this.mapHeight-1) {
+
+
             this.inWater = true;
             console.log((rowCurrent) < 11);
+            updatedVelocity = this.deafultVelocity * 0.2;
 
-           
 
             if (
-                Math.round(this.y / this.tileSize) < this.tileMap.layer1.length &&
-                Math.round(this.x / this.tileSize) + 1 < this.tileMap.layer1[0].length &&
-                this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3
-              ) {
-                this.y += ((this.tileSize * this.velocity * 0.2) / this.tileSize);
-                
-                // this.moveDown();
+                rowCurrent < this.tileMap.layer1.length &&
+                columnCurrent + 1 < this.tileMap.layer1[0].length &&
+                this.tileMap.layer1[rowCurrent+1][columnCurrent] === 3
+            ) {
+                this.y += ((this.tileSize * this.velocity * 0.5) / this.tileSize);
+                console.log("donwstream");
             }
 
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3) {
-                // this.x += (this.tileSize * this.velocity * 0.2) / this.tileSize;
-                updatedVelocity = this.deafultVelocity * 0.2;
-                this.moveRight();
+            if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 3) {
+                this.x += (this.tileSize * this.velocity * 0.5) / this.tileSize;
             }
 
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) - 1] === 3) {
-                // this.x -= (this.tileSize * this.velocity * 0.2) / this.tileSize;
-                updatedVelocity = this.deafultVelocity * 0.2;
-                this.moveLeft();
+            if (this.tileMap.layer1[rowCurrent][columnCurrent - 1] === 3) {
+                this.x -= (this.tileSize * this.velocity * 0.5) / this.tileSize;
             }
 
-            if (this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) + 1] === 3 && this.tileMap.layer1[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize) - 1] === 3) {
-                // this.x += (this.tileSize * this.velocity * 0.2) / this.tileSize;
-                updatedVelocity = this.deafultVelocity * 0.2;
-                this.moveRight();
+            if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 3 && this.tileMap.layer1[rowCurrent][Math.round(this.x / this.tileSize) - 1] === 3) {
+                this.x += (this.tileSize * this.velocity * 0.5) / this.tileSize;
             }
-        
-        this.inWater = false;
 
-    }
+            this.inWater = false;
 
+        }
 
-    this.velocity = updatedVelocity;
+        this.velocity = updatedVelocity;
     }
 
 
