@@ -139,7 +139,7 @@ export default class Hero {
             }
         }
 
-        if (columnLeft < 0 || (this.y / this.tileSize) > 12) {
+        if (columnLeft < 0) {
             this.isSolidLeft = true;
         } else {
             if (!(this.y / this.tileSize) > this.mapHeight &&
@@ -206,7 +206,7 @@ export default class Hero {
 
         //WATER
 
-        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent > 0 && rowCurrent < this.mapHeight-1) {
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent > 0 && rowCurrent < this.mapHeight - 1) {
 
 
             this.inWater = true;
@@ -217,7 +217,7 @@ export default class Hero {
             if (
                 rowCurrent < this.tileMap.layer1.length &&
                 columnCurrent + 1 < this.tileMap.layer1[0].length &&
-                this.tileMap.layer1[rowCurrent+1][columnCurrent] === 3
+                this.tileMap.layer1[rowCurrent + 1][columnCurrent] === 3
             ) {
                 this.y += ((this.tileSize * this.velocity * 0.5) / this.tileSize);
                 console.log("donwstream");
