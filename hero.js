@@ -181,10 +181,14 @@ export default class Hero {
     };
 
     // WIN CONDITION
+ 
+    
 
     winCondition() {
+        const winEvent = new CustomEvent('winEvent', { detail: { message: 'You won' } });
         if (this.tileMap.heroLayer[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 6) {
             console.log("WIN!!!");
+            document.dispatchEvent(winEvent);
         }
     }
 

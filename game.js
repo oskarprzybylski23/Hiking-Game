@@ -82,6 +82,28 @@ function handleHelp() {
   }
 }
 
+const continueButton = document.querySelector("#continueButton");
+continueButton.addEventListener("click", handleContinue);
+
+function handleContinue() {
+  gameRunning = false;
+  continueButton.style.visibility = "hidden";
+  startButton.style.visibility = "visible";
+}
+
+// WIN AND LOSE ACTIONS
+
+document.addEventListener('winEvent', handleWin);
+let win = 0;
+
+
+function handleWin(event) {
+  win = 1;
+  pauseGame = true;
+  continueButton.style.visibility = "visible";
+  console.log('Event received:', event.detail.message);
+}
+
 // GAME LOOP
 
 function gameLoop() {
@@ -123,7 +145,7 @@ function gameLoop() {
     remainingTime -= 1 / 60;
 
   }
-  
+
     //draw map and hero layers
 
     tileMap.draw(canvas, ctx);
@@ -146,7 +168,7 @@ function gameLoop() {
       actualTime = 0;
     }
 
-    if (actualTime >= 5) {
+    if (actualTime >= 5 && win === 0) {
       coverVisible = true;
       pauseGame = false;
     }
