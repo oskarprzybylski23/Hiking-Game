@@ -7,7 +7,7 @@ export default class TileMap {
     this.water = this.#image("water.png");
     this.stonePath = this.#image("stonePath.png");
     this.tree01 = this.#image("tree01.png");
-    this.remainingTime = 30;
+    this.targetTime = 10;
 
   }
 
@@ -109,7 +109,6 @@ export default class TileMap {
     this.#drawlayer1(ctx);
     this.#drawlayer2(ctx);
     this.#drawcolission(ctx);
-    // this.#drawcover(ctx);
   }
 
   // FUNCTIONS TO DRAW LAYERS

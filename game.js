@@ -9,7 +9,7 @@ const ctx = canvas.getContext("2d");
 const tileMap = new TileMap(tileSize);
 const hero = tileMap.getHero(velocity);
 
-let remainingTime = tileMap.remainingTime;
+let remainingTime = tileMap.targetTime;
 let actualTime = 0;
 let coverVisible = false;
 let pauseGame = true;
@@ -30,7 +30,6 @@ function handleKeyDown(event) {
   if (keyState["KeyN"]) {
     startGameLoop();
   }
-
 }
 
 function handleKeyUp(event) {
@@ -55,13 +54,13 @@ function startGameLoop() {
 
 //TIMER
 function updateTimer() {
-  if (coverVisible === true){
-  const remainingTimeElement = document.getElementById("remainingTime");
-  remainingTimeElement.textContent = Math.ceil(remainingTime);
-  document.getElementById("timer").style.visibility = "visible"
+  if (coverVisible === true) {
+    const remainingTimeElement = document.getElementById("remainingTime");
+    remainingTimeElement.textContent = Math.ceil(remainingTime);
+    document.getElementById("timer").style.visibility = "visible"
   } else {
-  document.getElementById("timer").style.visibility = "hidden";
-}
+    document.getElementById("timer").style.visibility = "hidden";
+  }
 }
 
 // OTHER ELEMENTS AND BUTTONS
@@ -88,63 +87,99 @@ continueButton.addEventListener("click", handleContinue);
 function handleContinue() {
   gameRunning = false;
   continueButton.style.visibility = "hidden";
+  restartButton.style.visibility = "hidden";
   startButton.style.visibility = "visible";
+  banner.style.visibility = "hidden";
+}
+
+const restartButton = document.querySelector("#restartButton");
+restartButton.addEventListener("click", handleRestart);
+
+function handleRestart() {
+  gameRunning = false;
+  continueButton.style.visibility = "hidden";
+  restartButton.style.visibility = "hidden";
+  startButton.style.visibility = "visible";
+  banner.style.visibility = "hidden";
 }
 
 // WIN AND LOSE ACTIONS
 
+const banner = document.querySelector(".banner-container");
+const bannerHeading = document.getElementById("banner-heading");
+const bannerMessageOne = document.getElementById("banner-message-1");
+const bannerMessageTwo = document.getElementById("banner-message-2");
+
+//win
 document.addEventListener('winEvent', handleWin);
 let win = 0;
-
 
 function handleWin(event) {
   win = 1;
   pauseGame = true;
   continueButton.style.visibility = "visible";
-  console.log('Event received:', event.detail.message);
+  restartButton.style.visibility = "visible";
+  banner.style.visibility = "visible";
+  let playerTime = (tileMap.targetTime - remainingTime).toFixed(2);
+  bannerHeading.textContent = "YOU WON!!!";
+  bannerMessageOne.textContent = "Congratulations! You reached the destination in " + playerTime + " seconds.";
+  bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
+
+}
+
+//lose
+function loseGame() {
+  pauseGame = true;
+  banner.style.visibility = "visible";
+  bannerHeading.textContent = "Time's Up!";
+  bannerMessageOne.textContent = "You didn't manage to get to the destination before the night. You have to camp in the wild.";
+  bannerMessageTwo.textContent = "Don't give up, try again, or take a break and try later!"
+  restartButton.style.visibility = "visible";
+  remainingTime = tileMap.targetTime;
+  actualTime = 0;
 }
 
 // GAME LOOP
 
 function gameLoop() {
-  
+
   tileMap.drawInitial(canvas, ctx);
 
   if (gameRunning) {
 
 
-  
+
     //key actions
-    
-    if (pauseGame === false){
-    if (keyState["ArrowUp"]) {
-      // Perform action when ArrowUp key is pressed
-      console.log("move_up");
-      hero.moveUp();
+
+    if (pauseGame === false) {
+      if (keyState["ArrowUp"]) {
+        // Perform action when ArrowUp key is pressed
+        console.log("move_up");
+        hero.moveUp();
+      }
+
+
+      if (keyState["ArrowDown"]) {
+        // Perform action when ArrowDown key is pressed
+        console.log("move_down");
+        hero.moveDown();
+      }
+
+      if (keyState["ArrowRight"]) {
+        // Perform action when ArrowDown key is pressed
+        console.log("move_right");
+        hero.moveRight();
+      }
+
+      if (keyState["ArrowLeft"]) {
+        // Perform action when ArrowDown key is pressed
+        console.log("move_left");
+        hero.moveLeft();
+      }
+
+      remainingTime -= 1 / 60;
+
     }
-
-
-    if (keyState["ArrowDown"]) {
-      // Perform action when ArrowDown key is pressed
-      console.log("move_down");
-      hero.moveDown();
-    }
-
-    if (keyState["ArrowRight"]) {
-      // Perform action when ArrowDown key is pressed
-      console.log("move_right");
-      hero.moveRight();
-    }
-
-    if (keyState["ArrowLeft"]) {
-      // Perform action when ArrowDown key is pressed
-      console.log("move_left");
-      hero.moveLeft();
-    }
-    
-    remainingTime -= 1 / 60;
-
-  }
 
     //draw map and hero layers
 
@@ -159,13 +194,10 @@ function gameLoop() {
     actualTime += 1 / 60;
 
     updateTimer();
-    
+
     if (remainingTime <= 0) {
       console.log("Time's up!");
-      gameRunning = false;
-      startButton.style.visibility = "visible";
-      remainingTime = tileMap.remainingTime;
-      actualTime = 0;
+      loseGame();
     }
 
     if (actualTime >= 5 && win === 0) {
@@ -181,7 +213,7 @@ function gameLoop() {
 
     console.log("actual time: " + Math.ceil(actualTime));
     console.log("remaining time: " + Math.ceil(remainingTime));
-    console.log("pause: "+ pauseGame);
+    console.log("pause: " + pauseGame);
   }
 }
 

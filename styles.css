@@ -60,24 +60,44 @@ main {
   width: 400px;
   padding: 20px;
   background-color: rgb(250, 234, 161);
-  border: solid 5px white;
+  border: solid 5px #994040;
   border-radius: 15px;
   position: absolute;
-  top: 30%;
+  /* top: 30%; */
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.banner-container {
+  position: absolute;
+  height: 200px;
+  width: 400px;
+  padding: 20px;
+  background-color: #0e9e0969;
+  border: solid 5px white;
+  border-radius: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+}
+
+.banner-container p, h2 {
+  color: black;
 }
 
 #helpButton {
   background-color: white;
 }
 
-#startButton {
-
-}
+#startButton {}
 
 #continueButton {
+  visibility: hidden;
+}
+
+#restartButton {
   visibility: hidden;
 }
 
