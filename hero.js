@@ -7,6 +7,8 @@ export default class Hero {
         this.tileMap = tileMap;
         this.#loadHeroImage();
         this.deafultVelocity = this.velocity;
+        this.deafultx = x;
+        this.deafulty = y;
     }
 
 
@@ -196,8 +198,8 @@ export default class Hero {
     }
 
     resetHero(){
-        this.x = 64;
-        this.y = 350;
+        this.x = this.deafultx;
+        this.y = this.deafulty;
     }
 
     // SURFACE BEHAVIOUR
