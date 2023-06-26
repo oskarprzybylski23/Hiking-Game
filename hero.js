@@ -132,7 +132,7 @@ export default class Hero {
             }
         }
 
-        if (columnRight >= this.mapWidth || (this.y / this.tileSize) > this.mapHeight - 1) {
+        if (columnRight >= this.mapWidth || rowCurrent > this.mapHeight) {
             this.isSolidRight = true;
         } else {
             if (this.tileMap.heroLayer[rowCurrent] &&
@@ -142,7 +142,7 @@ export default class Hero {
             }
         }
 
-        if (columnLeft < 0 || (this.y / this.tileSize) > this.mapHeight - 1) {
+        if (columnLeft < 0 || rowCurrent > this.mapHeight) {
             this.isSolidLeft = true;
         } else {
             if (

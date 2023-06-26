@@ -96,7 +96,7 @@ function handleContinue() {
   hero.resetHero();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
-  win = 0;
+  winorlose = 0;
 }
 
 const restartButton = document.querySelector("#restartButton");
@@ -111,7 +111,7 @@ function handleRestart() {
   hero.resetHero();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
-  win = 0;
+  winorlose = 0;
 }
 
 // WIN AND LOSE ACTIONS
@@ -123,10 +123,10 @@ const bannerMessageTwo = document.getElementById("banner-message-2");
 
 //win
 document.addEventListener('winEvent', handleWin);
-let win = 0;
+let winorlose = 0;
 
 function handleWin(event) {
-  win = 1;
+  winorlose = 1;
   pauseGame = true;
   continueButton.style.visibility = "visible";
   restartButton.style.visibility = "visible";
@@ -140,12 +140,14 @@ function handleWin(event) {
 
 //lose
 function loseGame() {
+  winorlose = 1;
   pauseGame = true;
+  restartButton.style.visibility = "visible";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Time's Up!";
   bannerMessageOne.textContent = "You didn't manage to get to the destination before the night. You have to camp in the wild.";
   bannerMessageTwo.textContent = "Don't give up, try again, or take a break and try later!"
-  restartButton.style.visibility = "visible";
+  
 }
 
 // GAME LOOP
@@ -208,7 +210,7 @@ function gameLoop() {
       loseGame();
     }
 
-    if (actualTime >= 5 && win === 0) {
+    if (actualTime >= 5 && winorlose === 0) {
       coverVisible = true;
       pauseGame = false;
     }
