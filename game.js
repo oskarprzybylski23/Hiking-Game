@@ -37,6 +37,7 @@ function handleKeyUp(event) {
 }
 
 // START GAME ACTION
+
 let gameRunning = false;
 
 const startButton = document.querySelector("#startButton");
@@ -53,6 +54,7 @@ function startGameLoop() {
 }
 
 //TIMER
+
 function updateTimer() {
   if (coverVisible === true) {
     const remainingTimeElement = document.getElementById("remainingTime");
@@ -92,6 +94,9 @@ function handleContinue() {
   banner.style.visibility = "hidden";
   tileMap.nextMap();
   hero.resetHero();
+  remainingTime = tileMap.targetTime;
+  actualTime = 0;
+  win = 0;
 }
 
 const restartButton = document.querySelector("#restartButton");
@@ -104,6 +109,9 @@ function handleRestart() {
   startButton.style.visibility = "visible";
   banner.style.visibility = "hidden";
   hero.resetHero();
+  remainingTime = tileMap.targetTime;
+  actualTime = 0;
+  win = 0;
 }
 
 // WIN AND LOSE ACTIONS
@@ -127,7 +135,7 @@ function handleWin(event) {
   bannerHeading.textContent = "YOU WON!!!";
   bannerMessageOne.textContent = "Congratulations! You reached the destination in " + playerTime + " seconds.";
   bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
-
+  
 }
 
 //lose
@@ -138,8 +146,6 @@ function loseGame() {
   bannerMessageOne.textContent = "You didn't manage to get to the destination before the night. You have to camp in the wild.";
   bannerMessageTwo.textContent = "Don't give up, try again, or take a break and try later!"
   restartButton.style.visibility = "visible";
-  remainingTime = tileMap.targetTime;
-  actualTime = 0;
 }
 
 // GAME LOOP

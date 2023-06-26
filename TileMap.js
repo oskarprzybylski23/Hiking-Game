@@ -133,6 +133,7 @@ export default class TileMap {
 
   // MAP SELECTION AND DRAWING LAYERS
 
+  //set initial map to map1
   mapNumber = 1;
   selectedMap = this.selectMap(this.mapNumber);
 
@@ -155,11 +156,12 @@ export default class TileMap {
     return currentMap;
   }
 
+  //assign current map layers
   layer1 = this.selectedMap.layer1;
   layer2 = this.selectedMap.layer2;
   heroLayer = this.selectedMap.heroLayer;
 
-  //select next map number and update variables
+  //select next map number and update variables when called
   nextMap() {
     this.mapNumber += 1;
     this.selectedMap = this.selectMap(this.mapNumber);
@@ -168,6 +170,7 @@ export default class TileMap {
     this.heroLayer = this.selectedMap.heroLayer;
   }
 
+  //create map cover layer
   //7 - covered tile (coverLayer only)
 
   coverLayer = [
@@ -203,8 +206,6 @@ export default class TileMap {
     this.#drawlayer1(ctx);
     this.#drawlayer2(ctx);
     this.#drawcolission(ctx);
-    console.log(this.mapNumber);
-    console.log(this.layer1);
   }
 
   // FUNCTIONS TO DRAW LAYERS
@@ -365,7 +366,6 @@ export default class TileMap {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
-
 
   #setCanvasSize(canvas) {
     canvas.height = this.layer1.length * this.tileSize;
