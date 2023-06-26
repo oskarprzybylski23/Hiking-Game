@@ -131,17 +131,14 @@ export default class TileMap {
     ]
   }
 
-  // CREATE MAP LAYERS
-  // currentMap = [];
-  mapNumber = 1;
+  // MAP SELECTION AND DRAWING LAYERS
 
-  nextMap(){
-    this.mapNumber += 1;
-  }
+  mapNumber = 1;
+  selectedMap = this.selectMap(this.mapNumber);
 
   selectMap(mapNumber) {
     let currentMap = "";
-  
+
     switch (mapNumber) {
       case 1:
         currentMap = this.map1;
@@ -154,16 +151,23 @@ export default class TileMap {
         console.log("Invalid map number!");
         return currentMap;
     }
-  
+
     return currentMap;
   }
-  
-  selectedMap = this.selectMap(this.mapNumber);
-    
-    layer1 = this.selectedMap.layer1;
-    layer2 = this.selectedMap.layer2;
-    heroLayer = this.selectedMap.heroLayer;
-  
+
+  layer1 = this.selectedMap.layer1;
+  layer2 = this.selectedMap.layer2;
+  heroLayer = this.selectedMap.heroLayer;
+
+  //select next map number and update variables
+  nextMap() {
+    this.mapNumber += 1;
+    this.selectedMap = this.selectMap(this.mapNumber);
+    this.layer1 = this.selectedMap.layer1;
+    this.layer2 = this.selectedMap.layer2;
+    this.heroLayer = this.selectedMap.heroLayer;
+  }
+
   //7 - covered tile (coverLayer only)
 
   coverLayer = [
@@ -187,7 +191,7 @@ export default class TileMap {
 
   // deafult canvas state
   drawInitial(canvas, ctx) {
-    
+
     this.#setCanvasSize(canvas);
     this.#clearCanvas(canvas, ctx);
   }
@@ -199,7 +203,8 @@ export default class TileMap {
     this.#drawlayer1(ctx);
     this.#drawlayer2(ctx);
     this.#drawcolission(ctx);
-    console.log(this.mapNumber)
+    console.log(this.mapNumber);
+    console.log(this.layer1);
   }
 
   // FUNCTIONS TO DRAW LAYERS

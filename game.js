@@ -90,6 +90,8 @@ function handleContinue() {
   restartButton.style.visibility = "hidden";
   startButton.style.visibility = "visible";
   banner.style.visibility = "hidden";
+  tileMap.nextMap();
+  hero.resetHero();
 }
 
 const restartButton = document.querySelector("#restartButton");
@@ -101,7 +103,6 @@ function handleRestart() {
   restartButton.style.visibility = "hidden";
   startButton.style.visibility = "visible";
   banner.style.visibility = "hidden";
-  tileMap.nextMap();
   hero.resetHero();
 }
 
