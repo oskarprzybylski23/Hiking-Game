@@ -101,6 +101,8 @@ function handleRestart() {
   restartButton.style.visibility = "hidden";
   startButton.style.visibility = "visible";
   banner.style.visibility = "hidden";
+  tileMap.nextMap();
+  hero.resetHero();
 }
 
 // WIN AND LOSE ACTIONS
@@ -182,7 +184,6 @@ function gameLoop() {
     }
 
     //draw map and hero layers
-
     tileMap.draw(canvas, ctx);
     hero.draw(ctx);
     hero.winCondition();
@@ -192,7 +193,7 @@ function gameLoop() {
     //timer
 
     actualTime += 1 / 60;
-
+    
     updateTimer();
 
     if (remainingTime <= 0) {

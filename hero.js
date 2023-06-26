@@ -12,6 +12,9 @@ export default class Hero {
 
     // HERO CREATION
 
+
+
+
     draw(ctx) {
         let visibleHeight = this.tileSize;
         let offsetY = 0;
@@ -129,7 +132,7 @@ export default class Hero {
             }
         }
 
-        if (columnRight >= this.mapWidth || (this.y / this.tileSize) > this.mapHeight-1) {
+        if (columnRight >= this.mapWidth || (this.y / this.tileSize) > this.mapHeight - 1) {
             this.isSolidRight = true;
         } else {
             if (this.tileMap.heroLayer[rowCurrent] &&
@@ -139,16 +142,16 @@ export default class Hero {
             }
         }
 
-        if (columnLeft < 0 || (this.y / this.tileSize) > this.mapHeight-1) {
+        if (columnLeft < 0 || (this.y / this.tileSize) > this.mapHeight - 1) {
             this.isSolidLeft = true;
-          } else {
+        } else {
             if (
-              this.tileMap.heroLayer[rowCurrent] &&
-              (this.tileMap.heroLayer[rowCurrent][columnLeft] === 4)
+                this.tileMap.heroLayer[rowCurrent] &&
+                (this.tileMap.heroLayer[rowCurrent][columnLeft] === 4)
             ) {
-              this.isSolidLeft = true;
+                this.isSolidLeft = true;
             }
-          }
+        }
 
         // LOG FOR DEBUGGING
 
@@ -181,8 +184,8 @@ export default class Hero {
     };
 
     // WIN CONDITION
- 
-    
+
+
 
     winCondition() {
         const winEvent = new CustomEvent('winEvent', { detail: { message: 'You won' } });
@@ -190,6 +193,11 @@ export default class Hero {
             console.log("WIN!!!");
             document.dispatchEvent(winEvent);
         }
+    }
+
+    resetHero(){
+        this.x = 64;
+        this.y = 350;
     }
 
     // SURFACE BEHAVIOUR
@@ -254,19 +262,19 @@ export default class Hero {
             [rowCurrent, columnCurrent - 1],
             [rowCurrent - 1, columnCurrent + 1],
             [rowCurrent + 1, columnCurrent - 1]
-          ];
-        
-          for (const [row, column] of tilesToUpdate) {
-            if (
-              row >= 0 &&
-              row < this.tileMap.coverLayer.length &&
-              column >= 0 &&
-              column < this.tileMap.coverLayer[row].length
-            ) {
-              this.tileMap.coverLayer[row][column] = 0;
-            }
-          }
-        }
+        ];
 
+        for (const [row, column] of tilesToUpdate) {
+            if (
+                row >= 0 &&
+                row < this.tileMap.coverLayer.length &&
+                column >= 0 &&
+                column < this.tileMap.coverLayer[row].length
+            ) {
+                this.tileMap.coverLayer[row][column] = 0;
+            }
+        }
     }
+
+}
 
