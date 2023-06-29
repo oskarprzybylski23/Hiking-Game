@@ -3,11 +3,35 @@ import Hero from "./hero.js";
 export default class TileMap {
   constructor(tileSize) {
     this.tileSize = tileSize;
-    this.grass = this.#image("grass_01.png");
-    this.water = this.#image("water.png");
-    this.stonePath = this.#image("stonePath.png");
+    this.grass = this.#image("tilesetGrass.png");
+    this.water = this.#image("tilesetWater.png");
+    this.stonePath = this.#image("tilesetPath.png");
     this.tree01 = this.#image("tree01.png");
     this.targetTime = 10;
+
+    this.grass01 = {
+      image: this.grass,
+      sx: this.tileSize*3,
+      sy: this.tileSize*2,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
+
+    this.path01 = {
+      image: this.stonePath,
+      sx: this.tileSize*3,
+      sy: this.tileSize*2,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
+
+    this.water01 = {
+      image: this.water,
+      sx: 0,
+      sy: 0,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
   }
 
   #image(fileName) {
@@ -15,6 +39,8 @@ export default class TileMap {
     img.src = `images/${fileName}`;
     return img;
   }
+  
+
 
 
   //MAP DATA
@@ -214,29 +240,33 @@ export default class TileMap {
     for (let row = 0; row < this.layer1.length; row++) {
       for (let column = 0; column < this.layer1[row].length; column++) {
         const tile = this.layer1[row][column];
-        let image = null;
+        let tileObject = null;
+
         switch (tile) {
           case 0:
-            image = null;
+            tileObject = null;
             break;
           case 1:
-            image = this.grass;
+            
+            tileObject = this.grass01;
             break;
           case 2:
-            image = this.stonePath;
+       
+            tileObject = this.path01;
             break;
           case 3:
-            image = this.water;
+         
+            tileObject = this.water01;
             break;
           case 4:
-            image = this.tree01;
+            tileObject = this.water01;
             break;
         }
 
 
-        if (image != null)
+        if (tileObject != null)
           ctx.drawImage(
-            image,
+            tileObject.image, tileObject.sx, tileObject.sy, tileObject.swidth, tileObject.sheight,
             column * this.tileSize,
             row * this.tileSize,
             this.tileSize,
@@ -253,29 +283,32 @@ export default class TileMap {
     for (let row = 0; row < this.layer2.length; row++) {
       for (let column = 0; column < this.layer2[row].length; column++) {
         const tile = this.layer2[row][column];
-        let image = null;
+        let tileObject = "";
+        
         switch (tile) {
           case 0:
-            image = null;
+            tileObject = null;
             break;
           case 1:
-            image = this.grass;
+            tileObject = this.grass01;
             break;
           case 2:
-            image = this.stonePath;
+       
+            tileObject = this.path01;
             break;
           case 3:
-            image = this.water;
+         
+            tileObject = this.water01;
             break;
           case 4:
-            image = this.tree01;
+            tileObject = this.water01;
             break;
         }
 
 
-        if (image != null)
+        if (tileObject != null)
           ctx.drawImage(
-            image,
+            tileObject.image, tileObject.sx, tileObject.sy, tileObject.swidth, tileObject.sheight,
             column * this.tileSize,
             row * this.tileSize,
             this.tileSize,

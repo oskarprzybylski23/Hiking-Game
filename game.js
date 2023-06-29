@@ -3,12 +3,14 @@ const tileSize = 32;
 let velocity = 3;
 
 
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const tileMap = new TileMap(tileSize);
 const hero = tileMap.getHero(velocity);
 
+const uncoveredTime = 10;
 let remainingTime = tileMap.targetTime;
 let actualTime = 0;
 let coverVisible = false;
@@ -210,10 +212,10 @@ function gameLoop() {
       loseGame();
     }
 
-    if (actualTime >= 5 && winorlose === 0) {
-      coverVisible = true;
-      pauseGame = false;
-    }
+    // if (actualTime >= uncoveredTime && winorlose === 0) {
+    //   coverVisible = true;
+    //   pauseGame = false;
+    // }
 
     console.log("cover" + coverVisible)
 
