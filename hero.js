@@ -22,8 +22,8 @@ export default class Hero {
         let offsetY = 0;
         let sx = 0;
         let sy = 0;
-        let swidth = this.tileSize;
-        let sheight = this.tileSize;
+        let swidth = this.tileSize*2;
+        let sheight = this.tileSize*2;
         let rowCurrent = Math.round(this.y / this.tileSize);
         let columnCurrent = Math.round(this.x / this.tileSize);
 
@@ -55,9 +55,15 @@ export default class Hero {
 
     #loadHeroImage() {
         let HeroImage1 = new Image();
-        HeroImage1.src = "./images/pacman.png";
-        this.HeroImages = [HeroImage1];
-        this.HeroImageIndex = 0;
+        let HeroImage2 = new Image();
+        let HeroImage3 = new Image();
+        let HeroImage4 = new Image();
+        HeroImage1.src = "./images/hiker01.png";
+        HeroImage2.src = "./images/hiker02.png";
+        HeroImage3.src = "./images/hiker03.png";
+        HeroImage4.src = "./images/hiker04.png";
+        this.HeroImages = [HeroImage1, HeroImage2, HeroImage3, HeroImage4];
+        this.HeroImageIndex = 2;
     };
 
     // MOVEMENT
@@ -67,6 +73,7 @@ export default class Hero {
 
         if (this.isSolidAbove == false) {
             this.y -= (this.tileSize * this.velocity) / this.tileSize;
+            this.HeroImageIndex = 0;
         }
     }
 
@@ -74,6 +81,7 @@ export default class Hero {
         this.checkIfSolid();
         if (this.isSolidBelow == false) {
             this.y += (this.tileSize * this.velocity) / this.tileSize;
+            this.HeroImageIndex = 3;
         }
     }
 
@@ -81,6 +89,7 @@ export default class Hero {
         this.checkIfSolid()
         if (this.isSolidRight == false) {
             this.x += (this.tileSize * this.velocity) / this.tileSize;
+            this.HeroImageIndex = 1;
         }
     }
 
@@ -88,6 +97,7 @@ export default class Hero {
         this.checkIfSolid()
         if (this.isSolidLeft == false) {
             this.x -= (this.tileSize * this.velocity) / this.tileSize;
+            this.HeroImageIndex = 2;
         }
     }
 
@@ -212,7 +222,7 @@ export default class Hero {
         let rowCurrent = Math.round(this.y / this.tileSize);
         let columnCurrent = Math.round(this.x / this.tileSize);
 
-        if (this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 2) {
+        if ([1, 2, 3, 4, 5, 6].includes(this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)])) {
             updatedVelocity = this.deafultVelocity;
         } else {
             updatedVelocity = this.deafultVelocity * 0.5;
