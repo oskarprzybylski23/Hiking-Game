@@ -91,7 +91,9 @@ main {
   background-color: white;
 }
 
-#startButton {}
+#startButton {
+  background-color: aqua;
+}
 
 #continueButton {
   visibility: hidden;

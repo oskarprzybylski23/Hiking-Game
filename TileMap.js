@@ -3,7 +3,7 @@ import Hero from "./hero.js";
 export default class TileMap {
   constructor(tileSize) {
     this.tileSize = tileSize;
-    this.grass = this.#image("grass.png");
+    this.grass = this.#image("grass_01.png");
     this.water = this.#image("water.png");
     this.stonePath = this.#image("stonePath.png");
     this.tree01 = this.#image("tree01.png");
@@ -127,7 +127,7 @@ export default class TileMap {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      [0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0]
     ]
   }
 
