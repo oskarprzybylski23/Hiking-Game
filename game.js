@@ -1,6 +1,6 @@
 import TileMap from "./TileMap.js";
 const tileSize = 32;
-let velocity = 3;
+let velocity = 2;
 
 
 
@@ -40,7 +40,7 @@ function handleKeyUp(event) {
 
 // START GAME ACTION
 
-let gameRunning = false; //change to false
+let gameRunning = true; //change to false
 
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGameLoop);
@@ -89,7 +89,7 @@ const continueButton = document.querySelector("#continueButton");
 continueButton.addEventListener("click", handleContinue);
 
 function handleContinue() {
-  gameRunning = false;
+  gameRunning = true;
   continueButton.style.visibility = "hidden";
   restartButton.style.visibility = "hidden";
   startButton.style.visibility = "visible";
@@ -210,10 +210,10 @@ function gameLoop() {
       loseGame();
     }
 
-    if (actualTime >= uncoveredTime && winorlose === 0) {
-      coverVisible = true;
-      pauseGame = false;
-    }
+    // if (actualTime >= uncoveredTime && winorlose === 0) {
+    //   coverVisible = true;
+    //   pauseGame = false;
+    // }
 
     console.log("cover" + coverVisible)
 

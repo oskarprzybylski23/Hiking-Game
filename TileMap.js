@@ -6,7 +6,14 @@ export default class TileMap {
     this.grass = this.#image("tilesetGrass.png");
     this.water = this.#image("tilesetWater.png");
     this.path = this.#image("tilesetPath.png");
-    this.tree = this.#image("tree01.png");
+    this.rock = this.#image("tilesetRock.png");
+    this.tree01 = this.#image("tree01.png");
+    this.tree02 = this.#image("tree02.png");
+    this.tree02 = this.#image("tree02.png");
+    this.tree03 = this.#image("tree03.png");
+    this.tree04 = this.#image("tree04.png");
+    this.bush01 = this.#image("bush01.png");
+    this.bush02 = this.#image("bush02.png");
     this.targetTime = 10;
 
     //single tile images from tilesets
@@ -28,7 +35,7 @@ export default class TileMap {
 
     this.path01 = {
       image: this.path,
-      sx: this.tileSize * 0,
+      sx: this.tileSize * 1,
       sy: this.tileSize * 2,
       swidth: this.tileSize,
       sheight: this.tileSize
@@ -42,29 +49,21 @@ export default class TileMap {
       sheight: this.tileSize
     }
 
-    // this.path03 = {
-    //   image: this.path,
-    //   sx: this.tileSize * 4,
-    //   sy: this.tileSize * 3,
-    //   swidth: this.tileSize,
-    //   sheight: this.tileSize
-    // }
+    this.stonepath01 = {
+      image: this.path,
+      sx: this.tileSize * 1,
+      sy: this.tileSize * 4.5,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
 
-    // this.path04 = {
-    //   image: this.path,
-    //   sx: this.tileSize * 5,
-    //   sy: this.tileSize * 2,
-    //   swidth: this.tileSize,
-    //   sheight: this.tileSize
-    // }
-
-    // this.path05 = {
-    //   image: this.path,
-    //   sx: this.tileSize * 4,
-    //   sy: this.tileSize * 2,
-    //   swidth: this.tileSize,
-    //   sheight: this.tileSize
-    // }
+    this.stonepath02 = {
+      image: this.path,
+      sx: this.tileSize * 5,
+      sy: this.tileSize * 4.5,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
 
     this.water01 = {
       image: this.water,
@@ -145,25 +144,94 @@ export default class TileMap {
       swidth: this.tileSize,
       sheight: this.tileSize
     }
+
     this.tree01 = {
-      image: this.tree,
+      image: this.tree01,
       sx: this.tileSize * 0,
       sy: this.tileSize * 0,
       swidth: 84,
       sheight: 102,
     }
+
+    this.tree02 = {
+      image: this.tree02,
+      sx: this.tileSize * 0,
+      sy: this.tileSize * 0,
+      swidth: 90,
+      sheight: 88,
+    }
+
+    this.tree03 = {
+      image: this.tree03,
+      sx: this.tileSize * 0,
+      sy: this.tileSize * 0,
+      swidth: 94,
+      sheight: 128,
+    }
+
+    this.tree04 = {
+      image: this.tree04,
+      sx: this.tileSize * 0,
+      sy: this.tileSize * 0,
+      swidth: 96,
+      sheight: 130,
+    }
+
+    this.bush01 = {
+      image: this.bush01,
+      sx: this.tileSize * 0,
+      sy: this.tileSize * 0,
+      swidth: 74,
+      sheight: 62,
+    }
+
+    this.bush02 = {
+      image: this.bush02,
+      sx: this.tileSize * 0,
+      sy: this.tileSize * 0,
+      swidth: 64,
+      sheight: 64,
+    }
+
+    this.rock01 = {
+      image: this.rock,
+      sx: this.tileSize * 0,
+      sy: this.tileSize * 0,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
+
+    this.rock02 = {
+      image: this.rock,
+      sx: this.tileSize * 1,
+      sy: this.tileSize * 0,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
+
+    this.rock03 = {
+      image: this.rock,
+      sx: this.tileSize * 0,
+      sy: this.tileSize * 1,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
+
+    this.rock04 = {
+      image: this.rock,
+      sx: this.tileSize * 1,
+      sy: this.tileSize * 1,
+      swidth: this.tileSize,
+      sheight: this.tileSize
+    }
+
   }
-
-
 
   #image(fileName) {
     const img = new Image();
     img.src = `images/${fileName}`;
     return img;
   }
-
-
-
 
   //MAP DATA
 
@@ -200,31 +268,31 @@ export default class TileMap {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1],
-      [0, 0, 0, 0, 0, 4, 1, 1, 0, 0, 0, 1, 5, 0, 0],
+      [0, 0, 0, 0, 0, 4, 1, 1, 0, 13, 0, 1, 5, 0, 0],
       [0, 0, 4, 1, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 2, 0, 0, 12, 7, 10, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 2, 7, 7, 9, 0, 8, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 2, 0, 0, 0, 0, 11, 7, 7, 0, 0, 0, 0, 0],
       [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
 
     heroLayer: [
+      [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0],
+      [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98],
+      [0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0],
+      [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 4, 0],
+      [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+      [0, 0, 99, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0]
     ]
   }
   //Map 2
@@ -265,13 +333,13 @@ export default class TileMap {
     heroLayer: [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -478,6 +546,38 @@ export default class TileMap {
             tileObject = this.path02;
             rotation = 180;
             break;
+          case 7:
+            tileObject = this.stonepath01
+            rotation = 0;
+            break;
+          case 8:
+            tileObject = this.stonepath01;
+            rotation = 90;
+            break;
+          case 9:
+            tileObject = this.stonepath02;
+            rotation = 0;
+            break;
+          case 10:
+            tileObject = this.stonepath02;
+            rotation = -90;
+            break;
+          case 11:
+            tileObject = this.stonepath02;
+            rotation = 90;
+            break;
+          case 12:
+            tileObject = this.stonepath02;
+            rotation = 180;
+            break;
+          case 13:
+            tileObject = this.rock01;
+            rotation = 0;
+            break
+          case 14:
+            tileObject = this.rock02;
+            rotation = 0;
+            break
         }
 
         if (tileObject != null) {
@@ -515,40 +615,64 @@ export default class TileMap {
             rotation = 0;
             break;
           case 2:
-            tileObject = this.tree01;
+            tileObject = this.tree02;
             rotation = 0;
             break;
           case 3:
-            tileObject = this.tree01;
+            tileObject = this.tree03;
             rotation = 0;
             break;
           case 4:
-            tileObject = this.tree01;
+            tileObject = this.tree04;
+            rotation = 0;
+            break
+          case 5:
+            tileObject = this.bush01;
+            rotation = 0;
+            break
+          case 6:
+            tileObject = this.bush02;
+            rotation = 0;
+            break
+          case 7:
+            tileObject = this.rock01;
+            rotation = 0;
+            break
+          case 8:
+            tileObject = this.rock02;
+            rotation = 0;
+            break
+          case 9:
+            tileObject = this.rock03;
+            rotation = 0;
+            break
+          case 10:
+            tileObject = this.rock04;
             rotation = 0;
             break
         }
 
         if (tileObject != null) {
-        const rotationRad = (rotation * Math.PI) / 180; // Convert rotation to radians
-        const centerX = column * this.tileSize + this.tileSize / 2;
-        const centerY = row * this.tileSize + this.tileSize / 2;
-        ctx.save(); // Save the current transformation state
-        ctx.translate(centerX, centerY); // Translate to the center of the tile
-        ctx.rotate(rotationRad); // Apply the rotation
-        ctx.drawImage(
-          tileObject.image,
-          tileObject.sx,
-          tileObject.sy,
-          tileObject.swidth,
-          tileObject.sheight,
-          -this.tileSize / 2,
-          -this.tileSize / 2,
-          this.tileSize,
-          this.tileSize
-        );
-        ctx.restore(); // Restore the previous transformation state
+          const rotationRad = (rotation * Math.PI) / 180; // Convert rotation to radians
+          const centerX = column * this.tileSize + this.tileSize / 2;
+          const centerY = row * this.tileSize + this.tileSize / 2;
+          ctx.save(); // Save the current transformation state
+          ctx.translate(centerX, centerY); // Translate to the center of the tile
+          ctx.rotate(rotationRad); // Apply the rotation
+          ctx.drawImage(
+            tileObject.image,
+            tileObject.sx,
+            tileObject.sy,
+            tileObject.swidth,
+            tileObject.sheight,
+            -this.tileSize / 2,
+            -this.tileSize / 2,
+            this.tileSize,
+            this.tileSize
+          );
+          ctx.restore(); // Restore the previous transformation state
+        }
       }
-    }
     }
   }
 

@@ -22,15 +22,15 @@ export default class Hero {
         let offsetY = 0;
         let sx = 0;
         let sy = 0;
-        let swidth = this.tileSize*2;
-        let sheight = this.tileSize*2;
+        let swidth = 64;
+        let sheight = 64;
         let rowCurrent = Math.round(this.y / this.tileSize);
         let columnCurrent = Math.round(this.x / this.tileSize);
 
 
         if (this.tileMap.layer1[rowCurrent][columnCurrent] ===5) {
-            sheight = this.tileSize / 2;
-            visibleHeight = this.tileSize / 2;
+            sheight = (64)*0.7;
+            visibleHeight = this.tileSize * 0.7;
         }
 
         //DRAW RECTANGLE FOR DEBUGGING
@@ -127,8 +127,8 @@ export default class Hero {
         if (rowAbove < 0) {
             this.isSolidAbove = true;
         } else {
-            if (
-                this.tileMap.heroLayer[rowAbove][columnCurrent] === 4
+            if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(
+                this.tileMap.heroLayer[rowAbove][columnCurrent])
             ) {
                 this.isSolidAbove = true;
             }
@@ -138,7 +138,7 @@ export default class Hero {
             this.isSolidBelow = true;
         } else {
             if (
-                this.tileMap.heroLayer[rowBelow][columnCurrent] === 4
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(this.tileMap.heroLayer[rowBelow][columnCurrent])
             ) {
                 this.isSolidBelow = true;
             }
@@ -148,7 +148,7 @@ export default class Hero {
             this.isSolidRight = true;
         } else {
             if (this.tileMap.heroLayer[rowCurrent] &&
-                (this.tileMap.heroLayer[rowCurrent][columnRight] === 4)
+                ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(this.tileMap.heroLayer[rowCurrent][columnRight]))
             ) {
                 this.isSolidRight = true;
             }
@@ -159,7 +159,7 @@ export default class Hero {
         } else {
             if (
                 this.tileMap.heroLayer[rowCurrent] &&
-                (this.tileMap.heroLayer[rowCurrent][columnLeft] === 4)
+                ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(this.tileMap.heroLayer[rowCurrent][columnLeft]))
             ) {
                 this.isSolidLeft = true;
             }
@@ -224,6 +224,8 @@ export default class Hero {
 
         if ([1, 2, 3, 4, 5, 6].includes(this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)])) {
             updatedVelocity = this.deafultVelocity;
+        } else if  ([7, 8, 9, 10, 11, 12].includes(this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)])) {
+            updatedVelocity = this.deafultVelocity* 0.7;
         } else {
             updatedVelocity = this.deafultVelocity * 0.5;
         }
