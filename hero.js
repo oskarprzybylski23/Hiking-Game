@@ -28,7 +28,7 @@ export default class Hero {
         let columnCurrent = Math.round(this.x / this.tileSize);
 
 
-        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3) {
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] ===5) {
             sheight = this.tileSize / 2;
             visibleHeight = this.tileSize / 2;
         }
@@ -191,7 +191,7 @@ export default class Hero {
 
     winCondition() {
         const winEvent = new CustomEvent('winEvent', { detail: { message: 'You won' } });
-        if (this.tileMap.heroLayer[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 6) {
+        if (this.tileMap.heroLayer[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 98) {
             console.log("WIN!!!");
             document.dispatchEvent(winEvent);
         }
@@ -220,7 +220,7 @@ export default class Hero {
 
         //WATER
 
-        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 3 && rowCurrent >= 0 && rowCurrent < this.mapHeight - 1) {
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 5 && rowCurrent >= 0 && rowCurrent < this.mapHeight - 1) {
 
             updatedVelocity = this.deafultVelocity * 0.2;
 
@@ -228,20 +228,20 @@ export default class Hero {
             if (
                 rowCurrent < this.tileMap.layer1.length &&
                 columnCurrent + 1 < this.tileMap.layer1[0].length &&
-                this.tileMap.layer1[rowCurrent + 1][columnCurrent] === 3
+                this.tileMap.layer1[rowCurrent + 1][columnCurrent] === 5
             ) {
                 this.y += ((this.tileSize * this.velocity * 0.5) / this.tileSize);
             }
 
-            if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 3) {
+            if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 5) {
                 this.x += (this.tileSize * this.velocity * 0.5) / this.tileSize;
             }
 
-            if (this.tileMap.layer1[rowCurrent][columnCurrent - 1] === 3) {
+            if (this.tileMap.layer1[rowCurrent][columnCurrent - 1] === 5) {
                 this.x -= (this.tileSize * this.velocity * 0.5) / this.tileSize;
             }
 
-            if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 3 && this.tileMap.layer1[rowCurrent][Math.round(this.x / this.tileSize) - 1] === 3) {
+            if (this.tileMap.layer1[rowCurrent][columnCurrent + 1] === 5 && this.tileMap.layer1[rowCurrent][Math.round(this.x / this.tileSize) - 1] === 5) {
                 this.x += (this.tileSize * this.velocity * 0.5) / this.tileSize;
             }
         }

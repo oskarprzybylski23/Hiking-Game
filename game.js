@@ -10,7 +10,7 @@ const ctx = canvas.getContext("2d");
 const tileMap = new TileMap(tileSize);
 const hero = tileMap.getHero(velocity);
 
-const uncoveredTime = 10;
+const uncoveredTime = 0;
 let remainingTime = tileMap.targetTime;
 let actualTime = 0;
 let coverVisible = false;
@@ -40,7 +40,7 @@ function handleKeyUp(event) {
 
 // START GAME ACTION
 
-let gameRunning = false;
+let gameRunning = true; //change to false
 
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGameLoop);
@@ -159,8 +159,6 @@ function gameLoop() {
   tileMap.drawInitial(canvas, ctx);
 
   if (gameRunning) {
-
-
 
     //key actions
 
