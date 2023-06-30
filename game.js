@@ -16,7 +16,7 @@ let actualTime = 0;
 let coverVisible = false;
 let pauseGame = true;
 
-// KEY INPUT SENSING
+// === KEY INPUT SENSING ===
 
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
@@ -38,9 +38,9 @@ function handleKeyUp(event) {
   keyState[event.code] = false;
 }
 
-// START GAME ACTION
+// === START GAME ACTION ===
 
-let gameRunning = true; //change to false
+let gameRunning = false; //change to false
 
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGameLoop);
@@ -55,7 +55,7 @@ function startGameLoop() {
   }
 }
 
-//TIMER
+// === TIMER ===
 
 function updateTimer() {
   if (coverVisible === true) {
@@ -67,7 +67,7 @@ function updateTimer() {
   }
 }
 
-// OTHER ELEMENTS AND BUTTONS
+// === OTHER ELEMENTS AND BUTTONS ===
 
 const helpButton = document.querySelector("#helpButton");
 const help = document.querySelector(".help");
@@ -118,7 +118,7 @@ function handleRestart() {
   winorlose = 0;
 }
 
-// WIN AND LOSE ACTIONS
+// === WIN AND LOSE ACTIONS ===
 
 const banner = document.querySelector(".banner-container");
 const bannerHeading = document.getElementById("banner-heading");
@@ -139,7 +139,7 @@ function handleWin(event) {
   bannerHeading.textContent = "YOU WON!!!";
   bannerMessageOne.textContent = "Congratulations! You reached the destination in " + playerTime + " seconds.";
   bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
-  
+
 }
 
 //lose
@@ -155,10 +155,18 @@ function loseGame() {
 
 //game complete
 document.addEventListener('gameCompleteEvent', handleGameComplete);
+
 function handleGameComplete() {
-console.log("game complete!!!!")
+  console.log("game complete!!!!")
+  continueButton.style.visibility = "visible";
+  startButton.style.visibility = "hidden";
+  banner.style.visibility = "visible";
+  bannerHeading.textContent = "Congratulations!";
+  bannerMessageOne.textContent = "You have conquered all trails! Keep playing to see if you can improve your time!";
+  bannerMessageTwo.textContent = "If you feel particularly adventurous, visit the github repo and add your own maps.</a>"
 }
-// GAME LOOP
+
+// === GAME LOOP ===
 
 function gameLoop() {
 
@@ -208,7 +216,7 @@ function gameLoop() {
     //timer
 
     actualTime += 1 / 60;
-    
+
     updateTimer();
 
     if (remainingTime <= 0) {
@@ -216,10 +224,10 @@ function gameLoop() {
       loseGame();
     }
 
-    // if (actualTime >= uncoveredTime && winorlose === 0) {
-    //   coverVisible = true;
-    //   pauseGame = false;
-    // }
+    if (actualTime >= uncoveredTime && winorlose === 0) {
+      coverVisible = true;
+      pauseGame = false;
+    }
 
 
 

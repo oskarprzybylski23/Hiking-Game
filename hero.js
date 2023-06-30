@@ -12,7 +12,7 @@ export default class Hero {
     }
 
 
-    // HERO CREATION
+    // === HERO CREATION ===
 
 
 
@@ -33,7 +33,8 @@ export default class Hero {
             visibleHeight = this.tileSize * 0.7;
         }
 
-        //DRAW RECTANGLE FOR DEBUGGING
+        // === DRAW RECTANGLE FOR DEBUGGING ===
+
         // Get the tile coordinates
         const tileX = Math.round(this.x / this.tileSize);
         const tileY = Math.round(this.y / this.tileSize);
@@ -66,7 +67,7 @@ export default class Hero {
         this.HeroImageIndex = 2;
     };
 
-    // MOVEMENT
+    // === MOVEMENT ===
 
     moveUp() {
         this.checkIfSolid();
@@ -101,7 +102,7 @@ export default class Hero {
         }
     }
 
-    // COLISSION
+    // === COLISSION ===
 
     checkIfSolid() {
 
@@ -166,7 +167,7 @@ export default class Hero {
             }
         }
 
-        // LOG FOR DEBUGGING
+        //log for debugging
 
         console.log(
             "above:" + this.isSolidAbove,
@@ -180,7 +181,6 @@ export default class Hero {
         console.log("row: " + Math.round(this.y / this.tileSize) + " column: " + Math.round(this.x / this.tileSize))
         console.log("x:" + this.x, "y:" + this.y);
     };
-
 
     findCollision() {
         const collisionCoordinates = [];
@@ -196,9 +196,7 @@ export default class Hero {
         return collisionCoordinates;
     };
 
-    // WIN CONDITION
-
-
+    // === WIN CONDITION ===
 
     winCondition() {
         const winEvent = new CustomEvent('winEvent', { detail: { message: 'You won' } });
@@ -213,7 +211,7 @@ export default class Hero {
         this.y = this.deafulty;
     }
 
-    // SURFACE BEHAVIOUR
+    // === SURFACE BEHAVIOUR LOGIC ===
 
     surfaceBehaviour() {
 
@@ -231,7 +229,7 @@ export default class Hero {
             updatedVelocity = this.deafultVelocity * 0.5;
         }
 
-        //WATER
+        // === WATER ===
 
         if (this.tileMap.layer1[rowCurrent][columnCurrent] === 5 && rowCurrent >= 0 && rowCurrent < this.mapHeight - 1) {
 
@@ -261,7 +259,7 @@ export default class Hero {
         this.velocity = updatedVelocity;
     }
 
-    //UNCOVERING TILES
+    // === UNCOVERING TILES ===
 
     uncoverTile() {
         const rowCurrent = Math.round(this.y / this.tileSize);

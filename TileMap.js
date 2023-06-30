@@ -20,7 +20,8 @@ export default class TileMap {
     this.sign = this.#image("sign.png")
     this.targetTime = 30;
 
-    //single tile images from tilesets
+    //single tile images
+
     this.grass01 = {
       image: this.grass,
       sx: this.tileSize * 2,
@@ -333,15 +334,13 @@ export default class TileMap {
     return img;
   }
 
-  //MAP DATA
-
-
-
+  // === MAP DATA ===
 
   //Map 1
   map1 = {
     name: 'map1',
 
+    //key for layer 1 (terrain and water)
     //0 - null
     //1 - grass 1
     //2 - grass 2
@@ -375,6 +374,7 @@ export default class TileMap {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
 
+    //key for layer 2 (paths and non-solid decoration)
     //1 - path (horizontal)
     //2 - path (vertical)
     //3 - path (corner 1)
@@ -408,6 +408,7 @@ export default class TileMap {
       [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
 
+    //key for heroLayer (solid objects and start/finish positions)
     //1 - tree 1
     //2 - tree 2
     //3 - tree 3
@@ -448,6 +449,7 @@ export default class TileMap {
   map2 = {
     name: 'map2',
 
+    //key for layer 1 (terrain and water)
     //0 - null
     //1 - grass 1
     //2 - grass 2
@@ -481,6 +483,22 @@ export default class TileMap {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
 
+    //key for layer 2 (paths and non-solid decoration)
+    //1 - path (horizontal)
+    //2 - path (vertical)
+    //3 - path (corner 1)
+    //4 - path (corner 2)
+    //5 - path (corner 3)
+    //6 - path (corner 4)
+    //7- stone path (horizontal)
+    //8 - stone path (vertical)
+    //9 - stone path (corner 1)
+    //10 - stone path (corner 2)
+    //11 - stone path (corner 3)
+    //12 - stone path (corner 4)
+    //13 - rock 1
+    //14 - rock 2
+
     layer2: [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -498,6 +516,24 @@ export default class TileMap {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
+
+    //key for heroLayer (solid objects and start/finish positions)
+    //1 - tree 1
+    //2 - tree 2
+    //3 - tree 3
+    //4 - tree 4
+    //5 - bush 1
+    //6 - bush 2
+    //7 - rock 1
+    //8 - rock 2
+    //9 - rock 3
+    //10 - rock 4
+    //11 - stump 1
+    //12 - stump 2
+    //13 - cliff (grass)
+    //14 - clifftop (grass)
+    //15 - cliff (rock)
+    //16 - clifftop (rock)
 
     heroLayer: [
       [0, 0, 0, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -518,7 +554,116 @@ export default class TileMap {
     ]
   }
 
-  // MAP SELECTION AND DRAWING LAYERS
+  //Map 3
+  map3 = {
+    name: 'map3',
+
+    //key for layer 1 (terrain and water)
+    //0 - null
+    //1 - grass 1
+    //2 - grass 2
+    //3 - grass 3
+    //4 - grass 4
+    //5 - water (plain)
+    //6 - water (shore right)
+    //7 - water (shore left)
+    //8 - water (shore top)
+    //9 - water (shore bottom)
+    //10 - water (corner 1)
+    //11 - water (corner 2)
+    //12 - water (corner 3)
+    //13 - water (corner 4)
+
+    layer1: [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ],
+
+    //key for layer 2 (paths and non-solid decoration)
+    //1 - path (horizontal)
+    //2 - path (vertical)
+    //3 - path (corner 1)
+    //4 - path (corner 2)
+    //5 - path (corner 3)
+    //6 - path (corner 4)
+    //7- stone path (horizontal)
+    //8 - stone path (vertical)
+    //9 - stone path (corner 1)
+    //10 - stone path (corner 2)
+    //11 - stone path (corner 3)
+    //12 - stone path (corner 4)
+    //13 - rock 1
+    //14 - rock 2
+
+    layer2: [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ],
+
+    //key for heroLayer (solid objects and start/finish positions)
+    //1 - tree 1
+    //2 - tree 2
+    //3 - tree 3
+    //4 - tree 4
+    //5 - bush 1
+    //6 - bush 2
+    //7 - rock 1
+    //8 - rock 2
+    //9 - rock 3
+    //10 - rock 4
+    //11 - stump 1
+    //12 - stump 2
+    //13 - cliff (grass)
+    //14 - clifftop (grass)
+    //15 - cliff (rock)
+    //16 - clifftop (rock)
+
+    heroLayer: [
+      [0, 0, 0, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98, 17, 0, 0],
+    ]
+  }
+
+  // === MAP SELECTION AND DRAWING LAYERS ===
 
   //set initial map to map1
   mapNumber = 2;
@@ -590,8 +735,82 @@ export default class TileMap {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ];
 
+  // === MAP SELECTION AND DRAWING LAYERS ===
 
-  // SET UP CANVAS AND DRAW OBJECTS
+  //set initial map to map1
+  mapNumber = 1;
+  selectedMap = this.selectMap(this.mapNumber);
+
+  selectMap(mapNumber) {
+    let currentMap = "";
+
+    switch (mapNumber) {
+      case 1:
+        currentMap = this.map1;
+        break;
+      case 2:
+        currentMap = this.map2;
+        break;
+      case 3:
+        currentMap = this.map3;
+        break;
+      // Add more cases for additional maps
+      default:
+        console.log("Invalid map number!");
+        return currentMap;
+    }
+    return currentMap;
+  }
+
+  //assign current map layers
+  layer1 = this.selectedMap.layer1;
+  layer2 = this.selectedMap.layer2;
+  heroLayer = this.selectedMap.heroLayer;
+
+  //select next map number and update variables when called
+  //if map number does not exist then assume game complete and trigger game complete event and reset map number
+  nextMap() {
+    this.mapNumber += 1;
+
+    if (this.selectMap(this.mapNumber)) {
+      this.selectedMap = this.selectMap(this.mapNumber);
+      this.layer1 = this.selectedMap.layer1;
+      this.layer2 = this.selectedMap.layer2;
+      this.heroLayer = this.selectedMap.heroLayer;
+    } else {
+      const gameCompleteEvent = new CustomEvent('gameCompleteEvent', { detail: { message: 'You completed all maps' } });
+      document.dispatchEvent(gameCompleteEvent);
+      this.mapNumber = 0;
+      this.selectedMap = this.selectMap(this.mapNumber);
+      this.layer1 = this.selectedMap.layer1;
+      this.layer2 = this.selectedMap.layer2;
+      this.heroLayer = this.selectedMap.heroLayer;
+    }
+    console.log("current map: map" + this.mapNumber)
+  }
+
+  //create map cover layer
+  //1 - covered tile (coverLayer only)
+
+  coverLayer = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  ];
+
+  // === SET UP CANVAS AND DRAW OBJECTS ===
 
   // deafult canvas state
   drawInitial(canvas, ctx) {
@@ -953,7 +1172,7 @@ export default class TileMap {
     }
   }
 
-  // SET UP CANVAS DEAFULT LOOK
+  // === SET UP CANVAS DEAFULT LOOK ===
 
   #clearCanvas(canvas, ctx) {
     ctx.fillStyle = "black";
