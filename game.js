@@ -40,7 +40,7 @@ function handleKeyUp(event) {
 
 // START GAME ACTION
 
-let gameRunning = false; //change to false
+let gameRunning = true; //change to false
 
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGameLoop);
@@ -216,10 +216,10 @@ function gameLoop() {
       loseGame();
     }
 
-    if (actualTime >= uncoveredTime && winorlose === 0) {
-      coverVisible = true;
-      pauseGame = false;
-    }
+    // if (actualTime >= uncoveredTime && winorlose === 0) {
+    //   coverVisible = true;
+    //   pauseGame = false;
+    // }
 
 
 

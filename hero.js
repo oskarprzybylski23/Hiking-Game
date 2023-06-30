@@ -122,12 +122,13 @@ export default class Hero {
         this.mapHeight = this.tileMap.layer1.length;
         this.mapWidth = this.tileMap.layer1[1].length;
 
+        const solidTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
         //add current row and column variables for readability
 
         if (rowAbove < 0) {
             this.isSolidAbove = true;
         } else {
-            if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(
+            if (solidTiles.includes(
                 this.tileMap.heroLayer[rowAbove][columnCurrent])
             ) {
                 this.isSolidAbove = true;
@@ -138,7 +139,7 @@ export default class Hero {
             this.isSolidBelow = true;
         } else {
             if (
-                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(this.tileMap.heroLayer[rowBelow][columnCurrent])
+                solidTiles.includes(this.tileMap.heroLayer[rowBelow][columnCurrent])
             ) {
                 this.isSolidBelow = true;
             }
@@ -148,7 +149,7 @@ export default class Hero {
             this.isSolidRight = true;
         } else {
             if (this.tileMap.heroLayer[rowCurrent] &&
-                ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(this.tileMap.heroLayer[rowCurrent][columnRight]))
+                (solidTiles.includes(this.tileMap.heroLayer[rowCurrent][columnRight]))
             ) {
                 this.isSolidRight = true;
             }
@@ -159,7 +160,7 @@ export default class Hero {
         } else {
             if (
                 this.tileMap.heroLayer[rowCurrent] &&
-                ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(this.tileMap.heroLayer[rowCurrent][columnLeft]))
+                (solidTiles.includes(this.tileMap.heroLayer[rowCurrent][columnLeft]))
             ) {
                 this.isSolidLeft = true;
             }
