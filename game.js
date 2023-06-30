@@ -1,6 +1,6 @@
 import TileMap from "./TileMap.js";
 const tileSize = 32;
-let velocity = 2;
+let velocity = 4;
 
 
 
@@ -139,7 +139,7 @@ function handleWin(event) {
   bannerHeading.textContent = "YOU WON!!!";
   bannerMessageOne.textContent = "Congratulations! You reached the destination in " + playerTime + " seconds.";
   bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
-
+  
 }
 
 //lose
@@ -151,9 +151,13 @@ function loseGame() {
   bannerHeading.textContent = "Time's Up!";
   bannerMessageOne.textContent = "You didn't manage to get to the destination before the night. You have to camp in the wild.";
   bannerMessageTwo.textContent = "Don't give up, try again, or take a break and try later!"
-
 }
 
+//game complete
+document.addEventListener('gameCompleteEvent', handleGameComplete);
+function handleGameComplete() {
+console.log("game complete!!!!")
+}
 // GAME LOOP
 
 function gameLoop() {
@@ -179,13 +183,13 @@ function gameLoop() {
       }
 
       if (keyState["ArrowRight"]) {
-        // Perform action when ArrowDown key is pressed
+        // Perform action when ArrowRight key is pressed
         console.log("move_right");
         hero.moveRight();
       }
 
       if (keyState["ArrowLeft"]) {
-        // Perform action when ArrowDown key is pressed
+        // Perform action when ArrowLeft key is pressed
         console.log("move_left");
         hero.moveLeft();
       }
@@ -194,12 +198,17 @@ function gameLoop() {
 
     }
 
-
+    //draw map and hero layers
+    tileMap.draw(canvas, ctx);
+    hero.draw(ctx);
+    hero.winCondition();
+    hero.surfaceBehaviour();
+    hero.uncoverTile();
 
     //timer
 
     actualTime += 1 / 60;
-
+    
     updateTimer();
 
     if (remainingTime <= 0) {
@@ -212,21 +221,16 @@ function gameLoop() {
       pauseGame = false;
     }
 
-    console.log("cover" + coverVisible)
+
 
     if (coverVisible === true) {
       tileMap.drawcover(ctx);
     }
 
-    //draw map and hero layers
-    tileMap.draw(canvas, ctx);
-    hero.draw(ctx);
-    hero.winCondition();
-    hero.surfaceBehaviour();
-    hero.uncoverTile();
-
-    console.log("actual time: " + Math.ceil(actualTime));
-    console.log("remaining time: " + Math.ceil(remainingTime));
+    // console.log("actual time: " + Math.ceil(actualTime));
+    // console.log("remaining time: " + Math.ceil(remainingTime));
+    // console.log("cover" + coverVisible)
+    // console.log("pause: " + pauseGame);
   }
 }
 
