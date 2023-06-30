@@ -96,6 +96,7 @@ function handleContinue() {
   banner.style.visibility = "hidden";
   tileMap.nextMap();
   hero.resetHero();
+  tileMap.resetcover();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
   winorlose = 0;
@@ -111,6 +112,7 @@ function handleRestart() {
   startButton.style.visibility = "visible";
   banner.style.visibility = "hidden";
   hero.resetHero();
+  tileMap.resetcover();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
   winorlose = 0;
@@ -137,7 +139,7 @@ function handleWin(event) {
   bannerHeading.textContent = "YOU WON!!!";
   bannerMessageOne.textContent = "Congratulations! You reached the destination in " + playerTime + " seconds.";
   bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
-  
+
 }
 
 //lose
@@ -149,7 +151,7 @@ function loseGame() {
   bannerHeading.textContent = "Time's Up!";
   bannerMessageOne.textContent = "You didn't manage to get to the destination before the night. You have to camp in the wild.";
   bannerMessageTwo.textContent = "Don't give up, try again, or take a break and try later!"
-  
+
 }
 
 // GAME LOOP
@@ -158,7 +160,7 @@ function gameLoop() {
 
   tileMap.drawInitial(canvas, ctx);
 
-  if (gameRunning) {
+  if (gameRunning) { //block to be only executed if gameplay is underway
 
     //key actions
 
@@ -192,17 +194,12 @@ function gameLoop() {
 
     }
 
-    //draw map and hero layers
-    tileMap.draw(canvas, ctx);
-    hero.draw(ctx);
-    hero.winCondition();
-    hero.surfaceBehaviour();
-    hero.uncoverTile();
+
 
     //timer
 
     actualTime += 1 / 60;
-    
+
     updateTimer();
 
     if (remainingTime <= 0) {
@@ -221,9 +218,15 @@ function gameLoop() {
       tileMap.drawcover(ctx);
     }
 
+    //draw map and hero layers
+    tileMap.draw(canvas, ctx);
+    hero.draw(ctx);
+    hero.winCondition();
+    hero.surfaceBehaviour();
+    hero.uncoverTile();
+
     console.log("actual time: " + Math.ceil(actualTime));
     console.log("remaining time: " + Math.ceil(remainingTime));
-    console.log("pause: " + pauseGame);
   }
 }
 
