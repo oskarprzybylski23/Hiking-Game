@@ -12,7 +12,7 @@ h2 {
 #game {
   box-shadow: 0px 10px 15px black;
   min-height: 500px;
-  border-radius: 25px;
+  border-radius: 20px;
 }
 
 body {
@@ -37,12 +37,14 @@ main {
   min-height: fit-content;
 }
 
-.top-menu {
+.top-content {
   display: flex;
   position: relative;
-  justify-content: space-around;
-  height: 50px;
-  width: 600px;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  width: 900px;
+  /* background-color: aqua; */
 }
 
 .button-container {
@@ -57,7 +59,7 @@ main {
 .help {
   visibility: hidden;
   position: absolute;
-  height: 400px;
+  height: auto;
   width: 400px;
   padding: 20px;
   background-color: rgb(250, 234, 161);
@@ -72,7 +74,7 @@ main {
 
 .banner-container {
   position: absolute;
-  height: 200px;
+  height: auto;
   width: 400px;
   padding: 20px;
   background-color: #0e9e0969;
@@ -90,6 +92,9 @@ main {
 
 #helpButton {
   background-color: white;
+  height: 50px;
+  width: 5rem;
+  border-radius: 5px;
 }
 
 #startButton {
@@ -104,6 +109,27 @@ main {
   visibility: hidden;
 }
 
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  width: 200px;
+  height: 80px;
+  border: solid 2px black;
+  border-radius: 5px;
+  box-shadow: 10px 5px 5px black;
+  text-align: center;
+}
+
+#timer-text {
+  margin-bottom: 0;
+  margin-top: 1px;
+}
+
 #timer {
-  visibility: hidden;
+  visibility: visible;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 5px;
 }

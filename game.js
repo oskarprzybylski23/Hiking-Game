@@ -59,11 +59,17 @@ function startGameLoop() {
 
 function updateTimer() {
   if (coverVisible === true) {
-    const remainingTimeElement = document.getElementById("remainingTime");
+    const remainingTimeElement = document.getElementById("timer");
     remainingTimeElement.textContent = Math.ceil(remainingTime);
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = Math.floor(remainingTime % 60);
+    const formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    remainingTimeElement.textContent = formattedTime;
+
     document.getElementById("timer").style.visibility = "visible"
   } else {
-    document.getElementById("timer").style.visibility = "hidden";
+    const remainingTimeElement = document.getElementById("timer");
+    remainingTimeElement.textContent = "00:00";
   }
 }
 
