@@ -1,6 +1,6 @@
 import TileMap from "./TileMap.js";
 const tileSize = 32;
-let velocity = 4;
+let velocity = 2;
 
 
 
@@ -138,6 +138,7 @@ let winorlose = 0;
 function handleWin(event) {
   winorlose = 1;
   pauseGame = true;
+  coverVisible = false;
   continueButton.style.visibility = "visible";
   restartButton.style.visibility = "visible";
   banner.style.visibility = "visible";
@@ -234,8 +235,6 @@ function gameLoop() {
       coverVisible = true;
       pauseGame = false;
     }
-
-
 
     if (coverVisible === true) {
       tileMap.drawcover(ctx);
