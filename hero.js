@@ -21,31 +21,29 @@ export default class Hero {
         let rowCurrent = Math.round(this.y / this.tileSize);
         let columnCurrent = Math.round(this.x / this.tileSize);
 
-
         if (this.tileMap.layer1[rowCurrent][columnCurrent] ===5) {
             sheight = (64)*0.7;
             visibleHeight = this.tileSize * 0.7;
         }
 
-        // === DRAW RECTANGLE FOR DEBUGGING ===
-
-        // Get the tile coordinates
-        const tileX = Math.round(this.x / this.tileSize);
-        const tileY = Math.round(this.y / this.tileSize);
-
-        // Calculate the position and size of the rectangle
-        const rectX = tileX * this.tileSize;
-        const rectY = tileY * this.tileSize;
-        const rectWidth = this.tileSize;
-        const rectHeight = this.tileSize;
-
-        // Draw the rectangle
-        ctx.strokeStyle = 'red'; // Set the stroke color
-        ctx.lineWidth = 2; // Set the stroke width
-        ctx.strokeRect(rectX, rectY, rectWidth, rectHeight);
-
-        //drawImage(img, sx, sy, swidth, sheight, x, y, width, height)
         ctx.drawImage(this.HeroImages[this.HeroImageIndex], sx, sy, swidth, sheight, this.x, this.y - offsetY, this.tileSize, visibleHeight);
+
+        //DRAW RECTANGLE FOR DEBUGGING (uncomment for wip only)
+
+        // // Get the tile coordinates
+        // const tileX = Math.round(this.x / this.tileSize);
+        // const tileY = Math.round(this.y / this.tileSize);
+
+        // // Calculate the position and size of the rectangle
+        // const rectX = tileX * this.tileSize;
+        // const rectY = tileY * this.tileSize;
+        // const rectWidth = this.tileSize;
+        // const rectHeight = this.tileSize;
+
+        // // Draw the rectangle
+        // ctx.strokeStyle = 'red'; // Set the stroke color
+        // ctx.lineWidth = 2; // Set the stroke width
+        // ctx.strokeRect(rectX, rectY, rectWidth, rectHeight);
     }
 
     #loadHeroImage() {
@@ -58,7 +56,7 @@ export default class Hero {
         HeroImage3.src = "./images/hiker03.png";
         HeroImage4.src = "./images/hiker04.png";
         this.HeroImages = [HeroImage1, HeroImage2, HeroImage3, HeroImage4];
-        this.HeroImageIndex = 2;
+        this.HeroImageIndex = 0;
     };
 
     // === MOVEMENT ===

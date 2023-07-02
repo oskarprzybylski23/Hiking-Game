@@ -3,6 +3,8 @@ import Hero from "./hero.js";
 export default class TileMap {
   constructor(tileSize) {
     this.tileSize = tileSize;
+    this.background = this.#image("background.png")
+    this.coverImage = this.#image("wood.png")
     this.grass = this.#image("tilesetGrass.png");
     this.water = this.#image("tilesetWater.png");
     this.path = this.#image("tilesetPath.png");
@@ -21,6 +23,14 @@ export default class TileMap {
     this.targetTime = 30;
 
     //single tile images
+
+    this.cover = {
+      image: this.wood,
+      sx: 0,
+      sy: 0,
+      swidth: 49,
+      sheight: 44,
+    }
 
     this.grass01 = {
       image: this.grass,
@@ -1054,27 +1064,35 @@ export default class TileMap {
   }
 
   drawcover(ctx) {
-    const whiteTileColor = "#FFFFFF";
 
     for (let row = 0; row < this.coverLayer.length; row++) {
       for (let column = 0; column < this.coverLayer[row].length; column++) {
         let tile = this.coverLayer[row][column];
-        let color = null;
-
+        let tileType = null;
+        
         switch (tile) {
           case 1:
-            color = whiteTileColor;
+            tileType = "covered";
             break;
         }
 
-        if (color === whiteTileColor) {
-          ctx.fillStyle = color;
-          ctx.fillRect(
-            column * this.tileSize,
+        if (tileType === "covered") {
+          ctx.drawImage(
+            this.coverImage, 
+            column * this.tileSize, 
             row * this.tileSize,
             this.tileSize,
             this.tileSize
           );
+
+          // ctx.fillStyle = color;
+
+          // ctx.fillRect(
+          //   column * this.tileSize,
+          //   row * this.tileSize,
+          //   this.tileSize,
+          //   this.tileSize
+          // );
         }
       }
     }
@@ -1102,8 +1120,9 @@ export default class TileMap {
   // === SET UP CANVAS DEAFULT LOOK ===
 
   #clearCanvas(canvas, ctx) {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
+    // ctx.fillStyle = "white";
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   #setCanvasSize(canvas) {
