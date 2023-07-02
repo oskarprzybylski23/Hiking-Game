@@ -15,7 +15,7 @@
     </header>
     <main>
         <div>
-            
+
         </div>
         <div class="top-content">
             <div class="timer-container">
@@ -25,37 +25,55 @@
             <button type="Button" id="helpButton">Help</button>
         </div>
         <div class="game-container">
-        <canvas id="game"></canvas>
-        <div class="button-container">
-            <button type="button" id="startButton">Click or press 'n' to start</button>
-            <button type="button" id="continueButton">Continue</button>
-            <button type="button" id="restartButton">Try Again</button>
-        </div>
-        
-        <div class="banner-container">
-            <h2 id="banner-heading"></h2>
-            <p id="banner-message-1"></p>
-            <p id="banner-message-2"></p>
-        </div>
-        <div class="help">
-            <h2>HELP</h2>
-            <article>
-                <p>In this game you set off on a hike. Your goal is to walk to the end point before the time runs
-                    out
-                    and the sun sets behind the horizon.</p>
+            <canvas id="game"></canvas>
+            <div class="button-container">
+                <button type="button" id="startButton">Click or press 'n' key to start</button>
+                <button type="button" id="continueButton">Continue</button>
+                <button type="button" id="restartButton">Try Again</button>
+            </div>
 
-                <p>
-                    There is only one trick. You have lost a map. You only get to see the map for a few seconds
-                    before
-                    you have to...
-                </p>
-            </article>
-        </div>
+            <div class="banner-container">
+                <h2 id="banner-heading"></h2>
+                <p id="banner-message-1"></p>
+                <p id="banner-message-2"></p>
+            </div>
+            <div class="help">
+                <div class="help-content">
+                    <div class="page">
+                        <h2>How to Play</h2>
+                        <article>
+                            <p>In this game you set off on a hike. Your goal is to walk to the end point before the time
+                                runs out and the sun sets behind the horizon.</p>
+                            <p>Unfortunately you forgot a map... <br> You only get to see the area for a few seconds
+                                before you have to find your way.</p>
+                        </article>
+                    </div>
+                    <div class="page">
+                        <h2>How to Play</h2>
+                        <article>
+                            <p>You need to focus and remember as much of the route as you can in that time.<br> The
+                                finish point is marked with a signpost.</p>
+                            <p>You can follow the trail, but remember, often the best route leads off the well trodden path.</p>
+                        </article>
+                    </div>
+                    <div class="page">
+                        <h2>How to Play</h2>
+                        <article>
+                            <p>Try to find the fastest route by looking for shortcuts and exploring the area. <br> Do not be scared to cross the rivers and swim a bit.</p>
+                            <p>Pack your lunch on go on a hike!</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="help-navigation">
+                    <button class="help-nav-button" id="help-prev-button">&larr; Prev</button>
+                    <button class="help-nav-button" id="help-next-button">Next &rarr;</button>
+                </div>
+            </div>
         </div>
 
     </main>
     <footer>
-        <p id="footer-text">Created for Founders and Coders by Oskar Przbylski</p>
+        <p id="footer-text">Created for Founders and Coders by Oskar Przybylski</p>
     </footer>
 </body>
 

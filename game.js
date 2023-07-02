@@ -74,6 +74,8 @@ function updateTimer() {
 
 // === OTHER ELEMENTS AND BUTTONS ===
 
+//help button and content
+
 const helpButton = document.querySelector("#helpButton");
 const help = document.querySelector(".help");
 helpButton.addEventListener("click", handleHelp);
@@ -89,6 +91,53 @@ function handleHelp() {
     help.style.visibility = "hidden";
   }
 }
+
+const helpContent = document.querySelector('.help-content');
+const prevButton = document.getElementById('help-prev-button');
+const nextButton = document.getElementById('help-next-button');
+const pages = document.querySelectorAll(".help-content .page");
+let currentPageIndex = 0;
+
+// Function to update the navigation buttons based on the current page index
+function updateNavigationButtons() {
+  prevButton.disabled = currentPageIndex === 0;
+  nextButton.disabled = currentPageIndex === pages.length - 1;
+}
+
+// Function to show the current page and hide the rest
+function showCurrentPage() {
+  pages.forEach((page, index) => {
+    if (index === currentPageIndex) {
+      page.style.display = "block";
+    } else {
+      page.style.display = "none";
+    }
+  });
+}
+
+// Event listener for previous button click
+prevButton.addEventListener("click", () => {
+  if (currentPageIndex > 0) {
+    currentPageIndex--;
+    showCurrentPage();
+    updateNavigationButtons();
+  }
+});
+
+// Event listener for next button click
+nextButton.addEventListener("click", () => {
+  if (currentPageIndex < pages.length - 1) {
+    currentPageIndex++;
+    showCurrentPage();
+    updateNavigationButtons();
+  }
+});
+
+// Initially update the navigation buttons and show the first page
+updateNavigationButtons();
+showCurrentPage();
+
+//continue game button
 
 const continueButton = document.querySelector("#continueButton");
 continueButton.addEventListener("click", handleContinue);
