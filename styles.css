@@ -25,6 +25,7 @@ h2 {
 body {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   font-family: 'Courier New', Courier, monospace;
   height: 100vh;
@@ -39,7 +40,6 @@ header {
 }
 
 main {
-  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
