@@ -41,13 +41,15 @@ function handleKeyUp(event) {
 let gameRunning = false; //change to false
 
 const startButton = document.querySelector("#startButton");
-startButton.addEventListener("click", startGameLoop);
+startButton.addEventListener("click", startGame);
 
 //check if game loop is already running
-function startGameLoop() {
+function startGame() {
   if (!gameRunning) {
     gameRunning = true;
     startButton.style.visibility = "hidden";
+    document.querySelector(".timer-container").style.visibility = "visible";
+    document.getElementById("timer").style.visibility = "visible";
     gameLoop();
     // Hide the button
   }
@@ -63,8 +65,7 @@ function updateTimer() {
     const seconds = Math.floor(remainingTime % 60);
     const formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     remainingTimeElement.textContent = formattedTime;
-
-    document.getElementById("timer").style.visibility = "visible"
+    
   } else {
     const remainingTimeElement = document.getElementById("timer");
     remainingTimeElement.textContent = "00:00";

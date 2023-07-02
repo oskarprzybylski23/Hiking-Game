@@ -72,6 +72,7 @@ footer {
   padding-top: 5px;
   box-shadow: 10px 5px 5px black;
   text-align: center;
+  visibility: hidden;
 }
 
 .game-container {
@@ -141,6 +142,7 @@ footer {
   font-size: 40px;
   font-weight: bold;
   margin: 5px;
+  visibility: hidden;
 }
 
 #footer-text {
