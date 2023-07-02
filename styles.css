@@ -98,10 +98,10 @@ footer {
 
 .banner-container {
   visibility: hidden;
-  position: absolute;
   height: auto;
   width: 400px;
   padding: 20px;
+  margin-top: 0;
   background-color: var(--moss);
   border: solid 2px var(--white);
   border-radius: 15px;
@@ -166,7 +166,6 @@ footer {
   position: absolute;
   align-self: center;
   visibility: visible;
-
 }
 
 #helpButton {
