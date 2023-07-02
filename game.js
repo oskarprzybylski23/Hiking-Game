@@ -101,8 +101,8 @@ function handleContinue() {
   startButton.style.visibility = "visible";
   banner.style.visibility = "hidden";
   tileMap.nextMap();
-  hero.resetHero();
   tileMap.resetcover();
+  hero.findStartPosition();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
   winorlose = 0;
@@ -117,8 +117,8 @@ function handleRestart() {
   restartButton.style.visibility = "hidden";
   startButton.style.visibility = "visible";
   banner.style.visibility = "hidden";
-  hero.resetHero();
   tileMap.resetcover();
+  hero.findStartPosition();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
   winorlose = 0;

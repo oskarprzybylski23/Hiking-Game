@@ -7,15 +7,10 @@ export default class Hero {
         this.tileMap = tileMap;
         this.#loadHeroImage();
         this.deafultVelocity = this.velocity;
-        this.deafultx = x;
-        this.deafulty = y;
     }
 
 
     // === HERO CREATION ===
-
-
-
 
     draw(ctx) {
         let visibleHeight = this.tileSize;
@@ -206,11 +201,6 @@ export default class Hero {
         }
     }
 
-    resetHero(){
-        this.x = this.deafultx;
-        this.y = this.deafulty;
-    }
-
     // === SURFACE BEHAVIOUR LOGIC ===
 
     surfaceBehaviour() {
@@ -289,5 +279,18 @@ export default class Hero {
         }
     }
 
+    findStartPosition(){
+        for (let row = 0; row < this.tileMap.heroLayer.length; row++) {
+            for (let column = 0; column < this.tileMap.heroLayer[row].length; column++) {
+              let tile = this.tileMap.heroLayer[row][column];
+              if (tile === 99) {
+                this.x = column * this.tileSize; 
+                this.y = row * this.tileSize;
+              }
+            }
+          }
+
+    }
 }
 
+    

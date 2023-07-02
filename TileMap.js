@@ -666,7 +666,7 @@ export default class TileMap {
   // === MAP SELECTION AND DRAWING LAYERS ===
 
   //set initial map to map1
-  mapNumber = 3;
+  mapNumber = 1;
   selectedMap = this.selectMap(this.mapNumber);
 
   selectMap(mapNumber) {
@@ -705,6 +705,7 @@ export default class TileMap {
       this.layer1 = this.selectedMap.layer1;
       this.layer2 = this.selectedMap.layer2;
       this.heroLayer = this.selectedMap.heroLayer;
+      
     } else {
       const gameCompleteEvent = new CustomEvent('gameCompleteEvent', { detail: { message: 'You completed all maps' } });
       document.dispatchEvent(gameCompleteEvent);
@@ -1092,8 +1093,6 @@ export default class TileMap {
       for (let column = 0; column < this.heroLayer[row].length; column++) {
         let tile = this.heroLayer[row][column];
         if (tile === 99) {
-          this.heroLayer[row][column] = 0;
-          this.coverLayer[row][column] = 0;
           return new Hero(column * this.tileSize, row * this.tileSize, this.tileSize, velocity, this);
         }
       }
