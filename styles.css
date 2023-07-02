@@ -96,7 +96,7 @@ button:active {
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  /* visibility: hidden; */
+  visibility: hidden;
   height: 250px;
   width: 400px;
   padding: 20px;
@@ -174,7 +174,7 @@ button:active {
   font-size: 1em;
 }
 
-#startButton, #helpButton, .help-nav-button, #continueButton, #restartButton, .timer-container {
+#startButton, #helpButton, .help-nav-button, #continueButton, #restartButton, #startAgainButton, .timer-container {
   background-color: var(--white);
   border: solid 2px var(--black);
   border-radius: 5px;
@@ -193,9 +193,15 @@ button:active {
   visibility: visible;
 }
 
-#helpButton {
+#helpButton, #startAgainButton {
   padding: 1rem;
-  width: 100px;
+  min-width: 100px;
+  height: 50px;
+}
+
+#startAgainButton {
+  translate: 200px;
+  visibility: hidden;
 }
 
 #continueButton {

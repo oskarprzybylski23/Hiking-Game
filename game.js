@@ -172,6 +172,16 @@ function handleRestart() {
   winorlose = false;
 }
 
+const startAgainButton = document.querySelector("#startAgainButton");
+startAgainButton.addEventListener("click", handleStartAgain);
+
+function handleStartAgain() {
+  winorlose = true;
+  pauseGame = true;
+  coverVisible = false;
+  handleRestart();
+}
+
 // === WIN AND LOSE ACTIONS ===
 
 const banner = document.querySelector(".banner-container");
@@ -201,7 +211,7 @@ function handleWin(event) {
 function loseGame() {
   winorlose = true;
   pauseGame = true;
-  remainingTime = 0;
+  coverVisible = false;
   restartButton.style.visibility = "visible";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Time's Up!";
@@ -286,12 +296,15 @@ function gameLoop() {
 
     if (coverVisible === true) {
       tileMap.drawcover(ctx);
+      startAgainButton.style.visibility = "visible";
+    } else {
+      startAgainButton.style.visibility = "hidden";
     }
 
-    // console.log("actual time: " + Math.ceil(actualTime));
-    // console.log("remaining time: " + Math.ceil(remainingTime));
-    // console.log("cover" + coverVisible)
-    console.log("pause: " + pauseGame);
+    console.log("actual time: " + Math.ceil(actualTime));
+    console.log("remaining time: " + Math.ceil(remainingTime));
+    console.log("cover" + coverVisible)
+    // console.log("pause: " + pauseGame);
   }
 }
 
