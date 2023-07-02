@@ -2,8 +2,6 @@ import TileMap from "./TileMap.js";
 const tileSize = 32;
 let velocity = 2;
 
-
-
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
@@ -153,6 +151,7 @@ function handleWin(event) {
 function loseGame() {
   winorlose = 1;
   pauseGame = true;
+  remainingTime = 0;
   restartButton.style.visibility = "visible";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Time's Up!";

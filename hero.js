@@ -9,7 +9,6 @@ export default class Hero {
         this.deafultVelocity = this.velocity;
     }
 
-
     // === HERO CREATION ===
 
     draw(ctx) {
