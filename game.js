@@ -28,7 +28,7 @@ function handleKeyDown(event) {
 
   //Start game action
   if (keyState["KeyN"]) {
-    startGameLoop();
+    startGame();
   }
 }
 

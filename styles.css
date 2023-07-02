@@ -2,6 +2,7 @@
   --khaki: #A09B83;
   --bole: #6C3D29;
   --azure: #38608A;
+  --sky: #5ec9f7;
   --moss: #829240;
   --ecru: #C4A97C;
   --white: #FFFFFF;
@@ -29,7 +30,7 @@ body {
   height: 100vh;
   background: linear-gradient(0deg,
       var(--moss),
-      var(--azure));
+      var(--sky) 50%);
   overflow: hidden;
 }
 
