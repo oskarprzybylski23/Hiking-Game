@@ -75,16 +75,16 @@ function updateTimer() {
 
 const helpButton = document.querySelector("#helpButton");
 const help = document.querySelector(".help");
-
 helpButton.addEventListener("click", handleHelp);
-const computedStyle = getComputedStyle(help);
 
 function handleHelp() {
+  const computedStyle = getComputedStyle(help);
   if (computedStyle.visibility === "hidden") {
     helpButton.style.background = "transparent";
     help.style.visibility = "visible";
+    
   } else {
-    helpButton.style.background = "white";
+    helpButton.style.background = "var(--white)";
     help.style.visibility = "hidden";
   }
 }
@@ -103,7 +103,7 @@ function handleContinue() {
   hero.findStartPosition();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
-  winorlose = 0;
+  winorlose = false;
 }
 
 const restartButton = document.querySelector("#restartButton");
@@ -119,7 +119,7 @@ function handleRestart() {
   hero.findStartPosition();
   remainingTime = tileMap.targetTime;
   actualTime = 0;
-  winorlose = 0;
+  winorlose = false;
 }
 
 // === WIN AND LOSE ACTIONS ===
@@ -131,10 +131,10 @@ const bannerMessageTwo = document.getElementById("banner-message-2");
 
 //win
 document.addEventListener('winEvent', handleWin);
-let winorlose = 0;
+let winorlose = false;
 
 function handleWin(event) {
-  winorlose = 1;
+  winorlose = true;
   pauseGame = true;
   coverVisible = false;
   continueButton.style.visibility = "visible";
@@ -149,7 +149,7 @@ function handleWin(event) {
 
 //lose
 function loseGame() {
-  winorlose = 1;
+  winorlose = true;
   pauseGame = true;
   remainingTime = 0;
   restartButton.style.visibility = "visible";
@@ -209,7 +209,6 @@ function gameLoop() {
       }
 
       remainingTime -= 1 / 60;
-
     }
 
     //draw map and hero layers
@@ -230,7 +229,7 @@ function gameLoop() {
       loseGame();
     }
 
-    if (actualTime >= uncoveredTime && winorlose === 0) {
+    if (actualTime >= uncoveredTime+5 && winorlose === false) {
       coverVisible = true;
       pauseGame = false;
     }
@@ -242,7 +241,7 @@ function gameLoop() {
     // console.log("actual time: " + Math.ceil(actualTime));
     // console.log("remaining time: " + Math.ceil(remainingTime));
     // console.log("cover" + coverVisible)
-    // console.log("pause: " + pauseGame);
+    console.log("pause: " + pauseGame);
   }
 }
 
