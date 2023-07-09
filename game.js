@@ -43,16 +43,21 @@ let gameRunning = false; //change to false
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGame);
 
+const timerBox = document.querySelector(".timer-container");
+const timerDigits = document.getElementById("timer");
+
 //check if game loop is already running
 function startGame() {
+
+
+
   if (!gameRunning) {
     gameRunning = true;
     startButton.style.display = "none";
     help.style.visibility = "hidden";
     helpButton.style.background = "white";
-    document.querySelector(".timer-container").style.visibility = "visible";
-    document.getElementById("timer").style.visibility = "visible";
-    
+    timerBox.style.visibility = "visible";
+    timerDigits.style.visibility = "visible";
     gameLoop();
     // Hide the button
   }
@@ -62,16 +67,15 @@ function startGame() {
 
 function updateTimer() {
   if (coverVisible === true) {
-    const remainingTimeElement = document.getElementById("timer");
-    remainingTimeElement.textContent = Math.ceil(remainingTime);
+    timerDigits.textContent = Math.ceil(remainingTime);
     const minutes = Math.floor(remainingTime / 60);
     const seconds = Math.floor(remainingTime % 60);
     const formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    remainingTimeElement.textContent = formattedTime;
+    timerDigits.textContent = formattedTime;
     
   } else {
-    const remainingTimeElement = document.getElementById("timer");
-    remainingTimeElement.textContent = "00:00";
+    const timerDigits = document.getElementById("timer");
+    timerDigits.textContent = "00:00";
   }
 }
 
@@ -206,7 +210,7 @@ function handleWin(event) {
   winorlose = true;
   pauseGame = true;
   coverVisible = false;
-  continueButton.style.display = "none";
+  continueButton.style.display = "block";
   restartButton.style.display= "block";
   banner.style.visibility = "visible";
   let playerTime = (tileMap.targetTime - remainingTime).toFixed(2);
@@ -232,9 +236,13 @@ function loseGame() {
 document.addEventListener('gameCompleteEvent', handleGameComplete);
 
 function handleGameComplete() {
+
+  
   continueButton.style.display= "block";
   startButton.style.display= "none";
   banner.style.visibility = "visible";
+  timerBox.style.visibility = "hidden";
+  timerDigits.style.visibility = "hidden";
   bannerHeading.textContent = "Congratulations!";
   bannerMessageOne.textContent = "You have conquered all the trails! Keep playing to see if you can improve your time!";
   bannerMessageTwo.textContent = "If you feel particularly adventurous, visit the github repo and add your own maps."

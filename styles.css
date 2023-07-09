@@ -177,7 +177,6 @@ button:active {
 }
 
 #timer {
-  visibility: visible;
   font-size: 40px;
   font-weight: bold;
   margin: 5px;
@@ -204,9 +203,7 @@ button:active {
 }
 
 #startButton {
-  position: absolute;
   align-self: center;
-  visibility: visible;
 }
 
 #helpButton, #startAgainButton {
