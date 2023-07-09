@@ -48,8 +48,11 @@ function startGame() {
   if (!gameRunning) {
     gameRunning = true;
     startButton.style.display = "none";
+    help.style.visibility = "hidden";
+    helpButton.style.background = "white";
     document.querySelector(".timer-container").style.visibility = "visible";
     document.getElementById("timer").style.visibility = "visible";
+    
     gameLoop();
     // Hide the button
   }
@@ -118,6 +121,7 @@ function showCurrentPage() {
 
 closeButton.addEventListener("click", () => {
  help.style.visibility = "hidden";
+ helpButton.style.background = "white";
 });
 
 // Event listener for previous button click

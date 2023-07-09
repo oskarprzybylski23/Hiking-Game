@@ -217,14 +217,14 @@ button:active {
 
 #startAgainButton {
   translate: 200px;
-  visibility: hidden;
+  display: none;
 }
 
 #continueButton {
-  visibility: hidden;
+  display: none;
 }
 
 #restartButton {
-  visibility: hidden;
+  display: none;
 }
 
