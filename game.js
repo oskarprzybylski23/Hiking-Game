@@ -211,7 +211,7 @@ function handleWin(event) {
 function loseGame() {
   winorlose = true;
   pauseGame = true;
-  coverVisible = false;
+  coverVisible = true;
   restartButton.style.visibility = "visible";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Time's Up!";
