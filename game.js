@@ -174,6 +174,7 @@ restartButton.addEventListener("click", handleRestart);
 
 function handleRestart() {
   gameRunning = false;
+  coverVisible = false;
   continueButton.style.display = "none";
   restartButton.style.display = "none";
   startButton.style.display = "block";
@@ -302,6 +303,7 @@ function gameLoop() {
 
     if (remainingTime <= 0) {
       console.log("Time's up!");
+      timerDigits.textContent = "00:00";
       loseGame();
     }
 
