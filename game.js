@@ -72,7 +72,7 @@ function updateTimer() {
     const seconds = Math.floor(remainingTime % 60);
     const formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     timerDigits.textContent = formattedTime;
-    
+
   } else {
     const timerDigits = document.getElementById("timer");
     timerDigits.textContent = "00:00";
@@ -92,7 +92,7 @@ function handleHelp() {
   if (computedStyle.visibility === "hidden") {
     helpButton.style.background = "transparent";
     help.style.visibility = "visible";
-    
+
   } else {
     helpButton.style.background = "var(--white)";
     help.style.visibility = "hidden";
@@ -121,11 +121,11 @@ function showCurrentPage() {
   });
 }
 
- const closeButton = document.querySelector('.close-button');
+const closeButton = document.querySelector('.close-button');
 
 closeButton.addEventListener("click", () => {
- help.style.visibility = "hidden";
- helpButton.style.background = "white";
+  help.style.visibility = "hidden";
+  helpButton.style.background = "white";
 });
 
 // Event listener for previous button click
@@ -212,7 +212,7 @@ function handleWin(event) {
   pauseGame = true;
   coverVisible = false;
   continueButton.style.display = "block";
-  restartButton.style.display= "block";
+  restartButton.style.display = "block";
   banner.style.visibility = "visible";
   let playerTime = (tileMap.targetTime - remainingTime).toFixed(2);
   bannerHeading.textContent = "YOU'VE MADE IT!!!";
@@ -226,7 +226,7 @@ function loseGame() {
   winorlose = true;
   pauseGame = true;
   coverVisible = true;
-  restartButton.style.display= "block";
+  restartButton.style.display = "block";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Time's Up!";
   bannerMessageOne.textContent = "You didn't manage to get to the destination before the night. You have to camp in the wild.";
@@ -238,9 +238,9 @@ document.addEventListener('gameCompleteEvent', handleGameComplete);
 
 function handleGameComplete() {
 
-  
-  continueButton.style.display= "block";
-  startButton.style.display= "none";
+
+  continueButton.style.display = "block";
+  startButton.style.display = "none";
   banner.style.visibility = "visible";
   timerBox.style.visibility = "hidden";
   timerDigits.style.visibility = "hidden";
@@ -262,26 +262,22 @@ function gameLoop() {
     if (pauseGame === false) {
       if (keyState["ArrowUp"]) {
         // Perform action when ArrowUp key is pressed
-        console.log("move_up");
         hero.moveUp();
       }
 
 
       if (keyState["ArrowDown"]) {
         // Perform action when ArrowDown key is pressed
-        console.log("move_down");
         hero.moveDown();
       }
 
       if (keyState["ArrowRight"]) {
         // Perform action when ArrowRight key is pressed
-        console.log("move_right");
         hero.moveRight();
       }
 
       if (keyState["ArrowLeft"]) {
         // Perform action when ArrowLeft key is pressed
-        console.log("move_left");
         hero.moveLeft();
       }
 
@@ -302,27 +298,21 @@ function gameLoop() {
     updateTimer();
 
     if (remainingTime <= 0) {
-      console.log("Time's up!");
       timerDigits.textContent = "00:00";
       loseGame();
     }
 
-    if (actualTime >= uncoveredTime+5 && winorlose === false) {
+    if (actualTime >= uncoveredTime + 5 && winorlose === false) {
       coverVisible = true;
       pauseGame = false;
     }
 
     if (coverVisible === true) {
       tileMap.drawcover(ctx);
-      startAgainButton.style.display= "block";
+      startAgainButton.style.display = "block";
     } else {
-      startAgainButton.style.display= "none";
+      startAgainButton.style.display = "none";
     }
-
-    console.log("actual time: " + Math.ceil(actualTime));
-    console.log("remaining time: " + Math.ceil(remainingTime));
-    console.log("cover" + coverVisible)
-    // console.log("pause: " + pauseGame);
   }
 }
 

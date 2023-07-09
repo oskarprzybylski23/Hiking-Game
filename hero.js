@@ -21,29 +21,12 @@ export default class Hero {
         let rowCurrent = Math.round(this.y / this.tileSize);
         let columnCurrent = Math.round(this.x / this.tileSize);
 
-        if (this.tileMap.layer1[rowCurrent][columnCurrent] ===5) {
-            sheight = (64)*0.7;
+        if (this.tileMap.layer1[rowCurrent][columnCurrent] === 5) {
+            sheight = (64) * 0.7;
             visibleHeight = this.tileSize * 0.7;
         }
 
         ctx.drawImage(this.HeroImages[this.HeroImageIndex], sx, sy, swidth, sheight, this.x, this.y - offsetY, this.tileSize, visibleHeight);
-
-        //DRAW RECTANGLE FOR DEBUGGING (uncomment for wip only)
-
-        // // Get the tile coordinates
-        // const tileX = Math.round(this.x / this.tileSize);
-        // const tileY = Math.round(this.y / this.tileSize);
-
-        // // Calculate the position and size of the rectangle
-        // const rectX = tileX * this.tileSize;
-        // const rectY = tileY * this.tileSize;
-        // const rectWidth = this.tileSize;
-        // const rectHeight = this.tileSize;
-
-        // // Draw the rectangle
-        // ctx.strokeStyle = 'red'; // Set the stroke color
-        // ctx.lineWidth = 2; // Set the stroke width
-        // ctx.strokeRect(rectX, rectY, rectWidth, rectHeight);
     }
 
     #loadHeroImage() {
@@ -158,20 +141,6 @@ export default class Hero {
                 this.isSolidLeft = true;
             }
         }
-
-        //log for debugging
-
-        console.log(
-            "above:" + this.isSolidAbove,
-            "below:" + this.isSolidBelow,
-            "right:" + this.isSolidRight,
-            "left:" + this.isSolidLeft,
-            "map-height:" + (this.mapHeight),
-            "map-width:" + (this.mapWidth)
-        )
-        console.log("colission object coordinates:" + JSON.stringify(this.findCollision()));
-        console.log("row: " + Math.round(this.y / this.tileSize) + " column: " + Math.round(this.x / this.tileSize))
-        console.log("x:" + this.x, "y:" + this.y);
     };
 
     findCollision() {
@@ -193,7 +162,6 @@ export default class Hero {
     winCondition() {
         const winEvent = new CustomEvent('winEvent', { detail: { message: 'You won' } });
         if (this.tileMap.heroLayer[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)] === 98) {
-            console.log("WIN!!!");
             document.dispatchEvent(winEvent);
         }
     }
@@ -210,8 +178,8 @@ export default class Hero {
 
         if ([1, 2, 3, 4, 5, 6].includes(this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)])) {
             updatedVelocity = this.deafultVelocity;
-        } else if  ([7, 8, 9, 10, 11, 12].includes(this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)])) {
-            updatedVelocity = this.deafultVelocity* 0.7;
+        } else if ([7, 8, 9, 10, 11, 12].includes(this.tileMap.layer2[Math.round(this.y / this.tileSize)][Math.round(this.x / this.tileSize)])) {
+            updatedVelocity = this.deafultVelocity * 0.7;
         } else {
             updatedVelocity = this.deafultVelocity * 0.5;
         }
@@ -276,18 +244,17 @@ export default class Hero {
         }
     }
 
-    findStartPosition(){
+    findStartPosition() {
         for (let row = 0; row < this.tileMap.heroLayer.length; row++) {
             for (let column = 0; column < this.tileMap.heroLayer[row].length; column++) {
-              let tile = this.tileMap.heroLayer[row][column];
-              if (tile === 99) {
-                this.x = column * this.tileSize; 
-                this.y = row * this.tileSize;
-              }
+                let tile = this.tileMap.heroLayer[row][column];
+                if (tile === 99) {
+                    this.x = column * this.tileSize;
+                    this.y = row * this.tileSize;
+                }
             }
-          }
+        }
 
     }
 }
 
-    

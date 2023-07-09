@@ -694,7 +694,6 @@ export default class TileMap {
         break;
       // Add more cases for additional maps
       default:
-        console.log("Invalid map number!");
         return currentMap;
     }
     return currentMap;
@@ -715,7 +714,7 @@ export default class TileMap {
       this.layer1 = this.selectedMap.layer1;
       this.layer2 = this.selectedMap.layer2;
       this.heroLayer = this.selectedMap.heroLayer;
-      
+
     } else {
       const gameCompleteEvent = new CustomEvent('gameCompleteEvent', { detail: { message: 'You completed all maps' } });
       document.dispatchEvent(gameCompleteEvent);
@@ -725,7 +724,6 @@ export default class TileMap {
       this.layer2 = this.selectedMap.layer2;
       this.heroLayer = this.selectedMap.heroLayer;
     }
-    console.log("current map: map" + this.mapNumber)
   }
 
   //create map cover layer
@@ -1069,7 +1067,7 @@ export default class TileMap {
       for (let column = 0; column < this.coverLayer[row].length; column++) {
         let tile = this.coverLayer[row][column];
         let tileType = null;
-        
+
         switch (tile) {
           case 1:
             tileType = "covered";
@@ -1078,21 +1076,12 @@ export default class TileMap {
 
         if (tileType === "covered") {
           ctx.drawImage(
-            this.coverImage, 
-            column * this.tileSize, 
+            this.coverImage,
+            column * this.tileSize,
             row * this.tileSize,
             this.tileSize,
             this.tileSize
           );
-
-          // ctx.fillStyle = color;
-
-          // ctx.fillRect(
-          //   column * this.tileSize,
-          //   row * this.tileSize,
-          //   this.tileSize,
-          //   this.tileSize
-          // );
         }
       }
     }
@@ -1121,8 +1110,6 @@ export default class TileMap {
 
   #clearCanvas(canvas, ctx) {
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
-    // ctx.fillStyle = "white";
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   #setCanvasSize(canvas) {

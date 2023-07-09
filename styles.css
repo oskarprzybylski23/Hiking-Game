@@ -13,7 +13,7 @@ h1 {
   color: var(--white);
   text-transform: uppercase;
   text-align: center;
-  box-shadow: #A09B83 ;
+  box-shadow: #A09B83;
 }
 
 h2 {
@@ -51,8 +51,8 @@ main {
 
 footer {
   /* position: absolute; */
-   height: 50px;
-   bottom: 10px;
+  height: 50px;
+  bottom: 10px;
 }
 
 button:active {
@@ -92,7 +92,7 @@ button:active {
 
 .help {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   padding: 10px;
@@ -141,7 +141,8 @@ button:active {
   grid-row: 2;
 }
 
-.banner-container p, h2 {
+.banner-container p,
+h2 {
   color: var(--black);
 }
 
@@ -167,7 +168,7 @@ button:active {
   box-shadow: 0px 10px 15px var(--black);
   border-radius: 20px;
   border: solid 5px var(--bole);
-  
+
 }
 
 #timer-text {
@@ -189,7 +190,13 @@ button:active {
   font-size: 1em;
 }
 
-#startButton, #helpButton, .help-nav-button, #continueButton, #restartButton, #startAgainButton, .timer-container {
+#startButton,
+#helpButton,
+.help-nav-button,
+#continueButton,
+#restartButton,
+#startAgainButton,
+.timer-container {
   background-color: var(--white);
   border: solid 2px var(--black);
   border-radius: 5px;
@@ -197,7 +204,9 @@ button:active {
   font-weight: bold;
 }
 
-#startButton, #restartButton, #continueButton {
+#startButton,
+#restartButton,
+#continueButton {
   min-width: 250px;
   padding: 1rem;
 }
@@ -206,7 +215,8 @@ button:active {
   align-self: center;
 }
 
-#helpButton, #startAgainButton {
+#helpButton,
+#startAgainButton {
   padding: 1rem;
   min-width: 100px;
   height: 50px;
@@ -224,4 +234,3 @@ button:active {
 #restartButton {
   display: none;
 }
-
