@@ -47,7 +47,7 @@ startButton.addEventListener("click", startGame);
 function startGame() {
   if (!gameRunning) {
     gameRunning = true;
-    startButton.style.visibility = "hidden";
+    startButton.style.display = "none";
     document.querySelector(".timer-container").style.visibility = "visible";
     document.getElementById("timer").style.visibility = "visible";
     gameLoop();
@@ -149,9 +149,9 @@ continueButton.addEventListener("click", handleContinue);
 
 function handleContinue() {
   gameRunning = false;
-  continueButton.style.visibility = "hidden";
-  restartButton.style.visibility = "hidden";
-  startButton.style.visibility = "visible";
+  continueButton.style.display = "none";
+  restartButton.style.display = "none";
+  startButton.style.display = "block";
   banner.style.visibility = "hidden";
   tileMap.nextMap();
   tileMap.resetcover();
@@ -166,9 +166,9 @@ restartButton.addEventListener("click", handleRestart);
 
 function handleRestart() {
   gameRunning = false;
-  continueButton.style.visibility = "hidden";
-  restartButton.style.visibility = "hidden";
-  startButton.style.visibility = "visible";
+  continueButton.style.display = "none";
+  restartButton.style.display = "none";
+  startButton.style.display = "block";
   banner.style.visibility = "hidden";
   tileMap.resetcover();
   hero.findStartPosition();
@@ -202,8 +202,8 @@ function handleWin(event) {
   winorlose = true;
   pauseGame = true;
   coverVisible = false;
-  continueButton.style.visibility = "visible";
-  restartButton.style.visibility = "visible";
+  continueButton.style.display = "none";
+  restartButton.style.display= "block";
   banner.style.visibility = "visible";
   let playerTime = (tileMap.targetTime - remainingTime).toFixed(2);
   bannerHeading.textContent = "YOU'VE MADE IT!!!";
@@ -217,7 +217,7 @@ function loseGame() {
   winorlose = true;
   pauseGame = true;
   coverVisible = true;
-  restartButton.style.visibility = "visible";
+  restartButton.style.display= "block";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Time's Up!";
   bannerMessageOne.textContent = "You didn't manage to get to the destination before the night. You have to camp in the wild.";
@@ -228,8 +228,8 @@ function loseGame() {
 document.addEventListener('gameCompleteEvent', handleGameComplete);
 
 function handleGameComplete() {
-  continueButton.style.visibility = "visible";
-  startButton.style.visibility = "hidden";
+  continueButton.style.display= "block";
+  startButton.style.display= "none";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Congratulations!";
   bannerMessageOne.textContent = "You have conquered all the trails! Keep playing to see if you can improve your time!";
@@ -300,9 +300,9 @@ function gameLoop() {
 
     if (coverVisible === true) {
       tileMap.drawcover(ctx);
-      startAgainButton.style.visibility = "visible";
+      startAgainButton.style.display= "block";
     } else {
-      startAgainButton.style.visibility = "hidden";
+      startAgainButton.style.display= "none";
     }
 
     console.log("actual time: " + Math.ceil(actualTime));
