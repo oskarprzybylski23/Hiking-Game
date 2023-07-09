@@ -107,6 +107,14 @@ button:active {
   grid-row: 2;
 }
 
+.close-button {
+  align-self: flex-end;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+}
+
+
+
 .help-content {
   height: 200px;
   text-align: justify;

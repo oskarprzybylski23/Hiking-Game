@@ -92,7 +92,6 @@ function handleHelp() {
   }
 }
 
-const helpContent = document.querySelector('.help-content');
 const prevButton = document.getElementById('help-prev-button');
 const nextButton = document.getElementById('help-next-button');
 const pages = document.querySelectorAll(".help-content .page");
@@ -114,6 +113,12 @@ function showCurrentPage() {
     }
   });
 }
+
+ const closeButton = document.querySelector('.close-button');
+
+closeButton.addEventListener("click", () => {
+ help.style.visibility = "hidden";
+});
 
 // Event listener for previous button click
 prevButton.addEventListener("click", () => {
@@ -201,7 +206,7 @@ function handleWin(event) {
   restartButton.style.visibility = "visible";
   banner.style.visibility = "visible";
   let playerTime = (tileMap.targetTime - remainingTime).toFixed(2);
-  bannerHeading.textContent = "YOU WON!!!";
+  bannerHeading.textContent = "YOU'VE MADE IT!!!";
   bannerMessageOne.textContent = "Congratulations! You reached the destination in " + playerTime + " seconds.";
   bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
 
@@ -223,13 +228,12 @@ function loseGame() {
 document.addEventListener('gameCompleteEvent', handleGameComplete);
 
 function handleGameComplete() {
-  console.log("game complete!!!!")
   continueButton.style.visibility = "visible";
   startButton.style.visibility = "hidden";
   banner.style.visibility = "visible";
   bannerHeading.textContent = "Congratulations!";
-  bannerMessageOne.textContent = "You have conquered all trails! Keep playing to see if you can improve your time!";
-  bannerMessageTwo.textContent = "If you feel particularly adventurous, visit the github repo and add your own maps.</a>"
+  bannerMessageOne.textContent = "You have conquered all the trails! Keep playing to see if you can improve your time!";
+  bannerMessageTwo.textContent = "If you feel particularly adventurous, visit the github repo and add your own maps."
 }
 
 // === GAME LOOP ===
