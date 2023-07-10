@@ -676,7 +676,7 @@ export default class TileMap {
   // === MAP SELECTION AND DRAWING LAYERS ===
 
   //set initial map to map1
-  mapNumber = 3;
+  mapNumber = 1;
   selectedMap = this.selectMap(this.mapNumber);
 
   selectMap(mapNumber) {
