@@ -216,7 +216,7 @@ function handleWin(event) {
   banner.style.visibility = "visible";
   let playerTime = (tileMap.targetTime - remainingTime).toFixed(2);
   bannerHeading.textContent = "YOU'VE MADE IT!!!";
-  bannerMessageOne.textContent = "Congratulations! You reached the destination in " + playerTime + " seconds.";
+  bannerMessageOne.textContent = "Well Done! You reached the destination in " + playerTime + " seconds.";
   bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
 
 }
@@ -244,8 +244,8 @@ function handleGameComplete() {
   banner.style.visibility = "visible";
   timerBox.style.visibility = "hidden";
   timerDigits.style.visibility = "hidden";
-  bannerHeading.textContent = "Congratulations!";
-  bannerMessageOne.textContent = "You have conquered all the trails! Keep playing to see if you can improve your time!";
+  bannerHeading.textContent = "CONGRATULATIONS!";
+  bannerMessageOne.textContent = "You have conquered all the trails! Keep playing to see if you can improve your time! Unfortunately, Sarah has probably done better than you anyway (unless you're Sarah then keep smashing it!). ";
   bannerMessageTwo.textContent = "If you feel particularly adventurous, visit the github repo and add your own maps."
 }
 

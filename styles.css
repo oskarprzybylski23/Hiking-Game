@@ -149,6 +149,7 @@ button:active {
   border-radius: 15px;
   grid-column: 2;
   grid-row: 2;
+  text-align: justify;
 }
 
 .banner-container p,
