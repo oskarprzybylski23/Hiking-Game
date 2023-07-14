@@ -50,7 +50,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 10px;
   height: fit-content;
   min-height: fit-content;
 }
@@ -62,6 +61,8 @@ footer {
   text-align: center;
   color: var(--black);
   font-size: 1em;
+  border-top: solid 1px var(--white);
+  padding-top: 10px;
 
 }
 
@@ -123,8 +124,6 @@ button:active {
   border-radius: 5px;
 }
 
-
-
 .help-content {
   height: 200px;
   text-align: justify;
@@ -171,6 +170,8 @@ h2 {
   row-gap: 10px;
   height: 100vh;
   justify-content: center;
+  padding-bottom: 50px;
+  box-sizing: border-box;
 
 }
 
