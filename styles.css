@@ -102,6 +102,8 @@ button:active {
 }
 
 .help {
+  z-index: 2;
+  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
