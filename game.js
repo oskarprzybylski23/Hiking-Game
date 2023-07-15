@@ -8,9 +8,9 @@ const ctx = canvas.getContext("2d");
 const tileMap = new TileMap(tileSize);
 const hero = tileMap.getHero(velocity);
 
-const uncoveredTime = 0;
-let remainingTime = tileMap.targetTime;
-let actualTime = 0;
+const uncoveredTime = 5; // time before map is covered
+let remainingTime = tileMap.targetTime; // map time target
+let gameTime = 0; // in game time
 let coverVisible = false;
 let pauseGame = true;
 
@@ -21,12 +21,11 @@ document.addEventListener("keyup", handleKeyUp);
 
 let keyState = {}; // Object to store the state of each key
 
-// handle keydown and keyup with event.code to get physical key code
 
+// handle keydown and keyup with event.code to get physical key code
 function handleKeyDown(event) {
   keyState[event.code] = true;
 
-  //Start game action
   if (keyState["KeyN"]) {
     startGame();
   }
@@ -38,19 +37,15 @@ function handleKeyUp(event) {
 
 // === START GAME ACTION ===
 
-let gameRunning = false; //change to false
+let gameRunning = false; //set to false on page launch
 
 const startButton = document.querySelector("#startButton");
 startButton.addEventListener("click", startGame);
-
 const timerBox = document.querySelector(".timer-container");
 const timerDigits = document.getElementById("timer");
 
-//check if game loop is already running
-function startGame() {
-
-
-
+function startGame() //initialise gameplay and start gameloop
+{
   if (!gameRunning) {
     gameRunning = true;
     startButton.style.display = "none";
@@ -59,13 +54,13 @@ function startGame() {
     timerBox.style.visibility = "visible";
     timerDigits.style.visibility = "visible";
     gameLoop();
-    // Hide the button
   }
 }
 
 // === TIMER ===
 
-function updateTimer() {
+function updateTimer() //timer formatting and countdown start when map is covered
+{
   if (coverVisible === true) {
     timerDigits.textContent = Math.ceil(remainingTime);
     const minutes = Math.floor(remainingTime / 60);
@@ -81,8 +76,7 @@ function updateTimer() {
 
 // === OTHER ELEMENTS AND BUTTONS ===
 
-//help button and content
-
+//help button and content navigation
 const helpButton = document.querySelector("#helpButton");
 const help = document.querySelector(".help");
 helpButton.addEventListener("click", handleHelp);
@@ -104,14 +98,14 @@ const nextButton = document.getElementById('help-next-button');
 const pages = document.querySelectorAll(".help-content .page");
 let currentPageIndex = 0;
 
-// Function to update the navigation buttons based on the current page index
-function updateNavigationButtons() {
+function updateNavigationButtons() // update the navigation buttons based on the current page index
+{
   prevButton.disabled = currentPageIndex === 0;
   nextButton.disabled = currentPageIndex === pages.length - 1;
 }
 
-// Function to show the current page and hide the rest
-function showCurrentPage() {
+function showCurrentPage() // show the current page and hide the rest
+{
   pages.forEach((page, index) => {
     if (index === currentPageIndex) {
       page.style.display = "block";
@@ -120,13 +114,6 @@ function showCurrentPage() {
     }
   });
 }
-
-const closeButton = document.querySelector('.close-button');
-
-closeButton.addEventListener("click", () => {
-  help.style.visibility = "hidden";
-  helpButton.style.background = "white";
-});
 
 // Event listener for previous button click
 prevButton.addEventListener("click", () => {
@@ -146,12 +133,19 @@ nextButton.addEventListener("click", () => {
   }
 });
 
-// Initially update the navigation buttons and show the first page
+// On launch update the navigation buttons and show the first page
 updateNavigationButtons();
 showCurrentPage();
 
-//continue game button
+// help close button
+const closeButton = document.querySelector('.close-button');
 
+closeButton.addEventListener("click", () => {
+  help.style.visibility = "hidden";
+  helpButton.style.background = "white";
+});
+
+//continue game button
 const continueButton = document.querySelector("#continueButton");
 continueButton.addEventListener("click", handleContinue);
 
@@ -165,10 +159,11 @@ function handleContinue() {
   tileMap.resetcover();
   hero.findStartPosition();
   remainingTime = tileMap.targetTime;
-  actualTime = 0;
+  gameTime = 0;
   winorlose = false;
 }
 
+//try again button
 const restartButton = document.querySelector("#restartButton");
 restartButton.addEventListener("click", handleRestart);
 
@@ -182,10 +177,11 @@ function handleRestart() {
   tileMap.resetcover();
   hero.findStartPosition();
   remainingTime = tileMap.targetTime;
-  actualTime = 0;
+  gameTime = 0;
   winorlose = false;
 }
 
+//start again button
 const startAgainButton = document.querySelector("#startAgainButton");
 startAgainButton.addEventListener("click", handleStartAgain);
 
@@ -214,7 +210,7 @@ function handleWin(event) {
   continueButton.style.display = "block";
   restartButton.style.display = "block";
   banner.style.visibility = "visible";
-  let playerTime = (tileMap.targetTime - remainingTime).toFixed(2);
+  let playerTime = (tileMap.targetTime - remainingTime).toFixed(2); //get game completion time up to 2 decimal places
   bannerHeading.textContent = "YOU'VE MADE IT!!!";
   bannerMessageOne.textContent = "Well Done! You reached the destination in " + playerTime + " seconds.";
   bannerMessageTwo.textContent = "Continue to the next adventure, or repeat your hike to see if you can improve your time."
@@ -237,8 +233,6 @@ function loseGame() {
 document.addEventListener('gameCompleteEvent', handleGameComplete);
 
 function handleGameComplete() {
-
-
   continueButton.style.display = "block";
   startButton.style.display = "none";
   banner.style.visibility = "visible";
@@ -255,16 +249,14 @@ function gameLoop() {
 
   tileMap.drawInitial(canvas, ctx);
 
-  if (gameRunning) { //block to be only executed if gameplay is underway
-
-    //key actions
-
-    if (pauseGame === false) {
+  if (gameRunning) //block to be only executed if gameplay is underway 
+  {
+    if (pauseGame === false) //prevent character movement and time countdown when gameplay is on pause
+    {
       if (keyState["ArrowUp"]) {
         // Perform action when ArrowUp key is pressed
         hero.moveUp();
       }
-
 
       if (keyState["ArrowDown"]) {
         // Perform action when ArrowDown key is pressed
@@ -281,33 +273,33 @@ function gameLoop() {
         hero.moveLeft();
       }
 
-      remainingTime -= 1 / 60;
+      remainingTime -= 1 / 60; // player time countdown
     }
 
-    //draw map and hero layers
+    //draw map layers
     tileMap.draw(canvas, ctx);
     hero.draw(ctx);
     hero.winCondition();
     hero.surfaceBehaviour();
     hero.uncoverTile();
 
-    //timer
-
-    actualTime += 1 / 60;
-
+    gameTime += 1 / 60; //in-game time count
     updateTimer();
 
-    if (remainingTime <= 0) {
+    if (remainingTime <= 0) // trigger lose condition
+    {
       timerDigits.textContent = "00:00";
       loseGame();
     }
 
-    if (actualTime >= uncoveredTime + 5 && winorlose === false) {
+    if (gameTime >= uncoveredTime && winorlose === false) // trigger map cover
+    {
       coverVisible = true;
       pauseGame = false;
     }
 
-    if (coverVisible === true) {
+    if (coverVisible === true) // show "start again" button
+    {
       tileMap.drawcover(ctx);
       startAgainButton.style.display = "block";
     } else {
