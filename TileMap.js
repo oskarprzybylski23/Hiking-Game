@@ -3,6 +3,7 @@ import Hero from "./hero.js";
 export default class TileMap {
   constructor(tileSize) {
     this.tileSize = tileSize;
+    //assign tileset images
     this.background = this.#image("background.png")
     this.coverImage = this.#image("wood.png")
     this.grass = this.#image("tilesetGrass.png");
@@ -22,8 +23,7 @@ export default class TileMap {
     this.sign = this.#image("sign.png")
     this.targetTime = 30;
 
-    //single tile images
-
+    //assign single tile images from tilesets
     this.cover = {
       image: this.wood,
       sx: 0,
@@ -338,7 +338,8 @@ export default class TileMap {
 
   }
 
-  #image(fileName) {
+  #image(fileName) // function to return image reference
+  {
     const img = new Image();
     img.src = `images/${fileName}`;
     return img;
@@ -346,7 +347,14 @@ export default class TileMap {
 
   // === MAP DATA ===
 
-  //Map 1
+  /* 
+    Add new map object named "mapX" to create a new map. Each map requires three layers.
+    layer 1 - basic terrain (grass, water);
+    layer 2 - paths and non-solid objects ;
+    hero layer - solid, colission objects. Hero start and finish points.
+   */
+
+  //MAP 1
   map1 = {
     name: 'map1',
 
@@ -455,7 +463,7 @@ export default class TileMap {
     ]
   }
 
-  //Map 2
+  //MAP 2
   map2 = {
     name: 'map2',
 
@@ -564,7 +572,7 @@ export default class TileMap {
     ]
   }
 
-  //Map 3
+  //MAP 3
   map3 = {
     name: 'map3',
 
@@ -675,8 +683,7 @@ export default class TileMap {
 
   // === MAP SELECTION AND DRAWING LAYERS ===
 
-  //set initial map to map1
-  mapNumber = 1;
+  mapNumber = 1; //set initial map to map1
   selectedMap = this.selectMap(this.mapNumber);
 
   selectMap(mapNumber) {
@@ -705,7 +712,7 @@ export default class TileMap {
   heroLayer = this.selectedMap.heroLayer;
 
   //select next map number and update variables when called
-  //if map number does not exist then assume game complete and trigger game complete event and reset map number
+  //assume game complete if map number does not exist and trigger game complete event and reset map number
   nextMap() {
     this.mapNumber += 1;
 
@@ -726,9 +733,8 @@ export default class TileMap {
     }
   }
 
-  //create map cover layer
+  //create map cover layer, shared for all maps
   //1 - covered tile (coverLayer only)
-
   coverLayer = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -747,25 +753,29 @@ export default class TileMap {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ];
 
-  // === SET UP CANVAS AND DRAW OBJECTS ===
+  // === SET UP CANVAS AND DRAW MAP OBJECTS ===
 
   // deafult canvas state
   drawInitial(canvas, ctx) {
-
     this.#setCanvasSize(canvas);
     this.#clearCanvas(canvas, ctx);
   }
 
-  //draw map and game elements
+  //draw map layers
   draw(canvas, ctx) {
     this.#setCanvasSize(canvas);
     this.#clearCanvas(canvas, ctx);
     this.#drawlayer1(ctx);
     this.#drawlayer2(ctx);
-    this.#drawcolission(ctx);
+    this.#drawHeroLayer(ctx);
   }
 
   // FUNCTIONS TO DRAW LAYERS
+  
+  /* 
+  Tile object is assigned value representing tile image based on number in array.
+  Same img can be reused with variable rotation
+  */
 
   #drawlayer1(ctx) {
     for (let row = 0; row < this.layer1.length; row++) {
@@ -849,12 +859,12 @@ export default class TileMap {
         }
 
         if (tileObject != null) {
-          const rotationRad = (rotation * Math.PI) / 180;
+          const rotationRad = (rotation * Math.PI) / 180; // Convert rotation to radians
           const centerX = column * this.tileSize + this.tileSize / 2;
           const centerY = row * this.tileSize + this.tileSize / 2;
-          ctx.save();
-          ctx.translate(centerX, centerY);
-          ctx.rotate(rotationRad);
+          ctx.save(); // Save the current transformation state
+          ctx.translate(centerX, centerY); // Translate to the center of the tile
+          ctx.rotate(rotationRad); // Apply the rotation
           ctx.drawImage(
             tileObject.image, tileObject.sx, tileObject.sy, tileObject.swidth, tileObject.sheight,
             -this.tileSize / 2,
@@ -862,7 +872,7 @@ export default class TileMap {
             this.tileSize,
             this.tileSize
           );
-          ctx.restore();
+          ctx.restore(); // Restore the previous transformation state
         }
       }
     }
@@ -938,12 +948,12 @@ export default class TileMap {
         }
 
         if (tileObject != null) {
-          const rotationRad = (rotation * Math.PI) / 180;
+          const rotationRad = (rotation * Math.PI) / 180; // Convert rotation to radians
           const centerX = column * this.tileSize + this.tileSize / 2;
           const centerY = row * this.tileSize + this.tileSize / 2;
-          ctx.save();
-          ctx.translate(centerX, centerY);
-          ctx.rotate(rotationRad);
+          ctx.save(); // Save the current transformation state
+          ctx.translate(centerX, centerY); // Translate to the center of the tile
+          ctx.rotate(rotationRad); // Apply the rotation
           ctx.drawImage(
             tileObject.image, tileObject.sx, tileObject.sy, tileObject.swidth, tileObject.sheight,
             -this.tileSize / 2,
@@ -951,13 +961,13 @@ export default class TileMap {
             this.tileSize,
             this.tileSize
           );
-          ctx.restore();
+          ctx.restore(); // Restore the previous transformation state
         }
       }
     }
   }
 
-  #drawcolission(ctx) {
+  #drawHeroLayer(ctx) {
     for (let row = 0; row < this.heroLayer.length; row++) {
       for (let column = 0; column < this.heroLayer[row].length; column++) {
         let tile = this.heroLayer[row][column];
@@ -1061,7 +1071,7 @@ export default class TileMap {
     }
   }
 
-  drawcover(ctx) {
+  drawCover(ctx) {
 
     for (let row = 0; row < this.coverLayer.length; row++) {
       for (let column = 0; column < this.coverLayer[row].length; column++) {
@@ -1087,7 +1097,8 @@ export default class TileMap {
     }
   }
 
-  resetcover() {
+  resetCover() //reset cover layer array values to 1
+  {
     for (let row = 0; row < this.coverLayer.length; row++) {
       for (let column = 0; column < this.coverLayer[row].length; column++) {
         this.coverLayer[row][column] = 1;
@@ -1095,7 +1106,8 @@ export default class TileMap {
     }
   }
 
-  getHero(velocity) {
+  getHero(velocity) //finds hero initial position and creates hero object
+  {
     for (let row = 0; row < this.heroLayer.length; row++) {
       for (let column = 0; column < this.heroLayer[row].length; column++) {
         let tile = this.heroLayer[row][column];

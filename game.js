@@ -1,6 +1,6 @@
 import TileMap from "./TileMap.js";
-const tileSize = 32;
-let velocity = 2;
+const tileSize = 32; //Map tile size px
+let velocity = 2; //in-game character velocity global variable
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -11,8 +11,8 @@ const hero = tileMap.getHero(velocity);
 const uncoveredTime = 5; // time before map is covered
 let remainingTime = tileMap.targetTime; // map time target
 let gameTime = 0; // in game time
-let coverVisible = false;
-let pauseGame = true;
+let coverVisible = false; //set to false by deafult to start with map uncovered
+let pauseGame = true; //pauseGame prevents character from moving and pauses timer countdown
 
 // === KEY INPUT SENSING ===
 
@@ -156,7 +156,7 @@ function handleContinue() {
   startButton.style.display = "block";
   banner.style.visibility = "hidden";
   tileMap.nextMap();
-  tileMap.resetcover();
+  tileMap.resetCover();
   hero.findStartPosition();
   remainingTime = tileMap.targetTime;
   gameTime = 0;
@@ -174,7 +174,7 @@ function handleRestart() {
   restartButton.style.display = "none";
   startButton.style.display = "block";
   banner.style.visibility = "hidden";
-  tileMap.resetcover();
+  tileMap.resetCover();
   hero.findStartPosition();
   remainingTime = tileMap.targetTime;
   gameTime = 0;
@@ -300,7 +300,7 @@ function gameLoop() {
 
     if (coverVisible === true) // show "start again" button
     {
-      tileMap.drawcover(ctx);
+      tileMap.drawCover(ctx);
       startAgainButton.style.display = "block";
     } else {
       startAgainButton.style.display = "none";
