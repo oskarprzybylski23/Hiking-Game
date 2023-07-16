@@ -35,6 +35,8 @@ During the design and creation process, I used various tools and assets, includi
   - [Trees & Bushes](https://rowdy41.itch.io/trees-bushes)
   - [Hiker Girl](https://www.deviantart.com/avalypuff/art/Hiker-Girl-806685123)
 
+Special credits go to OpenAI for ChatGPT, that became my best buddy for a while and helped me through a lot of issues, kind people of StackOverflow and staff at Bartons Cafe in Bermondsey who supplied me with caffeine and put up with me staying there hours on end on a weekly basis.
+
 ## Setup
 To run the game locally on your machine, follow these steps:
 
